@@ -132,7 +132,7 @@ export default function Home() {
                                 </SheetTrigger>
                                 <SheetContent
                                     side="right"
-                                    className="w-full h-full px-6 pt-4 pb-6 flex flex-col bg-neutral2
+                                    className="w-full h-full px-6 pt-4 pb-6 flex flex-col bg-neutral2 overflow-y-auto
                                     "
                                 >
                                     {/* Logo for mobile navigation */}
@@ -157,7 +157,7 @@ export default function Home() {
                                             </span>
                                             <Link
                                                 href="/shippers"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Shippers
                                             </Link>
@@ -169,13 +169,13 @@ export default function Home() {
                                             </Link>
                                             <Link
                                                 href="/pricing"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Pricing
                                             </Link>
                                             <Link
                                                 href="/contact"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Contact
                                             </Link>
@@ -188,37 +188,37 @@ export default function Home() {
                                             </span>
                                             <Link
                                                 href="/about"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 About
                                             </Link>
                                             <Link
                                                 href="/careers"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Careers
                                             </Link>
                                             <Link
                                                 href="/docs"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Docs
                                             </Link>
                                             <Link
                                                 href="/security"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Security
                                             </Link>
                                             <Link
                                                 href="/newsroom"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Newsroom
                                             </Link>
                                             <Link
                                                 href="/blog"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Blog
                                             </Link>
@@ -235,7 +235,7 @@ export default function Home() {
                                         <Button
                                             asChild
                                             size="sm"
-                                            className="bg-[#544DDC] hover:bg-[#001028]/90 rounded-[50] px-5 h-9"
+                                            className="bg-[#544DDC] hover:bg-[#001028]/90 px-5 h-9"
                                         >
                                             <Link
                                                 href="/register"
