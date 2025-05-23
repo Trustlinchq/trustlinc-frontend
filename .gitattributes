@@ -1,2 +1,22 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Set all text files to use LF line endings
+* text=auto eol=lf
+
+# Ensure specific file types use LF
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+
+# Binary files should not have line ending conversions
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
