@@ -400,14 +400,14 @@ export default function Home() {
                                     className="mx-auto w-full max-w-[300px] sm:max-w-[350px] md:max-w-[250px] h-auto object-contain"
                                 />
 
-                                <p className="text-1xl text-[#a0aec0] font-medium max-w-[90%] sm:max-w-[65%]">
+                                <p className="text-1xl text-[#a0aec0] font-medium max-w-[100%] sm:max-w-[65%]">
                                     Meet the traveler at a convenient location
                                     and hand over your securely packed item.
                                 </p>
                             </div>
 
                             {/* Step 4 */}
-                            <div className="flex flex-col justify-center gap-10s md:gap-24 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2b73]">
+                            <div className="flex flex-col justify-center gap-10 md:gap-24 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2b73]">
                                 <h3 className="text-xl font-semibold">
                                     Track & Receive
                                 </h3>
