@@ -341,7 +341,7 @@ export default function Home() {
 
                         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-5 ">
                             {/* Step 1 */}
-                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md  bg-[#0c1c2b73]">
+                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md  bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Post a Package
                                 </h3>
@@ -364,7 +364,7 @@ export default function Home() {
                             </div>
 
                             {/* Step 2 */}
-                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2b73]">
+                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Match with a Traveler
                                 </h3>
@@ -386,7 +386,7 @@ export default function Home() {
                             </div>
 
                             {/* Step 3 */}
-                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2b73]">
+                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Hand Over the Package
                                 </h3>
@@ -407,7 +407,7 @@ export default function Home() {
                             </div>
 
                             {/* Step 4 */}
-                            <div className="flex flex-col justify-center gap-10 md:gap-24 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2b73]">
+                            <div className="flex flex-col justify-center gap-10 md:gap-24 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Track & Receive
                                 </h3>

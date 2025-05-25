@@ -1,0 +1,15 @@
+{
+    "redirects": [
+        {
+            "source": "/",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.trustlinc.app"
+                }
+            ],
+            "destination": "https://trustlinc.app",
+            "permanent": true
+        }
+    ]
+}
