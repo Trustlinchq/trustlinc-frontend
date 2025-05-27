@@ -253,7 +253,7 @@ export default function Home() {
             </header>
 
             {/*Hero Section*/}
-            <main className="relative py-10 sm:py-24 overflow-hidden">
+            <main className="relative pt-10 sm:pt-24 overflow-hidden">
                 {/*Hero Text Content*/}
                 <section className="relative z-10 max-w-5xl  mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div className="px-6 flex flex-col space-y-4 md:text-left">
@@ -567,7 +567,7 @@ export default function Home() {
                         <div className="flex-shrink-0">
                             <Image
                                 src="/chiemela-portrait.png"
-                                alt="Chiemina Nwankwo"
+                                alt="Chiemela Nwankwo"
                                 width={500}
                                 height={300}
                                 quality={100}
@@ -651,6 +651,7 @@ export default function Home() {
                     </div>
                 </section>
 
+                {/* Join the Community Section */}
                 <section className="bg-neutral2 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto items-center text-center">
                         <div className="flex items-center justify-center gap-3 mb-4">
@@ -692,6 +693,155 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
+                {/* Footer */}
+                <footer className="bg-backgroundPrimary py-10 sm:py-24 px-4 sm:px-8">
+                    <div className="max-w-5xl mx-auto ">
+                        <div className="items-center text-center mb-10 sm:mb-36">
+                            <Link href="/" className="inline-block">
+                                <Image
+                                    src="/logo-white.svg"
+                                    alt="TrustLinc Logo"
+                                    width={400}
+                                    height={250}
+                                    priority={true}
+                                    quality={100}
+                                    className="w-auto max-w-[90vw] xl:max-w-[1400px] h-auto object-contain cursor-pointer"
+                                />
+                            </Link>
+                        </div>
+
+                        <div className="px-3 sm:max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-4">
+                            {/* Left section: Logo and contact info */}
+                            <div className="text-sm text-neutral2">
+                                <p className="mb-1 sm:mb-2 font-bold">
+                                    <a
+                                        href="mailto:support@trustlinc.app"
+                                        className="text-sm sm:text-base font-medium hover:text-accent1 hover:underline"
+                                    >
+                                        support@trustlinc.app
+                                    </a>
+                                </p>
+
+                                <p className="text-xs sm:text-sm text-neutral-400">
+                                    KM1 Aba | Port Harcourt <br />
+                                    Express Way Umuahia, Abia State.
+                                </p>
+                            </div>
+
+                            {/* Right section: Footer links */}
+                            <div className="grid grid-cols-3 sm:grid-cols-4 gap-8 sm:gap-10">
+                                {/* Products */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
+                                        Products
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/shippers">
+                                                Shippers
+                                            </Link>
+                                        </li>
+                                        <li className="text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/couriers">
+                                                Couriers
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                    F
+                                </div>
+
+                                {/* Company */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
+                                        Company
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/about">About</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/careers">Careers</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/blog">Blog</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/security">
+                                                Security
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Resources */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
+                                        Resources
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/docs">Docs</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/newsrooms">
+                                                Newsrooms
+                                            </Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/privacy">Privacy</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/terms">Terms</Link>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Support */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6 -mt-12 sm:mt-0">
+                                        Support
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/contact">
+                                                Contact us
+                                            </Link>
+                                            {/* Internal link – no target="_blank" */}
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <a
+                                                href="https://x.com/TrustLinchq"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                X (Twitter)
+                                            </a>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <a
+                                                href="https://www.instagram.com/trustlinchq/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                Instagram
+                                            </a>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <a
+                                                href="#"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                Facebook
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </main>
         </div>
     );
