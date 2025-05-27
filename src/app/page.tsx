@@ -163,7 +163,7 @@ export default function Home() {
                                             </Link>
                                             <Link
                                                 href="/couriers"
-                                                className="text-[#303E4B] text-xl font-bold hover:text-[#544ddca8]"
+                                                className="text-[#303E4B] text-2xl font-bold hover:text-[#544ddca8]"
                                             >
                                                 Couriers
                                             </Link>
@@ -225,6 +225,7 @@ export default function Home() {
                                         </div>
                                     </div>
 
+                                    {/* Auth Section */}
                                     <div className="flex justify-center space-x-6 py-7 items-center mt-auto">
                                         <Link
                                             href="/login"
