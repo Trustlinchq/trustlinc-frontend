@@ -56,7 +56,7 @@ export default function RegisterForm() {
                             <span className="text-accent3">TrustLinc</span>
                         </h2>
 
-                        <p className="text-xs sm:text-sm text-accent4 mx-auto mt-2 sm:mt-4 max-w-[80%]">
+                        <p className="text-xs sm:text-sm text-accent4 mx-auto mt-2 sm:mt-4 max-w-[70%] sm:max-w-[75%]">
                             Thanks for choosing TrustLinc! Enter your email to
                             start your journey with fast, secure deliveries.
                         </p>
@@ -69,13 +69,13 @@ export default function RegisterForm() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="w-full pr-10 pl-4 py-6 rounded-full text-sm bg-gray-100 border border-gray-300 mt-6 overflow-hidden max-w-80 mx-auto"
+                                className="w-full pr-10 pl-4 py-6 rounded-full text-sm bg-gray-100 border border-gray-300 mt-6 overflow-hidden max-w-[90%] mx-auto"
                             />
                         </div>
 
                         <Button
                             type="submit"
-                            className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mt-5 mb-4 max-w-80 mx-auto"
+                            className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mt-5 mb-4 max-w-[90%] mx-auto"
                             disabled={loading}
                         >
                             {loading ? "Sending OTP..." : "Continue"}
