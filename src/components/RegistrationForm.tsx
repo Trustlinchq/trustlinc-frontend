@@ -28,11 +28,21 @@ export default function RegisterForm() {
                 router.push("/verify-otp?email=" + encodeURIComponent(email));
             }
         } catch (err) {
-            const error = err as AxiosError<{ message: string }>;
-            setError(
-                error.response?.data?.message ||
-                    "An error occurred. Please try again."
-            );
+            const error = err as AxiosError<{
+                error?: string;
+                message?: string;
+                details?: string;
+            }>;
+
+            const serverError = error.response?.data;
+
+            const meaningfulError =
+                serverError?.error ||
+                serverError?.message ||
+                serverError?.details ||
+                "An unexpected error occurred. Please try again.";
+
+            setError(meaningfulError);
         } finally {
             setLoading(false);
         }
@@ -48,7 +58,7 @@ export default function RegisterForm() {
                 {/* Form Section */}
                 <form
                     onSubmit={handleSubmit}
-                    className="flex flex-col items-center space-y-6 w-full sm:max-w-md mx-auto"
+                    className="flex flex-col items-center space-y-6 w-full sm:max-w-md mx-auto overflow-hidden"
                 >
                     <div className="text-center w-full">
                         <h2 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold">
@@ -82,7 +92,11 @@ export default function RegisterForm() {
                         </Button>
                     </div>
 
-                    {error && <p className="text-red-600 text-sm">{error}</p>}
+                    {error && (
+                        <p className="animate-fade-in text-sm text-red-500 bg-red-50 border border-red-200 rounded-md px-4 py-2 text-center max-w-[90%] mx-auto">
+                            {error}
+                        </p>
+                    )}
 
                     <p className="text-sm text-accent4 text-center w-full">
                         Have an account already?{" "}
