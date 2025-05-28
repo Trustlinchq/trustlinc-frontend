@@ -40,17 +40,18 @@ export default function RegisterForm() {
 
     return (
         <section
-            className="h-screen flex flex-col bg-neutral2 px-4 overflow-hidden
+            className="min-h-screen px-6 flex flex-col bg-neutral2
 "
         >
-            {/* Main Content Area */}
-            <div className="flex-grow flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-4 max-h-full overflow-hidden">
+            {/* Wrapper */}
+            <div className="flex-grow flex flex-col items-center justify-center w-full max-w-md mx-auto space-y-4 max-h-full overflow-hidden ">
+                {/* Form Section */}
                 <form
                     onSubmit={handleSubmit}
-                    className="w-full flex flex-col items-center space-y-6"
+                    className="flex flex-col items-center space-y-6 pt-20 sm:pt-40 w-full max-w-md mx-auto"
                 >
                     <div className="text-center w-full">
-                        <h2 className="text-2xl sm:text-4xl text-backgroundSecondary font-bold">
+                        <h2 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold">
                             Welcome to{" "}
                             <span className="text-accent3">TrustLinc</span>
                         </h2>
@@ -68,13 +69,13 @@ export default function RegisterForm() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="w-full pr-10 pl-4 py-6 rounded-full text-sm bg-gray-100 border border-gray-300 mt-6"
+                                className="w-full pr-10 pl-4 py-6 rounded-full text-sm bg-gray-100 border border-gray-300 mt-6 overflow-hidden"
                             />
                         </div>
 
                         <Button
                             type="submit"
-                            className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mt-5 mb-6"
+                            className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mt-5 mb-4"
                             disabled={loading}
                         >
                             {loading ? "Sending OTP..." : "Continue"}
@@ -96,7 +97,7 @@ export default function RegisterForm() {
             </div>
 
             {/* Footer pinned at bottom */}
-            <div className="text-xs text-accent4 text-center w-full pt-4 border-t max-w-md mx-auto pb-4">
+            <div className="mt-auto text-xs text-accent4 text-center w-full pt-4 border-t max-w-72 mx-auto   pb-4">
                 By continuing, you agree to our{" "}
                 <Link
                     href="/terms"

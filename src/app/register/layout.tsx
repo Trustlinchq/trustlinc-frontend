@@ -1,5 +1,3 @@
-import MinimalHeader from "@/components/MinimalHeader";
-
 export default function RegisterLayout({
     children,
 }: {
@@ -8,7 +6,6 @@ export default function RegisterLayout({
     return (
         <html lang="en">
             <body className="bg-neutral1">
-                <MinimalHeader />
                 <main>{children}</main>
             </body>
         </html>
