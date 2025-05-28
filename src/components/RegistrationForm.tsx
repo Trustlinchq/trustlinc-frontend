@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export default function RegisterForm() {
     const [email, setEmail] = useState("");
@@ -27,9 +27,10 @@ export default function RegisterForm() {
                 // Registration successful, redirect to OTP verification page
                 router.push("/verify-otp?email=" + encodeURIComponent(email));
             }
-        } catch (err: any) {
+        } catch (err) {
+            const error = err as AxiosError<{ message: string }>;
             setError(
-                err.response?.data?.message ||
+                error.response?.data?.message ||
                     "An error occurred. Please try again."
             );
         } finally {
