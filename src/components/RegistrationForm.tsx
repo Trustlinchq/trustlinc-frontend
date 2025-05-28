@@ -93,7 +93,7 @@ export default function RegisterForm() {
                     </div>
 
                     {error && (
-                        <p className="animate-fade-in text-sm text-red-500 bg-red-50 border border-red-200 rounded-md px-4 py-2 text-center max-w-[90%] mx-auto">
+                        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-full px-4 py-2 text-center max-w-[90%] mx-auto">
                             {error}
                         </p>
                     )}
