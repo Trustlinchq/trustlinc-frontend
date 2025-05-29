@@ -3,7 +3,7 @@
 import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 import MinimalHeader from "@/components/MinimalHeader";
 
-export default function RegisterLayout({
+export default function VerifyLayout({
     children,
 }: {
     children: React.ReactNode;

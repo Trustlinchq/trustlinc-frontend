@@ -9,7 +9,7 @@ export default function AppHeader() {
     const isAuthRoute =
         pathname.startsWith("/register") ||
         pathname.startsWith("/verify") ||
-        pathname.startsWith("/email-verified") ||
+        pathname.startsWith("/verified") ||
         pathname.startsWith("/onboarding");
 
     if (isAuthRoute) return null;

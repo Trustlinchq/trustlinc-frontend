@@ -36,8 +36,14 @@ export default function VerifyClient() {
 
             if (res.status === 200) {
                 setMessage("OTP verified successfully!");
-                // You can now redirect to dashboard or login
-                // router.push("/dashboard");
+
+                // Store onboarding token
+                const onboardingToken = res.data?.data?.onboarding_token;
+                if (onboardingToken) {
+                    localStorage.setItem("onboardingToken", onboardingToken);
+                }
+
+                router.push("/verify/success");
             }
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
@@ -83,15 +89,15 @@ export default function VerifyClient() {
 
     return (
         <section className="min-h-screen flex flex-col bg-white justify-center items-center text-center px-4">
-            <div className="flex-grow flex flex-col items-center justify-center w-full mx-auto space-y-4 max-h-full overflow-hidden">
-                <h2 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold">
-                    We Just Sent You A Code
+            <div className="flex-grow flex flex-col items-center justify-center w-full mx-auto space-y-3 max-h-full overflow-hidden">
+                <h2 className="text-2xl sm:text-3xl text-backgroundSecondary font-bold">
+                    We&apos;ve just sent you a code
                 </h2>
 
-                <p className="text-xs sm:text-sm text-accent4 mx-auto mt-2 sm:mt-4  sm:max-w-[35%]">
-                    Check your inbox! We just sent a verification code to{" "}
-                    <span className="font-medium text-accent3">{email}</span> —
-                    enter it below to proceed.
+                <p className="text-xs sm:text-sm text-accent4 mx-auto sm:mt-4 sm:max-w-[35%]">
+                    Check your inbox — we’ve just sent a verification code to{" "}
+                    <span className="font-medium text-accent3">{email}.</span>{" "}
+                    Enter it below to.
                 </p>
 
                 <form
