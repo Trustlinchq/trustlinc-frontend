@@ -25,7 +25,7 @@ export default function RegisterForm() {
             );
             if (response.status === 200 || response.status === 201) {
                 // Registration successful, redirect to OTP verification page
-                router.push("/verify-otp?email=" + encodeURIComponent(email));
+                router.push("/verify?email=" + encodeURIComponent(email));
             }
         } catch (err) {
             const error = err as AxiosError<{
@@ -93,7 +93,7 @@ export default function RegisterForm() {
                     </div>
 
                     {error && (
-                        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-full px-4 py-2 text-center max-w-[90%] mx-auto">
+                        <p className="text-xs text-red-700 bg-red-50 border border-red-200 rounded-full px-4 py-2 text-center max-w-[90%] mx-auto">
                             {error}
                         </p>
                     )}

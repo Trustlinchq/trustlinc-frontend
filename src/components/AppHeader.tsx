@@ -8,7 +8,7 @@ export default function AppHeader() {
 
     const isAuthRoute =
         pathname.startsWith("/register") ||
-        pathname.startsWith("/verify-otp") ||
+        pathname.startsWith("/verify") ||
         pathname.startsWith("/email-verified") ||
         pathname.startsWith("/onboarding");
 
