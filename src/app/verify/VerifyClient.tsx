@@ -88,8 +88,8 @@ export default function VerifyClient() {
     };
 
     return (
-        <section className="min-h-screen flex flex-col bg-white justify-center items-center text-center px-4">
-            <div className="flex-grow flex flex-col items-center justify-center w-full mx-auto space-y-3 max-h-full overflow-hidden">
+        <section className="min-h-screen flex flex-col bg-white text-center px-4 pt-44 sm:pt-48 overflow-x-hidden">
+            <div className="flex-grow flex flex-col items-center w-full mx-auto space-y-3 max-h-full">
                 <h2 className="text-2xl sm:text-3xl text-backgroundSecondary font-bold">
                     We&apos;ve just sent you a code
                 </h2>

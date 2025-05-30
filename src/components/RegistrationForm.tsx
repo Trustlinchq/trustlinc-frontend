@@ -54,7 +54,7 @@ export default function RegisterForm() {
 "
         >
             {/* Wrapper */}
-            <div className="flex-grow flex flex-col items-center justify-center w-full mx-auto space-y-4 max-h-full overflow-hidden ">
+            <div className="flex-grow flex flex-col items-center w-full mx-auto space-y-4 max-h-full overflow-hidden pt-44 sm:pt-48 ">
                 {/* Form Section */}
                 <form
                     onSubmit={handleSubmit}
@@ -111,7 +111,7 @@ export default function RegisterForm() {
             </div>
 
             {/* Footer pinned at bottom */}
-            <div className="mt-auto text-xs text-accent4 text-center w-full pt-4 border-t max-w-72 mx-auto   pb-6">
+            <div className="mt-auto text-xs text-accent4 text-center w-full pt-4 border-t max-w-72 mx-auto pb-6">
                 By continuing, you agree to our{" "}
                 <Link
                     href="/terms"

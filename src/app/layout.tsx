@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
 import AppHeader from "@/components/AppHeader";
+import { Toaster } from "sonner";
 
 const ubuntu = Ubuntu({
-    variable: "--font-ubuntu",
-    weight: ["300", "400", "500", "700"],
     subsets: ["latin"],
+    variable: "--font-ubuntu",
+    weight: ["300", "500", "700"],
+    display: "swap",
 });
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -23,6 +25,7 @@ export default function RootLayout({
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
                 {children}
+                <Toaster richColors />
             </body>
         </html>
     );
