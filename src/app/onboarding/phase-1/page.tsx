@@ -37,7 +37,7 @@ export default function OnboardingPhase1() {
     }, [router]);
 
     useEffect(() => {
-        const token = localStorage.getItem("onboarding_token");
+        const token = localStorage.getItem("onboardingToken");
         if (!token) {
             toast.error("No onboarding token found. Restarting onboarding...");
             handleRestartOnboarding();
@@ -70,7 +70,7 @@ export default function OnboardingPhase1() {
             );
 
             toast.success("Successfully submitted onboarding phase 1");
-            localStorage.setItem("onboarding_token", res.data.onboarding_token);
+            localStorage.setItem("onboardingToken", res.data.onboarding_token);
             router.push("/onboarding/phase-2");
         } catch (error: unknown) {
             const err = error as AxiosError<{ message?: string }>;
