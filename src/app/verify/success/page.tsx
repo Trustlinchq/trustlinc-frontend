@@ -8,7 +8,7 @@ export default function SuccessPage() {
 
     const handleContinue = () => {
         const token = localStorage.getItem("onboardingToken");
-        if (token) {
+        if (!token) {
             alert("Something went wrong. Please verify your email again.");
             router.push("/verify");
         } else {
