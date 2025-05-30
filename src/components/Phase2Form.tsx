@@ -60,19 +60,44 @@ export default function Phase2() {
     const [username, setUsername] = useState("");
     const [selectedState, setSelectedState] = useState("");
     const [loading, setLoading] = useState(false);
+    const [isInitializing, setIsInitializing] = useState(true);
+    const [onboardingToken, setOnboardingToken] = useState<string | null>(null);
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [onboardingToken, setOnboardingToken] = useState<string | null>(null);
 
+    // Handle token extraction and early validation
     useEffect(() => {
         const token = searchParams.get("token");
-        setOnboardingToken(token);
+
+        if (!token) {
+            setIsInitializing(false);
+            return;
+        }
+
+        axios
+            .post(
+                "https://trustlinc-backend.onrender.com/api/v1/auth/refresh-onboarding-token",
+                {
+                    token,
+                }
+            )
+            .then(() => {
+                setOnboardingToken(token);
+            })
+            .catch(() => {
+                toast.error(
+                    "Your onboarding session has expired. Please restart."
+                );
+            })
+            .finally(() => {
+                setIsInitializing(false);
+            });
     }, [searchParams]);
 
     const handleSubmit = async () => {
         if (!username || !selectedState || !onboardingToken) {
-            toast.error("Please fill all fields, or token is missing.");
+            toast.error("Please fill all fields or token is missing.");
             return;
         }
 
@@ -88,11 +113,9 @@ export default function Phase2() {
             );
 
             toast.success("Onboarding complete! Redirecting...");
-            router.push("/onboarding/success"); // Change to your actual route
+            router.push("/onboarding/success");
         } catch (error) {
             const err = error as AxiosError<{ error: string }>;
-
-            console.error(err);
             toast.error(
                 err?.response?.data?.error || "Something went wrong. Try again."
             );
@@ -101,8 +124,23 @@ export default function Phase2() {
         }
     };
 
-    if (!onboardingToken) {
+    // Initial loading state while validating token
+    if (isInitializing) {
         return <p className="text-xs text-center">Loading...</p>;
+    }
+
+    // Token invalid or missing after initialization
+    if (!onboardingToken) {
+        return (
+            <div className="text-center mt-20 text-sm">
+                <p className="mb-4">
+                    Invalid or expired token. Please restart onboarding.
+                </p>
+                <Button onClick={() => router.push("/register")}>
+                    Restart
+                </Button>
+            </div>
+        );
     }
 
     return (
@@ -135,7 +173,7 @@ export default function Phase2() {
                     Help us connect you with your local community.
                 </p>
                 <Select onValueChange={setSelectedState}>
-                    <SelectTrigger className="w-full pr-10 pl-4 py-6  border border-gray-300 mt-1 overflow-hidden rounded-lg mx-auto ">
+                    <SelectTrigger className="w-full pr-10 pl-4 py-6 border border-gray-300 mt-1 overflow-hidden rounded-lg mx-auto">
                         <SelectValue placeholder="Select your state" />
                     </SelectTrigger>
                     <SelectContent
