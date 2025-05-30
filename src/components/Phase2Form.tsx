@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { Button } from "@/components/ui/button";
@@ -63,11 +63,16 @@ export default function Phase2() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const onboarding_token = searchParams.get("token");
+    const [onboardingToken, setOnboardingToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        const token = searchParams.get("token");
+        setOnboardingToken(token);
+    }, [searchParams]);
 
     const handleSubmit = async () => {
-        if (!username || !selectedState) {
-            toast.error("Please fill all fields");
+        if (!username || !selectedState || !onboardingToken) {
+            toast.error("Please fill all fields, or token is missing.");
             return;
         }
 
@@ -78,7 +83,7 @@ export default function Phase2() {
                 {
                     username,
                     state: selectedState,
-                    onboarding_token,
+                    onboarding_token: onboardingToken,
                 }
             );
 
@@ -95,6 +100,10 @@ export default function Phase2() {
             setLoading(false);
         }
     };
+
+    if (!onboardingToken) {
+        return <p className="text-xs text-center">Loading...</p>;
+    }
 
     return (
         <div className="mx-auto max-w-md">

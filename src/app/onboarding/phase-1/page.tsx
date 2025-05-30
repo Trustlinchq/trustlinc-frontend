@@ -6,7 +6,6 @@ import axios, { AxiosError } from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 export default function OnboardingPhase1() {
@@ -17,15 +16,18 @@ export default function OnboardingPhase1() {
     const [onboardingToken, setOnboardingToken] = useState<string | null>(null);
 
     const handleRestartOnboarding = useCallback(async () => {
-        try {
-            const email = localStorage.getItem("email");
-            if (!email) throw new Error("Missing email for restart");
+        const email = localStorage.getItem("email");
+        if (!email) {
+            toast.error("Session expired. Please register again.");
+            router.push("/register");
+            return;
+        }
 
+        try {
             await axios.post(
                 "https://trustlinc-backend.onrender.com/api/v1/auth/restart-onboarding",
                 { email }
             );
-
             toast.success("Restarted. Check your email for a new OTP.");
             router.push("/verify");
         } catch (error: unknown) {
@@ -47,7 +49,7 @@ export default function OnboardingPhase1() {
     }, [handleRestartOnboarding]);
 
     const handleSubmit = async () => {
-        if (!role || !fullName) {
+        if (!role || !fullName.trim()) {
             toast.error("Please enter your full name and select a role");
             return;
         }
@@ -65,7 +67,7 @@ export default function OnboardingPhase1() {
                 {
                     onboarding_token: onboardingToken,
                     role,
-                    full_name: fullName,
+                    full_name: fullName.trim(),
                 }
             );
 
@@ -91,16 +93,20 @@ export default function OnboardingPhase1() {
     };
 
     const refreshTokenAndRetry = async () => {
-        try {
-            const email = localStorage.getItem("email");
-            if (!email) throw new Error("Missing email for token refresh");
+        const email = localStorage.getItem("email");
+        if (!email) {
+            toast.error("Session expired. Please register again.");
+            router.push("/register");
+            return;
+        }
 
+        try {
             const res = await axios.post(
                 "https://trustlinc-backend.onrender.com/api/v1/auth/refresh-onboarding-token",
                 { email }
             );
 
-            localStorage.setItem("onboarding_token", res.data.onboarding_token);
+            localStorage.setItem("onboardingToken", res.data.onboarding_token);
             setOnboardingToken(res.data.onboarding_token);
             toast.success("Token refreshed. Please try again.");
         } catch (error: unknown) {
@@ -120,16 +126,18 @@ export default function OnboardingPhase1() {
                     Community
                 </h2>
 
-                <div>
-                    <p className="text-sm text-accent4 font-normal">
-                        How do you want to be part of TrustLinc?
-                    </p>
-                </div>
+                <p className="text-sm text-accent4 font-normal">
+                    How do you want to be part of TrustLinc?
+                </p>
             </div>
 
             <div className="flex-grow flex flex-col w-full space-y-4 max-h-full max-w-md mx-auto">
-                <Label
-                    className={`flex justify-between items-center rounded-lg border p-4 cursor-pointer ${
+                {/* Role: Shipper */}
+                <div
+                    role="button"
+                    aria-pressed={role === "SHIPPER"}
+                    onClick={() => setRole("SHIPPER")}
+                    className={`flex justify-between items-center rounded-lg border p-4 cursor-pointer transition ${
                         role === "SHIPPER"
                             ? "bg-neutral1 dark:border-b-gray-500 dark:bg-blue-950"
                             : ""
@@ -146,19 +154,19 @@ export default function OnboardingPhase1() {
 
                     <Checkbox
                         checked={role === "SHIPPER"}
-                        onCheckedChange={() =>
-                            setRole((prev) =>
-                                prev === "SHIPPER" ? "" : "SHIPPER"
-                            )
-                        }
-                        className=" data-[state=checked]:border-blue-600 data-[state=checked]:bg-accent3 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+                        onCheckedChange={() => setRole("SHIPPER")}
+                        className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-accent3 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
                     />
-                </Label>
+                </div>
 
-                <Label
-                    className={`flex justify-between items-center rounded-lg border p-4 cursor-pointer ${
+                {/* Role: Courier */}
+                <div
+                    role="button"
+                    aria-pressed={role === "COURIER"}
+                    onClick={() => setRole("COURIER")}
+                    className={`flex justify-between items-center rounded-lg border p-4 cursor-pointer transition ${
                         role === "COURIER"
-                            ? " bg-blue-50 dark:border-b-gray-500 dark:bg-blue-950"
+                            ? "bg-blue-50 dark:border-b-gray-500 dark:bg-blue-950"
                             : ""
                     }`}
                 >
@@ -173,14 +181,10 @@ export default function OnboardingPhase1() {
 
                     <Checkbox
                         checked={role === "COURIER"}
-                        onCheckedChange={() =>
-                            setRole((prev) =>
-                                prev === "COURIER" ? "" : "COURIER"
-                            )
-                        }
+                        onCheckedChange={() => setRole("COURIER")}
                         className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-accent3 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
                     />
-                </Label>
+                </div>
 
                 <div>
                     <Input
