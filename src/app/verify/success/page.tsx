@@ -1,15 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function SuccessPage() {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     const handleContinue = () => {
+        if (loading) return;
+        setLoading(true);
+
         const token = localStorage.getItem("onboardingToken");
         if (!token) {
-            alert("Something went wrong. Please verify your email again.");
+            toast.error(
+                "Something went wrong. Please verify your email again."
+            );
             router.push("/verify");
         } else {
             router.push("/onboarding/phase-1");

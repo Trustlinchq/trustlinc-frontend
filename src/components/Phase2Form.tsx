@@ -68,36 +68,40 @@ export default function Phase2() {
 
     // Handle token extraction and early validation
     useEffect(() => {
-        const token = searchParams.get("token");
+        const localToken = localStorage.getItem("onboardingToken");
+        const urlToken = searchParams.get("token");
 
-        if (!token) {
+        // Use localStorage token if available, else try the URL
+        if (localToken) {
+            setOnboardingToken(localToken);
             setIsInitializing(false);
-            return;
+        } else if (urlToken) {
+            axios
+                .post(
+                    "https://trustlinc-backend.onrender.com/api/v1/auth/refresh-onboarding-token",
+                    { token: urlToken }
+                )
+                .then(() => {
+                    localStorage.setItem("onboardingToken", urlToken);
+                    setOnboardingToken(urlToken);
+                })
+                .catch(() => {
+                    toast.error(
+                        "Your onboarding session has expired. Please restart."
+                    );
+                })
+                .finally(() => {
+                    setIsInitializing(false);
+                });
+        } else {
+            toast.error("Missing onboarding token. Please restart onboarding.");
+            setIsInitializing(false);
         }
-
-        axios
-            .post(
-                "https://trustlinc-backend.onrender.com/api/v1/auth/refresh-onboarding-token",
-                {
-                    token,
-                }
-            )
-            .then(() => {
-                setOnboardingToken(token);
-            })
-            .catch(() => {
-                toast.error(
-                    "Your onboarding session has expired. Please restart."
-                );
-            })
-            .finally(() => {
-                setIsInitializing(false);
-            });
     }, [searchParams]);
 
     const handleSubmit = async () => {
-        if (!username || !selectedState || !onboardingToken) {
-            toast.error("Please fill all fields or token is missing.");
+        if (!username.trim() || !selectedState || !onboardingToken) {
+            toast.error("Please fill all fields.");
             return;
         }
 
