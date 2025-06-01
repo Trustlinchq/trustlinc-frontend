@@ -38,13 +38,15 @@ export default function AuthForm({
         setLoading(true);
 
         try {
-            await axios.post(submitUrl, { email });
+            const res = await axios.post(submitUrl, { email });
             toast.success("OTP sent to your email.");
-            router.push(
-                `${
-                    redirectToVerification ?? "/verify"
-                }?email=${encodeURIComponent(email)}`
-            );
+            if (res.status === 201) {
+                router.push(
+                    `${
+                        redirectToVerification ?? "/verify"
+                    }?email=${encodeURIComponent(email)}`
+                );
+            }
         } catch (err) {
             const error = err as AxiosError<{
                 error?: string;

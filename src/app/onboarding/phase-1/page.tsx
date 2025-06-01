@@ -119,7 +119,7 @@ export default function OnboardingPhase1() {
     };
 
     return (
-        <section className="min-h-screen flex flex-col bg-white px-4 pt-24 sm:pt-40 overflow-x-hidden">
+        <section className="min-h-screen flex flex-col bg-neutral-100 px-4 pt-24 sm:pt-40 overflow-x-hidden">
             <div className="mx-auto max-w-md mb-3">
                 <h2 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold text-center max-w-[80%] mx-auto mb-11">
                     Join The <span className="text-accent3">TrustLinc</span>{" "}
