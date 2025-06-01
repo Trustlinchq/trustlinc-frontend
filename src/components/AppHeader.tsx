@@ -10,7 +10,10 @@ export default function AppHeader() {
         pathname.startsWith("/register") ||
         pathname.startsWith("/verify") ||
         pathname.startsWith("/verified") ||
-        pathname.startsWith("/onboarding");
+        pathname.startsWith("/onboarding") ||
+        pathname.startsWith("/restart-onboarding") ||
+        pathname.startsWith("/login") ||
+        pathname.startsWith("/login-otp");
 
     if (isAuthRoute) return null;
 

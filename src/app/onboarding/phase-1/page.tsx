@@ -197,9 +197,9 @@ export default function OnboardingPhase1() {
                 </div>
 
                 <Button
-                    className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mx-auto"
+                    className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-lg mx-auto"
                     onClick={handleSubmit}
-                    disabled={loading}
+                    disabled={loading || !fullName || !role}
                 >
                     {loading ? "Submitting..." : "Continue"}
                 </Button>

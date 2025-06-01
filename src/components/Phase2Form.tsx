@@ -130,17 +130,24 @@ export default function Phase2() {
 
     // Initial loading state while validating token
     if (isInitializing) {
-        return <p className="text-xs text-center">Loading...</p>;
+        return (
+            <p className="text-lg items-center text-center justify-center">
+                Loading...
+            </p>
+        );
     }
 
     // Token invalid or missing after initialization
     if (!onboardingToken) {
         return (
-            <div className="text-center mt-20 text-sm">
-                <p className="mb-4">
+            <div className="flex flex-col text-center items-center mt-40 text-sm max-w-[90%] sm:max-w-md mx-auto">
+                <p className="text-base sm:text-lg mb-6">
                     Invalid or expired token. Please restart onboarding.
                 </p>
-                <Button onClick={() => router.push("/register")}>
+                <Button
+                    onClick={() => router.push("/restart-onboarding")}
+                    className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mx-auto"
+                >
                     Restart
                 </Button>
             </div>
@@ -195,8 +202,8 @@ export default function Phase2() {
             </div>
 
             <Button
-                className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mx-auto"
-                disabled={loading}
+                className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-lg mx-auto"
+                disabled={loading || !username || !selectedState}
                 onClick={handleSubmit}
             >
                 {loading ? "Submitting..." : "Continue"}

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios, { AxiosError } from "axios";
 
-export default function VerifyClient() {
+export default function LoginVerifyClient() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const email = searchParams.get("email");
@@ -15,12 +15,26 @@ export default function VerifyClient() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const [resendCooldown, setResendCooldown] = useState(0);
+    const otpInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (!email) {
-            router.push("/register");
+            router.push("/login");
         }
+
+        otpInputRef.current?.focus();
     }, [email, router]);
+
+    useEffect(() => {
+        if (resendCooldown > 0) {
+            const timer = setTimeout(
+                () => setResendCooldown(resendCooldown - 1),
+                1000
+            );
+            return () => clearTimeout(timer);
+        }
+    }, [resendCooldown]);
 
     const handleVerify = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -30,20 +44,26 @@ export default function VerifyClient() {
 
         try {
             const res = await axios.post(
-                "https://trustlinc-backend.onrender.com/api/v1/auth/verify-otp",
+                "https://trustlinc-backend.onrender.com/api/v1/auth/login",
                 { email, otp }
             );
 
             if (res.status === 200) {
                 setMessage("OTP verified successfully!");
 
-                // Store onboarding token
-                const onboardingToken = res.data?.data?.onboarding_token;
-                if (onboardingToken) {
-                    localStorage.setItem("onboardingToken", onboardingToken);
-                }
+                const token = res.data?.token;
+                const user = res.data?.user;
 
-                router.push("/verify/success");
+                if (token && typeof token === "string") {
+                    localStorage.setItem("trustlinc_token", token);
+                    localStorage.setItem(
+                        "trustlinc_user",
+                        JSON.stringify(user)
+                    );
+                    router.push("/dashboard");
+                } else {
+                    throw new Error("Invalid token received from server.");
+                }
             }
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
@@ -61,17 +81,20 @@ export default function VerifyClient() {
     };
 
     const handleResend = async () => {
+        if (resendCooldown > 0) return;
+
         setLoading(true);
         setError("");
         setMessage("");
 
         try {
             const res = await axios.post(
-                "https://trustlinc-backend.onrender.com/api/v1/auth/request-verification-otp",
+                "https://trustlinc-backend.onrender.com/api/v1/auth/requestLoginOtp",
                 { email }
             );
             if (res.status === 200) {
                 setMessage("OTP resent successfully!");
+                setResendCooldown(30); // 30 seconds cooldown
             }
         } catch (err: unknown) {
             if (err instanceof AxiosError) {
@@ -96,8 +119,8 @@ export default function VerifyClient() {
 
                 <p className="text-xs sm:text-sm text-accent4 mx-auto sm:mt-4 sm:max-w-[35%]">
                     Check your inbox — we’ve just sent a verification code to{" "}
-                    <span className="font-medium text-accent3">{email}.</span>{" "}
-                    Enter it below to.
+                    <span className="font-medium text-accent3">{email}</span>.
+                    Enter it below to proceed.
                 </p>
 
                 <form
@@ -105,8 +128,11 @@ export default function VerifyClient() {
                     className="w-full max-w-md flex flex-col items-center space-y-4"
                 >
                     <Input
+                        ref={otpInputRef}
                         type="text"
-                        placeholder="Code"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        placeholder="Enter 6-digit code"
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                         required
@@ -139,8 +165,11 @@ export default function VerifyClient() {
                             type="button"
                             onClick={handleResend}
                             className="text-accent3 hover:text-backgroundPrimary font-medium"
+                            disabled={resendCooldown > 0}
                         >
-                            Resend
+                            {resendCooldown > 0
+                                ? `Resend in ${resendCooldown}s`
+                                : "Resend"}
                         </button>
                     </p>
                 </form>

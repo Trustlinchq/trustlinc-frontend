@@ -6,27 +6,45 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
 
-export default function RegisterForm() {
+interface AuthFormProps {
+    title: string | React.ReactNode;
+    description: string;
+    submitUrl: string;
+    redirectLabel: string;
+    redirectHref: string;
+    redirectText: string;
+    terms?: boolean;
+    redirectToVerification?: string;
+}
+
+export default function AuthForm({
+    title,
+    description,
+    submitUrl,
+    redirectLabel,
+    redirectHref,
+    redirectText,
+    terms,
+    redirectToVerification,
+}: AuthFormProps) {
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setError("");
 
         try {
-            const response = await axios.post(
-                "https://trustlinc-backend.onrender.com/api/v1/auth/register",
-                { email }
+            await axios.post(submitUrl, { email });
+            toast.success("OTP sent to your email.");
+            router.push(
+                `${
+                    redirectToVerification ?? "/verify"
+                }?email=${encodeURIComponent(email)}`
             );
-            if (response.status === 200 || response.status === 201) {
-                // Registration successful, redirect to OTP verification page
-                router.push("/verify?email=" + encodeURIComponent(email));
-            }
         } catch (err) {
             const error = err as AxiosError<{
                 error?: string;
@@ -35,40 +53,31 @@ export default function RegisterForm() {
             }>;
 
             const serverError = error.response?.data;
-
             const meaningfulError =
                 serverError?.error ||
                 serverError?.message ||
                 serverError?.details ||
                 "An unexpected error occurred. Please try again.";
 
-            setError(meaningfulError);
+            toast.error(meaningfulError);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <section
-            className="min-h-screen flex flex-col bg-neutral2
-"
-        >
-            {/* Wrapper */}
-            <div className="flex-grow flex flex-col items-center w-full mx-auto space-y-4 max-h-full overflow-hidden pt-44 sm:pt-48 ">
-                {/* Form Section */}
+        <section className="min-h-screen flex flex-col bg-neutral-100">
+            <div className="flex-grow flex flex-col items-center w-full mx-auto space-y-4 max-h-full overflow-hidden pt-44 sm:pt-48">
                 <form
                     onSubmit={handleSubmit}
                     className="flex flex-col items-center space-y-6 w-full sm:max-w-md mx-auto overflow-hidden"
                 >
                     <div className="text-center w-full">
                         <h2 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold">
-                            Welcome to{" "}
-                            <span className="text-accent3">TrustLinc</span>
+                            {title}
                         </h2>
-
-                        <p className="text-xs sm:text-sm text-accent4 mx-auto mt-2 sm:mt-4 max-w-[70%] sm:max-w-[75%]">
-                            Thanks for choosing TrustLinc! Enter your email to
-                            start your journey with fast, secure deliveries.
+                        <p className="text-xs sm:text-sm text-accent4 mx-auto mt-2 sm:mt-4 max-w-[75%]">
+                            {description}
                         </p>
 
                         <div className="w-full relative">
@@ -79,48 +88,43 @@ export default function RegisterForm() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="w-full pr-10 pl-4 py-6 rounded-full text-sm bg-gray-100 border border-gray-300 mt-6 overflow-hidden max-w-[90%] mx-auto"
+                                className="w-full pr-10 pl-4 py-6 rounded-lg text-sm bg-gray-100 border border-gray-300 mt-6 overflow-hidden max-w-[90%] mx-auto"
                             />
                         </div>
 
                         <Button
                             type="submit"
-                            className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mt-5 mb-4 max-w-[90%] mx-auto"
-                            disabled={loading}
+                            className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-lg mt-5 mb-4 max-w-[90%] mx-auto"
+                            disabled={loading || !email}
                         >
                             {loading ? "Sending OTP..." : "Continue"}
                         </Button>
                     </div>
 
-                    {error && (
-                        <p className="text-xs text-red-700 bg-red-50 border border-red-200 rounded-full px-4 py-2 text-center max-w-[90%] mx-auto">
-                            {error}
-                        </p>
-                    )}
-
                     <p className="text-sm text-accent4 text-center w-full">
-                        Have an account already?{" "}
+                        {redirectLabel}{" "}
                         <Link
-                            href="/login"
+                            href={redirectHref}
                             className="text-accent3 hover:text-backgroundPrimary font-medium"
                         >
-                            Log in here
+                            {redirectText}
                         </Link>
                     </p>
                 </form>
             </div>
 
-            {/* Footer pinned at bottom */}
-            <div className="mt-auto text-xs text-accent4 text-center w-full pt-4 border-t max-w-72 mx-auto pb-6">
-                By continuing, you agree to our{" "}
-                <Link
-                    href="/terms"
-                    className="text-accent3 hover:text-backgroundPrimary font-medium"
-                >
-                    Terms
-                </Link>
-                .
-            </div>
+            {terms && (
+                <div className="mt-auto text-xs text-accent4 text-center w-full pt-4 border-t max-w-72 mx-auto pb-6">
+                    By continuing, you agree to our{" "}
+                    <Link
+                        href="/terms"
+                        className="text-accent3 hover:text-backgroundPrimary font-medium"
+                    >
+                        Terms
+                    </Link>
+                    .
+                </div>
+            )}
         </section>
     );
 }
