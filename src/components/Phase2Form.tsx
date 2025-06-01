@@ -117,7 +117,7 @@ export default function Phase2() {
             );
 
             toast.success("Onboarding complete! Redirecting...");
-            router.push("/onboarding/success");
+            router.push("/welcome");
         } catch (error) {
             const err = error as AxiosError<{ error: string }>;
             toast.error(

@@ -13,7 +13,8 @@ export default function AppHeader() {
         pathname.startsWith("/onboarding") ||
         pathname.startsWith("/restart-onboarding") ||
         pathname.startsWith("/login") ||
-        pathname.startsWith("/login-otp");
+        pathname.startsWith("/login-otp") ||
+        pathname.startsWith("/welcome");
 
     if (isAuthRoute) return null;
 
