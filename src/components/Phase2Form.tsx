@@ -107,7 +107,7 @@ export default function Phase2() {
 
         setLoading(true);
         try {
-            await axios.post(
+            const response = await axios.post(
                 "https://trustlinc-backend.onrender.com/api/v1/auth/onboard/phase2",
                 {
                     username,
@@ -116,7 +116,14 @@ export default function Phase2() {
                 }
             );
 
-            toast.success("Onboarding complete! Redirecting...");
+            // Store user and token in localStorage
+            const { user, token } = response.data;
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
+
+            toast.success(
+                "Onboarding complete! Redirecting to welcome page..."
+            );
             router.push("/welcome");
         } catch (error) {
             const err = error as AxiosError<{ error: string }>;
@@ -190,7 +197,7 @@ export default function Phase2() {
                     <SelectContent
                         side="bottom"
                         sideOffset={4}
-                        className="text-xs text-accent4 w-[200px] h-[200px]"
+                        className="text-xs text-accent4 max-h-60 w-full"
                     >
                         {STATES.map((state) => (
                             <SelectItem key={state} value={state}>

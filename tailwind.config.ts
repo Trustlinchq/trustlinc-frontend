@@ -15,21 +15,14 @@ export default {
             colors: {
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
-
-                // Backgrounds
-                backgroundPrimary: "#001028", // Primary Background
-                backgroundSecondary: "#303E4B", // Secondary Background
-
-                // Accents
-                accent1: "#95F8CE", // Accent Color 001
-                accent2: "#71D0FF", // Accent Color 002
-                accent3: "#544DDC", // Accent Color 003
-                accent4: "#636262", // Accent Color 004
-
-                // Neutrals
-                neutral1: "#EFF3F7", // Neutral Color 001
-                neutral2: "#FFFFFF", // Neutral Color 002
-
+                backgroundPrimary: "#001028",
+                backgroundSecondary: "#303E4B",
+                accent1: "#95F8CE",
+                accent2: "#71D0FF",
+                accent3: "#544DDC",
+                accent4: "#636262",
+                neutral1: "#EFF3F7",
+                neutral2: "#FFFFFF",
                 card: {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
@@ -67,6 +60,18 @@ export default {
                     "3": "hsl(var(--chart-3))",
                     "4": "hsl(var(--chart-4))",
                     "5": "hsl(var(--chart-5))",
+                },
+                sidebar: {
+                    DEFAULT: "hsl(var(--sidebar-background))",
+                    foreground: "hsl(var(--sidebar-foreground))",
+                    primary: "hsl(var(--sidebar-primary))",
+                    "primary-foreground":
+                        "hsl(var(--sidebar-primary-foreground))",
+                    accent: "hsl(var(--sidebar-accent))",
+                    "accent-foreground":
+                        "hsl(var(--sidebar-accent-foreground))",
+                    border: "hsl(var(--sidebar-border))",
+                    ring: "hsl(var(--sidebar-ring))",
                 },
             },
             borderRadius: {

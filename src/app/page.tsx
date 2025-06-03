@@ -539,7 +539,6 @@ export default function Home() {
                                             </Link>
                                         </li>
                                     </ul>
-                                    F
                                 </div>
 
                                 {/* Company */}
