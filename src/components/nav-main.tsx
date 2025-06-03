@@ -1,6 +1,6 @@
 "use client";
 
-import { PlusCircleIcon, LayoutDashboard, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, type LucideIcon } from "lucide-react";
 
 import {
     SidebarGroup,
