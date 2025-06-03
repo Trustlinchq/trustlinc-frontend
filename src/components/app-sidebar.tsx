@@ -11,7 +11,7 @@ import {
     FileTextIcon,
     FolderIcon,
     HelpCircleIcon,
-    LayoutDashboardIcon,
+    PlusCircleIcon,
     ListIcon,
     SearchIcon,
     SettingsIcon,
@@ -42,9 +42,9 @@ const data = {
     },
     navMain: [
         {
-            title: "Dashboard",
+            title: "Create a Package",
             url: "#",
-            icon: LayoutDashboardIcon,
+            icon: PlusCircleIcon,
         },
         {
             title: "Lifecycle",

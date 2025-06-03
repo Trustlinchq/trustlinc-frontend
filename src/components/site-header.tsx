@@ -10,7 +10,9 @@ export function SiteHeader() {
                     orientation="vertical"
                     className="mx-2 data-[orientation=vertical]:h-4"
                 />
-                <h1 className="text-lg font-bold">Dashboard</h1>
+                <h1 className="text-2xl text-backgroundPrimary font-bold">
+                    Dashboard
+                </h1>
             </div>
         </header>
     );

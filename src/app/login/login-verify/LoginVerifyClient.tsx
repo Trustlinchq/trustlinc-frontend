@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
 
 export default function LoginVerifyClient() {
     const router = useRouter();
@@ -13,8 +14,6 @@ export default function LoginVerifyClient() {
 
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
     const [resendCooldown, setResendCooldown] = useState(0);
     const otpInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,8 +38,6 @@ export default function LoginVerifyClient() {
     const handleVerify = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setError("");
-        setMessage("");
 
         try {
             const res = await axios.post(
@@ -49,32 +46,35 @@ export default function LoginVerifyClient() {
             );
 
             if (res.status === 200) {
-                setMessage("OTP verified successfully!");
+                const { user, token } = res.data;
 
-                const token = res.data?.token;
-                const user = res.data?.user;
+                if (token && typeof token === "string" && user && user.role) {
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("user", JSON.stringify(user));
+                    toast.success("OTP verified successfully! Redirecting...");
 
-                if (token && typeof token === "string") {
-                    localStorage.setItem("trustlinc_token", token);
-                    localStorage.setItem(
-                        "trustlinc_user",
-                        JSON.stringify(user)
-                    );
-                    router.push("/dashboard");
+                    // Redirect based on user role
+                    if (user.role === "COURIER") {
+                        router.push("/dashboard/courier");
+                    } else if (user.role === "SHIPPER") {
+                        router.push("/dashboard/shipper");
+                    } else {
+                        throw new Error("Invalid user role.");
+                    }
                 } else {
-                    throw new Error("Invalid token received from server.");
+                    throw new Error("Invalid response from server.");
                 }
             }
         } catch (err: unknown) {
-            if (err instanceof AxiosError) {
-                setError(
-                    err.response?.data?.error ||
-                        err.response?.data?.message ||
-                        "Could not verify code. Try again later."
-                );
-            } else {
-                setError("An unexpected error occurred.");
-            }
+            const error =
+                err instanceof AxiosError
+                    ? err.response?.data?.error ||
+                      err.response?.data?.message ||
+                      "Could not verify code. Try again later."
+                    : err instanceof Error
+                    ? err.message
+                    : "An unexpected error occurred.";
+            toast.error(error);
         } finally {
             setLoading(false);
         }
@@ -84,8 +84,6 @@ export default function LoginVerifyClient() {
         if (resendCooldown > 0) return;
 
         setLoading(true);
-        setError("");
-        setMessage("");
 
         try {
             const res = await axios.post(
@@ -93,18 +91,16 @@ export default function LoginVerifyClient() {
                 { email }
             );
             if (res.status === 200) {
-                setMessage("OTP resent successfully!");
+                toast.success("OTP resent successfully!");
                 setResendCooldown(30); // 30 seconds cooldown
             }
         } catch (err: unknown) {
-            if (err instanceof AxiosError) {
-                setError(
-                    err.response?.data?.error ||
-                        "Could not resend code. Try again later."
-                );
-            } else {
-                setError("An unexpected error occurred.");
-            }
+            const error =
+                err instanceof AxiosError
+                    ? err.response?.data?.error ||
+                      "Could not resend code. Try again later."
+                    : "An unexpected error occurred.";
+            toast.error(error);
         } finally {
             setLoading(false);
         }
@@ -114,7 +110,7 @@ export default function LoginVerifyClient() {
         <section className="min-h-screen flex flex-col bg-neutral-100 text-center px-4 pt-20 sm:pt-28 overflow-x-hidden">
             <div className="flex-grow flex flex-col items-center w-full mx-auto space-y-3 max-h-full">
                 <h2 className="text-2xl sm:text-3xl text-backgroundSecondary font-bold">
-                    We&apos;ve just sent you a code
+                    We&#39;ve just sent you a code
                 </h2>
 
                 <p className="text-xs sm:text-sm text-accent4 mx-auto sm:mt-4 sm:max-w-[35%]">
@@ -146,18 +142,6 @@ export default function LoginVerifyClient() {
                     >
                         {loading ? "Verifying..." : "Continue"}
                     </Button>
-
-                    {error && (
-                        <p className="text-xs text-red-700 bg-red-50 border border-red-200 rounded-full px-4 py-2 text-center max-w-[90%] mx-auto">
-                            {error}
-                        </p>
-                    )}
-
-                    {message && (
-                        <p className="text-xs text-green-700 bg-green-50 border border-green-200 rounded-full px-4 py-2">
-                            {message}
-                        </p>
-                    )}
 
                     <p className="text-sm text-accent4 text-center w-full">
                         Didn&apos;t get the code?{" "}

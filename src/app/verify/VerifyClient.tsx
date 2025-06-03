@@ -106,7 +106,9 @@ export default function VerifyClient() {
                 >
                     <Input
                         type="text"
-                        placeholder="Code"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        placeholder="Enter 6-digit code"
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                         required
