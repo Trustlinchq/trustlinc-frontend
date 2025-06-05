@@ -296,7 +296,7 @@ export default function Home() {
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Community-Driven
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[85%] sm:max-w-[100%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[100%]">
                                     Leverage everyday travelers to move packages
                                     faster and more efficiently, reducing costs
                                     and promoting sustainability.
@@ -305,20 +305,20 @@ export default function Home() {
                         </div>
 
                         {/* Card 4 */}
-                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
+                        <div className="bg-backgroundPrimary text-center sm:text-left rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
                             <Image
                                 src="/flexible.svg"
                                 alt="Flexible"
                                 width={500}
                                 height={300}
                                 quality={100}
-                                className="w-full max-w-[250px] sm:max-w-[180px] h-auto object-contain mx-auto"
+                                className="w-full max-w-[200px]  sm:max-w-[180px] rounded-lg h-auto object-contain mx-auto"
                             />
-                            <div className="text-center sm:text-left pb-3">
+                            <div className="text-center sm:text-left">
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Flexible & Rewarding
                                 </h3>
-                                <p className="text-sm text-neutral1 max-w-[75%] sm:max-w-[70%] mx-auto">
+                                <p className="text-sm text-neutral1 sm:max-w-[70%]">
                                     Set your own delivery price, earn while
                                     traveling, and enjoy a delivery system that
                                     works around your schedule.
