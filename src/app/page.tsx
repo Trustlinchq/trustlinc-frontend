@@ -236,14 +236,14 @@ export default function Home() {
                         <br className="hidden sm:block" /> Powered by People.
                     </h2>
 
-                    <div className="columns-1 md:columns-2 gap-3 space-y-4 max-w-5xl mx-auto">
+                    <div className="columns-1 md:columns-2 gap-2 space-y-4 max-w-5xl mx-auto">
                         {/* Card 1 */}
-                        <div className="bg-backgroundPrimary rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
+                        <div className="bg-backgroundPrimary rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
                             <div>
                                 <h3 className="text-lg sm:text-[20px] text-center md:text-left text-accent1 font-semibold mb-2">
                                     Secure & Trust-Based Deliveries
                                 </h3>
-                                <p className="text-sm text-neutral1 text-center md:text-left sm:max-w-[80%]">
+                                <p className="text-sm text-neutral1 text-center mx-auto  md:text-left max-w-[90%] sm:max-w-[80%]">
                                     Send and deliver with confidence—every
                                     transaction is securely protected by
                                     TrustLinc’s escrow system.
@@ -251,31 +251,31 @@ export default function Home() {
                             </div>
 
                             <Image
-                                src="/card-1.svg"
+                                src="/secure-delivery.svg"
                                 alt="Secure Delivery"
                                 width={500}
                                 height={300}
                                 quality={100}
-                                className="mx-auto w-full max-w-[500px] rounded-lg h-auto object-contain"
+                                className="mx-auto w-full max-w-[250px] sm:max-w-[200px] h-auto object-contain"
                             />
                         </div>
 
                         {/* Card 2 */}
-                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-8 pb-8 gap-8 sm:gap-6 sm:p-6 break-inside-avoid">
+                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8  sm:p-2 break-inside-avoid">
                             <Image
-                                src="/card-2.svg"
+                                src="/smart-matching.svg"
                                 alt="Smart Matching"
                                 width={120}
                                 height={120}
                                 quality={100}
-                                className="w-[120px] h-auto rounded-lg object-contain mx-auto sm:mx-0"
+                                className=" max-w-[250px] w-full sm:max-w-[120px] h-auto object-contain mx-auto sm:mx-0"
                             />
 
-                            <div className="text-center sm:text-left">
+                            <div className="text-center items-center sm:text-left pb-4 sm:pb-4">
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Smart Matching
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[75%] sm:max-w-[80%]">
                                     Match with trusted travelers headed your way
                                     for seamless and secure deliveries.
                                 </p>
@@ -283,20 +283,20 @@ export default function Home() {
                         </div>
 
                         {/* Card 3 */}
-                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-8 pb-8 gap-8 sm:gap-6 sm:p-6 break-inside-avoid">
+                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
                             <Image
-                                src="/card-3.svg"
+                                src="/community-driven.svg"
                                 alt="Community Driven"
                                 width={120}
                                 height={120}
                                 quality={100}
-                                className="w-[120px] rounded-lg h-auto object-contain mx-auto sm:mx-0"
+                                className="max-w-[250px] w-full sm:max-w-[120px] h-auto object-contain mx-auto sm:mx-0"
                             />
-                            <div className="text-center sm:text-left">
+                            <div className="text-center sm:text-left pb-3">
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Community-Driven
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[90%] sm:max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[85%] sm:max-w-[100%]">
                                     Leverage everyday travelers to move packages
                                     faster and more efficiently, reducing costs
                                     and promoting sustainability.
@@ -305,20 +305,20 @@ export default function Home() {
                         </div>
 
                         {/* Card 4 */}
-                        <div className="bg-backgroundPrimary text-center sm:text-left rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
+                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
                             <Image
-                                src="/card-4.svg"
+                                src="/flexible.svg"
                                 alt="Flexible"
                                 width={500}
                                 height={300}
                                 quality={100}
-                                className="w-full max-w-[379px] rounded-lg h-auto object-contain"
+                                className="w-full max-w-[250px] sm:max-w-[180px] h-auto object-contain mx-auto"
                             />
-                            <div>
+                            <div className="text-center sm:text-left pb-3">
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Flexible & Rewarding
                                 </h3>
-                                <p className="text-sm text-neutral1 sm:max-w-[70%]">
+                                <p className="text-sm text-neutral1 max-w-[75%] sm:max-w-[70%] mx-auto">
                                     Set your own delivery price, earn while
                                     traveling, and enjoy a delivery system that
                                     works around your schedule.
