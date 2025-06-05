@@ -318,7 +318,7 @@ export default function Home() {
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Flexible & Rewarding
                                 </h3>
-                                <p className="text-sm text-neutral1 sm:max-w-[70%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[80%]">
                                     Set your own delivery price, earn while
                                     traveling, and enjoy a delivery system that
                                     works around your schedule.
