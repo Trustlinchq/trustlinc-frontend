@@ -312,7 +312,7 @@ export default function Home() {
                                 width={500}
                                 height={300}
                                 quality={100}
-                                className="w-full max-w-[200px]  sm:max-w-[180px] rounded-lg h-auto object-contain mx-auto"
+                                className="w-full max-w-[200px] sm:max-w-[180px] h-auto object-contain mx-auto"
                             />
                             <div className="text-center sm:text-left">
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
