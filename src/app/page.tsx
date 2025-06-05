@@ -307,7 +307,7 @@ export default function Home() {
                         {/* Card 4 */}
                         <div className="bg-backgroundPrimary text-center sm:text-left rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
                             <Image
-                                src="/flexible.svg"
+                                src="/rewarding.svg"
                                 alt="Flexible"
                                 width={500}
                                 height={300}
