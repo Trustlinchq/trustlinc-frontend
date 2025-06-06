@@ -243,7 +243,7 @@ export default function Home() {
                                 <h3 className="text-lg sm:text-[20px] text-center md:text-left text-accent1 font-semibold mb-2">
                                     Secure & Trust-Based Deliveries
                                 </h3>
-                                <p className="text-sm text-neutral1 text-center mx-auto  md:text-left max-w-[90%] sm:max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[90%] sm:max-w-[80%]">
                                     Send and deliver with confidence—every
                                     transaction is securely protected by
                                     TrustLinc’s escrow system.
@@ -296,7 +296,7 @@ export default function Home() {
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Community-Driven
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[100%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[90%]">
                                     Leverage everyday travelers to move packages
                                     faster and more efficiently, reducing costs
                                     and promoting sustainability.
@@ -312,13 +312,13 @@ export default function Home() {
                                 width={500}
                                 height={300}
                                 quality={100}
-                                className="w-full max-w-[200px] sm:max-w-[180px] h-auto object-contain mx-auto"
+                                className="w-full max-w-[200px] sm:max-w-[199px] h-auto object-contain mx-auto"
                             />
                             <div className="text-center sm:text-left">
                                 <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
                                     Flexible & Rewarding
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%]">
                                     Set your own delivery price, earn while
                                     traveling, and enjoy a delivery system that
                                     works around your schedule.
