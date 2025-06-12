@@ -57,7 +57,7 @@ export default function LoginVerifyClient() {
                     if (user.role === "COURIER") {
                         router.push("/dashboard/courier");
                     } else if (user.role === "SHIPPER") {
-                        router.push("/dashboard/shipper");
+                        router.push("/shipper/dashboard");
                     } else {
                         throw new Error("Invalid user role.");
                     }
