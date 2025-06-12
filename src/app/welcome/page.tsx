@@ -31,9 +31,9 @@ export default function WelcomePage() {
         // Redirect after exit animation (1s)
         const redirectTimeout = setTimeout(() => {
             if (user.role === "COURIER") {
-                router.push("/dashboard/courier");
+                router.push("/courier/dashboard");
             } else if (user.role === "SHIPPER") {
-                router.push("/dashboard/shipper");
+                router.push("/shipper/dashboard");
             } else {
                 toast.error("Invalid user role. Please contact support.");
                 router.push("/login");

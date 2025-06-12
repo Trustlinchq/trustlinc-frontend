@@ -78,12 +78,14 @@ export default function Home() {
 
                     {/*Hero Image*/}
                     <div className="hidden md:block absolute inset-y-0 right-0 w-[20%] md:w-[100%] lg:w-[50%] ml-4 md:ml-16 lg:ml-24">
-                        <div className="relative h-full w-full overflow-hidden rounded-[1rem] shadow-[0_15px_40px_rgba(0,0,0,0.15)]">
+                        <div className="overflow-hidden rounded-lg shadow-[0_15px_40px_rgba(0,0,0,0.15)]">
                             <Image
-                                src="/dashboard1.svg"
+                                src="/shipper-dashboard.svg"
                                 alt="Dashboard"
-                                fill
-                                className="object-contain"
+                                width={500}
+                                height={300}
+                                quality={100}
+                                className="object-cover"
                                 sizes="40vw"
                             />
                         </div>
@@ -223,7 +225,7 @@ export default function Home() {
                 </section>
 
                 {/*Our Features Section*/}
-                <section className="py-10 sm:py-24 px-6">
+                <section className="py-10 sm:py-24 px-6 bg-neutral1">
                     <div className="flex items-center justify-center gap-3 mb-4">
                         <span className="w-2 h-2 bg-backgroundPrimary rounded-full"></span>
                         <p className="text-sm flex font-semibold text-accent3">
@@ -238,12 +240,12 @@ export default function Home() {
 
                     <div className="columns-1 md:columns-2 gap-2 space-y-4 max-w-5xl mx-auto">
                         {/* Card 1 */}
-                        <div className="bg-backgroundPrimary rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
+                        <div className="bg-neutral2 rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
                             <div>
-                                <h3 className="text-lg sm:text-[20px] text-center md:text-left text-accent1 font-semibold mb-2">
+                                <h3 className="text-lg sm:text-[20px] text-center md:text-left text-backgroundPrimary font-semibold mb-2">
                                     Secure & Trust-Based Deliveries
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[90%] sm:max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-accent4 max-w-[90%] sm:max-w-[80%]">
                                     Send and deliver with confidence—every
                                     transaction is securely protected by
                                     TrustLinc’s escrow system.
@@ -261,7 +263,7 @@ export default function Home() {
                         </div>
 
                         {/* Card 2 */}
-                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8  sm:p-2 break-inside-avoid">
+                        <div className="bg-neutral2 flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8  sm:p-2 break-inside-avoid">
                             <Image
                                 src="/smart-matching.svg"
                                 alt="Smart Matching"
@@ -272,10 +274,10 @@ export default function Home() {
                             />
 
                             <div className="text-center items-center sm:text-left pb-4 sm:pb-4">
-                                <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
+                                <h3 className="text-lg sm:text-[20px] text-backgroundPrimary font-semibold mb-2">
                                     Smart Matching
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[75%] sm:max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-accent4 max-w-[75%] sm:max-w-[80%]">
                                     Match with trusted travelers headed your way
                                     for seamless and secure deliveries.
                                 </p>
@@ -283,7 +285,7 @@ export default function Home() {
                         </div>
 
                         {/* Card 3 */}
-                        <div className="bg-backgroundPrimary flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
+                        <div className="bg-neutral2 flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
                             <Image
                                 src="/community-driven.svg"
                                 alt="Community Driven"
@@ -293,10 +295,10 @@ export default function Home() {
                                 className="max-w-[250px] w-full sm:max-w-[120px] h-auto object-contain mx-auto sm:mx-0"
                             />
                             <div className="text-center sm:text-left pb-3">
-                                <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
+                                <h3 className="text-lg sm:text-[20px] text-backgroundPrimary font-semibold mb-2">
                                     Community-Driven
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%] sm:max-w-[90%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-accent4 max-w-[80%] sm:max-w-[90%]">
                                     Leverage everyday travelers to move packages
                                     faster and more efficiently, reducing costs
                                     and promoting sustainability.
@@ -305,7 +307,7 @@ export default function Home() {
                         </div>
 
                         {/* Card 4 */}
-                        <div className="bg-backgroundPrimary text-center sm:text-left rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
+                        <div className="bg-neutral2 text-center sm:text-left rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
                             <Image
                                 src="/rewarding.svg"
                                 alt="Flexible"
@@ -315,10 +317,10 @@ export default function Home() {
                                 className="w-full max-w-[200px] sm:max-w-[180px] h-auto object-contain mx-auto"
                             />
                             <div className="text-center sm:text-left">
-                                <h3 className="text-lg sm:text-[20px] text-accent1 font-semibold mb-2">
+                                <h3 className="text-lg sm:text-[20px] text-backgroundPrimary font-semibold mb-2">
                                     Flexible & Rewarding
                                 </h3>
-                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-neutral1 max-w-[80%]">
+                                <p className="text-sm text-center sm:text-left m-auto sm:m-0 text-accent4 max-w-[80%]">
                                     Set your own delivery price, earn while
                                     traveling, and enjoy a delivery system that
                                     works around your schedule.
@@ -369,7 +371,7 @@ export default function Home() {
                 </section>
 
                 {/* FAQ Section */}
-                <section className="bg-neutral1 py-10 sm:py-24 px-4 sm:px-8">
+                <section className="bg-neutral2 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 items-center">
                         {/* Left Side */}
                         <div>
@@ -409,8 +411,8 @@ export default function Home() {
                                     <div
                                         key={index}
                                         className={`rounded-xl p-2 transition-colors duration-200 
-                                        hover:bg-slate-200 
-                                        ${isOpen ? "bg-slate-200" : ""}`}
+                                        hover:bg-slate-50 
+                                        ${isOpen ? "bg-slate-50" : ""}`}
                                     >
                                         <button
                                             className="w-full text-left text-lg p-2 flex items-center justify-between text-backgroundSecondary font-semibold"
@@ -443,7 +445,7 @@ export default function Home() {
                 </section>
 
                 {/* Join the Community Section */}
-                <section className="bg-neutral2 py-10 sm:py-24 px-4 sm:px-8">
+                <section className="bg-neutral1 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto items-center text-center">
                         <div className="flex items-center justify-center gap-3 mb-4">
                             <span className="w-2 h-2 bg-backgroundPrimary rounded-full"></span>
