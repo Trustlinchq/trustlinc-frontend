@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { logout } from "@/lib/logout";
 import { toast } from "sonner";
+import { LogOut } from "lucide-react";
 
 export default function LogoutButton() {
     const router = useRouter();
@@ -20,10 +21,10 @@ export default function LogoutButton() {
 
     return (
         <Button
-            variant="ghost"
-            className="font-bold bg-backgroundPrimary text-neutral1"
+            className="bg-backgroundPrimary text-neutral-300 text-base hover:text-red-400 w-full justify-start shadow-none"
             onClick={handleLogout}
         >
+            <LogOut className="mr-4" />
             Logout
         </Button>
     );

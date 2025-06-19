@@ -4,14 +4,124 @@ import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
+
+interface User {
+    id: string;
+    email: string;
+    role: "SHIPPER" | "COURIER" | "ADMIN";
+    status: string;
+}
+
+interface VerifyTokenResponse {
+    user: User;
+}
 
 export default function Home() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const router = useRouter();
+    const [authStatus, setAuthStatus] = useState<
+        "checking" | "unauthenticated" | "redirecting"
+    >("checking");
+    const [mounted, setMounted] = useState(false);
 
     const toggleIndex = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
+        const token = localStorage.getItem("token");
+        let user: User | null = null;
+        try {
+            const userData = localStorage.getItem("user");
+            user = userData ? JSON.parse(userData) : null;
+        } catch (err) {
+            console.error("Home: Failed to parse user data:", err);
+            toast.error("Invalid session data. Please log in again.");
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            setAuthStatus("unauthenticated");
+            return;
+        }
+
+        if (!token || !user) {
+            console.log("Home: No token or user found, showing public page");
+            setAuthStatus("unauthenticated");
+            return;
+        }
+
+        axios
+            .get<VerifyTokenResponse>(
+                "https://trustlinc-backend.onrender.com/api/v1/auth/verify-token",
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            )
+            .then((res) => {
+                console.log("Home: Token verified, user:", res.data.user);
+                setAuthStatus("redirecting");
+                const { role } = res.data.user;
+                setTimeout(() => {
+                    if (role === "SHIPPER") {
+                        router.push("/shipper/dashboard");
+                    } else if (role === "COURIER") {
+                        router.push("/courier/dashboard");
+                    } else if (role === "ADMIN") {
+                        router.push("/admin/dashboard");
+                    }
+                }, 1000); // Wait for exit animation
+            })
+            .catch((err) => {
+                console.error(
+                    "Home: Token verification failed:",
+                    err.response?.data || err
+                );
+                toast.error("Session invalid or expired. Please log in again.");
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                setAuthStatus("unauthenticated");
+            });
+    }, [router, mounted]);
+
+    if (!mounted || authStatus === "checking" || authStatus === "redirecting") {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-neutral2">
+                <AnimatePresence>
+                    {(authStatus === "checking" ||
+                        authStatus === "redirecting") && (
+                        <motion.div
+                            className="flex flex-col items-center"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            transition={{
+                                opacity: { duration: 1, ease: "easeInOut" },
+                                scale: { duration: 1, ease: "easeInOut" },
+                            }}
+                        >
+                            <Image
+                                src="/logo-icon.svg"
+                                alt="TrustLinc Logo"
+                                width={100}
+                                height={50}
+                                className="object-contain"
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        );
+    }
 
     const faqs = [
         {
@@ -30,7 +140,6 @@ export default function Home() {
             question: "What types of items can I send?",
             answer: "You can send most small to medium-sized personal or business items — like documents, clothing, gadgets, or care packages. Hazardous, illegal, or oversized items are not allowed.",
         },
-
         {
             question: "Do I need to meet the traveler in person?",
             answer: "Yes, in most cases, senders and travelers coordinate a convenient pickup and drop-off location. In the future, we’ll introduce smart locker options for added convenience.",
@@ -53,13 +162,11 @@ export default function Home() {
                             Powered by People. <br />
                             Built on Trust.
                         </h1>
-
-                        <p className="text-base sm:text-lg  md:text-xl text-[#303e4b] max-w-[80%] md:max-w-[80%]">
+                        <p className="text-base sm:text-lg md:text-xl text-[#303e4b] max-w-[80%] md:max-w-[80%]">
                             TrustLinc connects travelers with people who need
                             deliveries—secure, reliable, and powered by
                             community.
                         </p>
-
                         <div className="flex justify-start">
                             <Button
                                 asChild
@@ -75,7 +182,6 @@ export default function Home() {
                             </Button>
                         </div>
                     </div>
-
                     {/*Hero Image*/}
                     <div className="hidden md:block absolute inset-y-0 right-0 w-[20%] md:w-[100%] lg:w-[50%] ml-4 md:ml-16 lg:ml-24">
                         <div className="overflow-hidden rounded-lg shadow-[0_15px_40px_rgba(0,0,0,0.15)]">
@@ -91,14 +197,12 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
                 {/*Our Value Section*/}
                 <section className="bg-neutral1 text-center py-10 sm:py-24 mt-24">
                     <div className="max-w-3xl mx-auto">
                         <div className="flex items-center gap-3 justify-center mb-4">
                             <span className="w-2 h-2 bg-backgroundPrimary rounded-full"></span>
-
-                            <p className="text-sm flex font-semibold text-accent3 ">
+                            <p className="text-sm flex font-semibold text-accent3">
                                 Our Value
                             </p>
                         </div>
@@ -113,15 +217,13 @@ export default function Home() {
                         </h2>
                     </div>
                 </section>
-
                 {/*How It Works Section*/}
                 <section className="w-full bg-backgroundPrimary text-white py-10 px-6 sm:py-24">
                     <div className="max-w-5xl mx-auto">
                         <div className="text-center space-y-4">
                             <div className="flex items-center gap-3 justify-center mb-4">
                                 <span className="w-2 h-2 bg-neutral2 rounded-full"></span>
-
-                                <p className="text-sm flex font-semibold text-accent1 ">
+                                <p className="text-sm flex font-semibold text-accent1">
                                     How it Works
                                 </p>
                             </div>
@@ -131,14 +233,12 @@ export default function Home() {
                                 People
                             </h2>
                         </div>
-
-                        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-5 ">
+                        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-5">
                             {/* Step 1 */}
-                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md  bg-[#0c1c2bd5]">
+                            <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Post a Package
                                 </h3>
-
                                 <Image
                                     src="/how-it-works-step1.svg"
                                     alt="Post a Package"
@@ -148,20 +248,17 @@ export default function Home() {
                                     quality={100}
                                     className="mx-auto w-full max-w-[300px] sm:max-w-[350px] md:max-w-[300px] h-auto object-contain"
                                 />
-
                                 <p className="text-1xl text-[#a0aec0] font-medium sm:max-w-[70%]">
                                     Create a delivery request, set a reward, and
                                     deposit payment into TrustLinc’s secure
                                     escrow for peace of mind.
                                 </p>
                             </div>
-
                             {/* Step 2 */}
                             <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Match with a Traveler
                                 </h3>
-
                                 <Image
                                     src="/how-it-works-step2.svg"
                                     alt="Match with a Traveler"
@@ -170,20 +267,17 @@ export default function Home() {
                                     quality={100}
                                     className="mx-auto w-full max-w-[300px] sm:max-w-[350px] md:max-w-[250px] h-auto object-contain"
                                 />
-
                                 <p className="text-1xl text-[#a0aec0] font-medium sm:max-w-[70%]">
                                     Connect with a verified traveler heading
                                     your way to pick up and deliver your
                                     package.
                                 </p>
                             </div>
-
                             {/* Step 3 */}
                             <div className="flex flex-col justify-center gap-10 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Hand Over the Package
                                 </h3>
-
                                 <Image
                                     src="/how-it-works-step3.svg"
                                     alt="Hand Over the Package"
@@ -192,19 +286,16 @@ export default function Home() {
                                     quality={100}
                                     className="mx-auto w-full max-w-[300px] sm:max-w-[350px] md:max-w-[250px] h-auto object-contain"
                                 />
-
                                 <p className="text-1xl text-[#a0aec0] font-medium max-w-[100%] sm:max-w-[65%]">
                                     Meet the traveler at a convenient location
                                     and hand over your securely packed item.
                                 </p>
                             </div>
-
                             {/* Step 4 */}
                             <div className="flex flex-col justify-center gap-10 md:gap-24 p-6 sm:pl-6 shadow-sm rounded-3xl transition duration-300 hover:shadow-md bg-[#0c1c2bd5]">
                                 <h3 className="text-xl font-semibold">
                                     Track & Receive
                                 </h3>
-
                                 <Image
                                     src="/how-it-works-step4.svg"
                                     alt="Track & Receive"
@@ -213,7 +304,6 @@ export default function Home() {
                                     quality={100}
                                     className="mx-auto w-full max-w-[300px] sm:max-w-[350px] md:max-w-[350px] h-auto object-contain"
                                 />
-
                                 <p className="text-1xl text-[#a0aec0] font-medium max-w-[90%] sm:max-w-[65%]">
                                     Monitor your package’s journey and confirm
                                     delivery before releasing payment from
@@ -223,7 +313,6 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
                 {/*Our Features Section*/}
                 <section className="py-10 sm:py-24 px-6 bg-neutral1">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -232,12 +321,10 @@ export default function Home() {
                             Our Features
                         </p>
                     </div>
-
                     <h2 className="text-3xl md:text-4xl text-center font-bold mb-12">
                         Effortless Shipping,
                         <br className="hidden sm:block" /> Powered by People.
                     </h2>
-
                     <div className="columns-1 md:columns-2 gap-2 space-y-4 max-w-5xl mx-auto">
                         {/* Card 1 */}
                         <div className="bg-neutral2 rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
@@ -251,7 +338,6 @@ export default function Home() {
                                     TrustLinc’s escrow system.
                                 </p>
                             </div>
-
                             <Image
                                 src="/secure-delivery.svg"
                                 alt="Secure Delivery"
@@ -261,18 +347,16 @@ export default function Home() {
                                 className="mx-auto w-full max-w-[250px] sm:max-w-[200px] h-auto object-contain"
                             />
                         </div>
-
                         {/* Card 2 */}
-                        <div className="bg-neutral2 flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8  sm:p-2 break-inside-avoid">
+                        <div className="bg-neutral2 flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
                             <Image
                                 src="/smart-matching.svg"
                                 alt="Smart Matching"
                                 width={120}
                                 height={120}
                                 quality={100}
-                                className=" max-w-[250px] w-full sm:max-w-[120px] h-auto object-contain mx-auto sm:mx-0"
+                                className="max-w-[250px] w-full sm:max-w-[120px] h-auto object-contain mx-auto sm:mx-0"
                             />
-
                             <div className="text-center items-center sm:text-left pb-4 sm:pb-4">
                                 <h3 className="text-lg sm:text-[20px] text-backgroundPrimary font-semibold mb-2">
                                     Smart Matching
@@ -283,7 +367,6 @@ export default function Home() {
                                 </p>
                             </div>
                         </div>
-
                         {/* Card 3 */}
                         <div className="bg-neutral2 flex flex-col sm:flex-row sm:items-end rounded-xl shadow-lg pt-2 pb-2 gap-2 sm:gap-8 sm:p-2 break-inside-avoid">
                             <Image
@@ -305,7 +388,6 @@ export default function Home() {
                                 </p>
                             </div>
                         </div>
-
                         {/* Card 4 */}
                         <div className="bg-neutral2 text-center sm:text-left rounded-xl shadow-lg p-6 flex flex-col gap-8 break-inside-avoid">
                             <Image
@@ -329,20 +411,18 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
                 {/*What We Believe Section*/}
                 <section className="bg-backgroundPrimary py-10 sm:py-24 px-6 sm:px-8">
                     <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center gap-8 sm:gap-16">
                         {/* Text Section */}
                         <div className="text-left max-w-xl">
-                            <div className="flex items-center gap-3  mb-6">
+                            <div className="flex items-center gap-3 mb-6">
                                 <span className="w-2 h-2 bg-neutral2 rounded-full"></span>
-
-                                <p className="text-sm flex font-semibold text-accent1 ">
+                                <p className="text-sm flex font-semibold text-accent1">
                                     What We Believe
                                 </p>
                             </div>
-                            <p className="text-lg sm:text-2xl font-medium  sm:max-w-[80%] text-neutral2 mb-6">
+                            <p className="text-lg sm:text-2xl font-medium sm:max-w-[80%] text-neutral2 mb-6">
                                 “TrustLinc isn’t just about deliveries—it’s
                                 about people helping people. We’re building a
                                 community-driven solution that makes shipping
@@ -355,7 +435,6 @@ export default function Home() {
                                 <span className="text-accent1">TrustLinc</span>
                             </p>
                         </div>
-
                         {/* Image Section */}
                         <div className="flex-shrink-0">
                             <Image
@@ -369,15 +448,14 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
                 {/* FAQ Section */}
                 <section className="bg-neutral2 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 items-center">
                         {/* Left Side */}
                         <div>
-                            <div className="flex items-center gap-2 mb-2  sm:mb-5">
+                            <div className="flex items-center gap-2 mb-2 sm:mb-5">
                                 <span className="w-2 h-2 bg-backgroundPrimary rounded-full"></span>
-                                <p className="text-sm flex font-semibold text-accent3 ">
+                                <p className="text-sm flex font-semibold text-accent3">
                                     Frequently Asked Questions
                                 </p>
                             </div>
@@ -387,11 +465,10 @@ export default function Home() {
                             <p className="text-sm text-accent4 font-medium mb-4">
                                 Can’t find what you’re looking for?
                             </p>
-
                             <Button
                                 asChild
                                 size="sm"
-                                className="bg-[#544DDC] hover:bg-[#001028]/90 transition  px-4 py-2 h-9"
+                                className="bg-[#544DDC] hover:bg-[#001028]/90 transition px-4 py-2 h-9"
                             >
                                 <Link
                                     href="/register"
@@ -401,18 +478,16 @@ export default function Home() {
                                 </Link>
                             </Button>
                         </div>
-
                         {/* Right Side FAQ Accordion */}
                         <div className="space-y-4">
                             {faqs.map((faq, index) => {
                                 const isOpen = openIndex === index;
-
                                 return (
                                     <div
                                         key={index}
-                                        className={`rounded-xl p-2 transition-colors duration-200 
-                                        hover:bg-slate-50 
-                                        ${isOpen ? "bg-slate-50" : ""}`}
+                                        className={`rounded-xl p-2 transition-colors duration-200 hover:bg-slate-50 ${
+                                            isOpen ? "bg-slate-50" : ""
+                                        }`}
                                     >
                                         <button
                                             className="w-full text-left text-lg p-2 flex items-center justify-between text-backgroundSecondary font-semibold"
@@ -443,7 +518,6 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
                 {/* Join the Community Section */}
                 <section className="bg-neutral1 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto items-center text-center">
@@ -453,21 +527,18 @@ export default function Home() {
                                 Join the Community
                             </p>
                         </div>
-
                         <h2 className="text-2xl sm:text-4xl text-center font-bold text-headingPrimary mb-2 sm:mb-4">
                             Join a Smarter Way to Deliver.
                         </h2>
-
                         <p className="text-sm max-w-[90%] mx-auto sm:max-w-none text-accent4 font-medium mb-5">
                             A smarter delivery network—built on trust, powered
                             by people.
                         </p>
-
                         <div className="items-center space-x-6 font-bold">
                             <Button
                                 asChild
                                 size="sm"
-                                className="bg-[#544DDC] hover:bg-[#001028]/90  px-5 h-9"
+                                className="bg-[#544DDC] hover:bg-[#001028]/90 px-5 h-9"
                             >
                                 <Link
                                     href="/register"
@@ -476,7 +547,6 @@ export default function Home() {
                                     Get Started
                                 </Link>
                             </Button>
-
                             <Link
                                 href="/login"
                                 className="text-[#303E4B] text-sm hover:text-[#544ddca8]"
@@ -486,10 +556,9 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
                 {/* Footer */}
                 <footer className="bg-backgroundPrimary py-10 sm:py-24 px-4 sm:px-8">
-                    <div className="max-w-5xl mx-auto ">
+                    <div className="max-w-5xl mx-auto">
                         <div className="items-center text-center mb-10 sm:mb-36">
                             <Link href="/" className="inline-block">
                                 <Image
@@ -503,7 +572,6 @@ export default function Home() {
                                 />
                             </Link>
                         </div>
-
                         <div className="px-3 sm:max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-16 sm:gap-4">
                             {/* Left section: Logo and contact info */}
                             <div className="text-sm text-neutral2">
@@ -515,13 +583,11 @@ export default function Home() {
                                         support@trustlinc.app
                                     </a>
                                 </p>
-
                                 <p className="text-xs sm:text-sm text-neutral-400">
                                     KM1 Aba | Port Harcourt <br />
                                     Express Way Umuahia, Abia State.
                                 </p>
                             </div>
-
                             {/* Right section: Footer links */}
                             <div className="grid grid-cols-3 sm:grid-cols-4 gap-8 sm:gap-10">
                                 {/* Products */}
@@ -542,7 +608,6 @@ export default function Home() {
                                         </li>
                                     </ul>
                                 </div>
-
                                 {/* Company */}
                                 <div>
                                     <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
@@ -565,7 +630,6 @@ export default function Home() {
                                         </li>
                                     </ul>
                                 </div>
-
                                 {/* Resources */}
                                 <div>
                                     <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
@@ -588,7 +652,6 @@ export default function Home() {
                                         </li>
                                     </ul>
                                 </div>
-
                                 {/* Support */}
                                 <div>
                                     <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6 -mt-12 sm:mt-0">
@@ -599,7 +662,6 @@ export default function Home() {
                                             <Link href="/contact">
                                                 Contact us
                                             </Link>
-                                            {/* Internal link – no target="_blank" */}
                                         </li>
                                         <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
                                             <a
