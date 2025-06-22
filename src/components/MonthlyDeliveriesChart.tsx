@@ -125,27 +125,33 @@ export default function MonthlyDeliveriesChart() {
                 Monthly Deliveries
             </h2>
 
-            <ChartContainer
-                config={chartConfig}
-                className="min-h-[300px] h-[100px] w-full"
-            >
-                <BarChart data={monthlyDeliveries}>
-                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                    <XAxis dataKey="month" axisLine={false} tickLine={false} />
-                    <YAxis hide />
-                    <Tooltip />
-                    <Bar
-                        dataKey="delivered"
-                        fill="var(--color-delivered)"
-                        radius={4}
-                    />
-                    <Bar
-                        dataKey="inProgress"
-                        fill="var(--color-inProgress)"
-                        radius={4}
-                    />
-                </BarChart>
-            </ChartContainer>
+            <div className="w-full max-w-[100%] sm:max-w-full mx-auto">
+                <ChartContainer
+                    config={chartConfig}
+                    className="h-[200px] sm:h-[300px] w-full"
+                >
+                    <BarChart data={monthlyDeliveries}>
+                        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                        <XAxis
+                            dataKey="month"
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <YAxis hide />
+                        <Tooltip />
+                        <Bar
+                            dataKey="delivered"
+                            fill="var(--color-delivered)"
+                            radius={4}
+                        />
+                        <Bar
+                            dataKey="inProgress"
+                            fill="var(--color-inProgress)"
+                            radius={4}
+                        />
+                    </BarChart>
+                </ChartContainer>
+            </div>
 
             {error && <p className="text-sm text-red-500 text-center mt-4"></p>}
 

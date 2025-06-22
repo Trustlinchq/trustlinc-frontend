@@ -49,12 +49,12 @@ export default function TopBar() {
     }, []);
 
     return (
-        <div className="w-full px-14 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between bg-white">
+        <div className="w-full px-4 sm:px-14 py-3 flex flex-row items-center justify-between bg-white">
             <div className="mb-2 sm:mb-0">
                 <h1 className="text-xl sm:text-2xl font-bold capitalize">
                     {pageTitle}
                 </h1>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="sm:text-sm text-xs text-muted-foreground mt-1">
                     {communityUpdate
                         ? `📢 ${communityUpdate.message}`
                         : "📢 Community update unavailable"}
