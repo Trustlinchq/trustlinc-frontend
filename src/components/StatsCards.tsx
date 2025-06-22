@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import {
     ArrowUpRight,
     ArrowDownRight,
@@ -13,6 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "./ui/skeleton";
 import { toast } from "sonner";
+import { setupSessionSync, handleLogout } from "@/lib/session";
+import apiClient from "@/lib/api";
 
 type Stat = {
     current: number;
@@ -39,59 +40,58 @@ export default function StatsCards() {
     }, []);
 
     useEffect(() => {
+        setupSessionSync(
+            () => {
+                // Handle logout in other tabs
+                toast.error("Logged out in other tabs");
+                handleLogout();
+            },
+            () => {
+                // Refetch stats
+                apiClient
+                    .get("/shippers/dashboard/stats")
+                    .then((res) => {
+                        setStats(res.data);
+                        setLoading(false);
+                    })
+                    .catch(() => {
+                        setError("Could not load dashboard stats.");
+                        setLoading(false);
+                    });
+            }
+        );
+
         if (!mounted) return; //Skip until client-side
 
-        const token = localStorage.getItem("token");
-        console.log("StatsCards: Retrieved token from localStorage:", token); // Debugging
-
-        if (!token) {
-            setError("Please log in to view stats");
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+        if (user.role === "SHIPPER") {
+            setError("Access denied. Shipper role required.");
             setLoading(false);
-            toast.error("No authentication token found. Please log in.");
+            toast.error("Access denied. Shipper role required.");
             return;
         }
 
-        axios
-            .get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/stats",
+        if (!localStorage.getItem("token")) {
+            setError("No token found. Please log in.");
+            setLoading(false);
+            toast.error("No token found. Please log in.");
+            return;
+        }
 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
+        apiClient
+            .get("/admin/dashboard/stats")
             .then((res) => {
                 setStats(res.data);
                 setLoading(false);
                 console.log(
                     "StatsCards: Fetched stats successfully:",
                     res.data
-                ); // Debugging
-            })
-            .catch((err) => {
-                const status = err.response?.status;
-                let errorMsg = "Could not load dashboard stats.";
-                if (status === 401) {
-                    errorMsg =
-                        "Session expired or invalid token. Please log in again.";
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                } else if (status === 403) {
-                    errorMsg = "Access denied. Shipper role required.";
-                } else {
-                    errorMsg =
-                        err.response?.data?.error ||
-                        err.response?.data?.details ||
-                        errorMsg;
-                }
-                setError(errorMsg);
-                setLoading(false);
-                toast.error(errorMsg);
-                console.error(
-                    "StatsCards: Fetch error:",
-                    err.response?.data || err
                 );
+            })
+            .catch(() => {
+                // Errors handled by apiClient interceptor
+                setError("Could not load dashboard stats.");
+                setLoading(false);
             });
     }, [mounted]);
 

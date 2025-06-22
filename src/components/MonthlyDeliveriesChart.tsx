@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import { toast } from "sonner";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
+import { setupSessionSync, handleLogout } from "@/lib/session";
+import apiClient from "@/lib/api";
 
 type MonthlyDelivery = {
     month: string;
@@ -62,6 +63,40 @@ export default function MonthlyDeliveriesChart() {
     useEffect(() => {
         if (!mounted) return;
 
+        setupSessionSync(
+            () => {
+                // Handle logout in other tabs
+                toast.error("Logged out in another tabs");
+                handleLogout();
+            },
+            () => {
+                // Handle token update (refresh)
+                apiClient
+                    .get("/shipper/dashboard/monthly-deliveries")
+                    .then((res) => {
+                        const data = res.data || [];
+                        const isEmpty = data.every(
+                            (d: MonthlyDelivery) =>
+                                d.delivered === 0 && d.inProgress === 0
+                        );
+                        setMonthlyDeliveries(
+                            isEmpty ? getCurrentYearEmptyData() : data
+                        );
+                    })
+                    .catch(() => {
+                        setMonthlyDeliveries(getCurrentYearEmptyData());
+                    });
+            }
+        );
+
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+        if (user.role !== "SHIPPER") {
+            setError("Access denied. Shipper role required.");
+            setLoading(false);
+            toast.error("Access denied. Shipper role required.");
+            return;
+        }
+
         const token = localStorage.getItem("token");
         if (!token) {
             setError("Please log in to view monthly deliveries.");
@@ -70,13 +105,8 @@ export default function MonthlyDeliveriesChart() {
             return;
         }
 
-        axios
-            .get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/monthly-deliveries",
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            )
+        apiClient
+            .get("/shipper/dashboard/monthly-deliveries") // Use apiClient
             .then((res) => {
                 const data = res.data || [];
                 const isEmpty = data.every(
@@ -88,25 +118,10 @@ export default function MonthlyDeliveriesChart() {
                 );
                 setLoading(false);
             })
-            .catch((err) => {
-                const status = err.response?.status;
-                let errorMsg = "Could not load monthly deliveries.";
-                if (status === 401) {
-                    errorMsg = "Session expired. Please log in again.";
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("user");
-                } else if (status === 403) {
-                    errorMsg = "Access denied. Shipper role required.";
-                } else {
-                    errorMsg =
-                        err.response?.data?.error ||
-                        err.response?.data?.details ||
-                        errorMsg;
-                }
+            .catch(() => {
+                // Errors handled by apiClient interceptor
                 setMonthlyDeliveries(getCurrentYearEmptyData());
-                setError(errorMsg);
                 setLoading(false);
-                toast.error(errorMsg);
             });
     }, [mounted]);
 
@@ -120,15 +135,15 @@ export default function MonthlyDeliveriesChart() {
     }
 
     return (
-        <div className="p-4 rounded-sm shadow-sm border mb-1">
+        <div className="w-full px-4 sm:px-6 md:px-8 py-4 rounded-sm shadow-sm border mb-4">
             <h2 className="text-base font-bold text-backgroundSecondary mb-4">
                 Monthly Deliveries
             </h2>
 
-            <div className="w-full max-w-[100%] sm:max-w-full mx-auto">
+            <div className="w-full">
                 <ChartContainer
                     config={chartConfig}
-                    className="h-[200px] sm:h-[300px] w-full"
+                    className="h-[250px] sm:h-[300px] md:h-[350px] w-full"
                 >
                     <BarChart data={monthlyDeliveries}>
                         <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -158,7 +173,7 @@ export default function MonthlyDeliveriesChart() {
             {monthlyDeliveries.every(
                 (d) => d.delivered === 0 && d.inProgress === 0
             ) && (
-                <p className="text-center text-xs sm:text-sm max-w-[70%] sm:max-w-full mx-auto text-muted-foreground mt-4">
+                <p className="text-center text-xs sm:text-sm max-w-[95%] mx-auto text-muted-foreground mt-4">
                     You don&#39;t have any delivery data yet. Start sending
                     packages to see your stats here.
                 </p>

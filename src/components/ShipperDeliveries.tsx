@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -15,6 +14,8 @@ import {
     TableHeader,
     TableRow,
 } from "./ui/table";
+import { setupSessionSync, handleLogout } from "@/lib/session";
+import apiClient from "@/lib/api";
 
 const FILTERS = ["all", "in-progress", "delivered"];
 
@@ -38,39 +39,66 @@ export default function ShipperDeliveries() {
 
     const fetchDeliveries = async () => {
         setLoading(true);
-        const token = localStorage.getItem("token");
+
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+        if (user.role !== "SHIPPER") {
+            toast.error("Access denied. Shipper role required.");
+            setLoading(false);
+            return;
+        }
+
+        if (!localStorage.getItem("token")) {
+            toast.error("No authentication token found. Please log in.");
+            setLoading(false);
+            return;
+        }
 
         try {
-            const res = await axios.get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/deliveries",
-
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                    params: {
-                        status: filter,
-                        page,
-                        limit: 5,
-                    },
-                }
-            );
+            const res = await apiClient.get("/shipper/dashboard/deliveries", {
+                params: {
+                    status: filter,
+                    page,
+                    limit: 5,
+                },
+            });
 
             setDeliveries(res.data.data);
             SetTotalPages(res.data.pagination.totalPages);
-        } catch (err) {
-            console.error("Error fetching deliveries:", err);
-            toast.error("Failed to load deliveries");
+        } catch {
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
+        setupSessionSync(
+            () => {
+                // Handle logout in other tabs
+                toast.error("Logged out in other tabs");
+                handleLogout();
+            },
+            () => {
+                // Handle token update (refresh)
+                apiClient
+                    .get("/shipper/dashboard/deliveries", {
+                        params: { status: filter, page, limit: 5 },
+                    })
+                    .then((res) => {
+                        setDeliveries(res.data.data);
+                        SetTotalPages(res.data.pagination.totalPages);
+                    })
+                    .catch(() => {
+                        setDeliveries([]);
+                    });
+            }
+        );
+
         fetchDeliveries();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter, page]);
 
     return (
-        <div className="p-4 rounded-sm shadow-sm border">
+        <div className="w-full px-4 sm:px-6 md:px-8 py-4 rounded-sm shadow-sm border mb-4">
             {loading ? (
                 <div className="space-y-6">
                     {/* Header Skeleton */}
@@ -171,16 +199,28 @@ export default function ShipperDeliveries() {
 
                     {/* Table */}
                     <div className="overflow-x-auto">
-                        <Table>
+                        <Table className="min-w-[700px]">
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>ID</TableHead>
-                                    <TableHead>Description</TableHead>
-                                    <TableHead>Pickup → Dropoff</TableHead>
-                                    <TableHead>Courier</TableHead>
-                                    <TableHead>Status</TableHead>
-                                    <TableHead>Date</TableHead>
-                                    <TableHead className="text-right">
+                                    <TableHead className="text-sm">
+                                        ID
+                                    </TableHead>
+                                    <TableHead className="text-sm">
+                                        Description
+                                    </TableHead>
+                                    <TableHead className="text-sm whitespace-nowrap">
+                                        Pickup → Dropoff
+                                    </TableHead>
+                                    <TableHead className="text-sm">
+                                        Courier
+                                    </TableHead>
+                                    <TableHead className="text-sm">
+                                        Status
+                                    </TableHead>
+                                    <TableHead className="text-sm">
+                                        Date
+                                    </TableHead>
+                                    <TableHead className="text-sm text-right">
                                         Action
                                     </TableHead>
                                 </TableRow>
@@ -189,20 +229,20 @@ export default function ShipperDeliveries() {
                             <TableBody>
                                 {deliveries.map((delivery) => (
                                     <TableRow key={delivery.id}>
-                                        <TableCell className="font-medium">
+                                        <TableCell className="text-sm font-medium whitespace-nowrap">
                                             {delivery.id}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="text-sm">
                                             {delivery.description}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="text-sm whitespace-nowrap">
                                             {delivery.pickup} →{" "}
                                             {delivery.dropoff}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="text-sm">
                                             {delivery.courier}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="text-sm">
                                             <span
                                                 className={
                                                     delivery.status ===
@@ -217,8 +257,10 @@ export default function ShipperDeliveries() {
                                                 {delivery.status}
                                             </span>
                                         </TableCell>
-                                        <TableCell>{delivery.date}</TableCell>
-                                        <TableCell className="text-right">
+                                        <TableCell className="text-sm">
+                                            {delivery.date}
+                                        </TableCell>
+                                        <TableCell className="text-sm text-right">
                                             <Button
                                                 size="sm"
                                                 variant="link"
