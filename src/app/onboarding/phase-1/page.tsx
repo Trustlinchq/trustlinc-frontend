@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
+import apiClient from "@/lib/api";
 
 export default function OnboardingPhase1() {
     const router = useRouter();
@@ -24,10 +25,7 @@ export default function OnboardingPhase1() {
         }
 
         try {
-            await axios.post(
-                "https://trustlinc-backend.onrender.com/api/v1/auth/restart-onboarding",
-                { email }
-            );
+            await apiClient.post("/auth/restart-onboarding", { email });
             toast.success("Restarted. Check your email for a new OTP.");
             router.push("/verify");
         } catch (error: unknown) {
@@ -71,10 +69,13 @@ export default function OnboardingPhase1() {
                 }
             );
 
+            console.log("Phase1: API response:", res.data); // Debugging
+
             toast.success("Successfully submitted onboarding phase 1");
             localStorage.setItem("onboardingToken", res.data.onboarding_token);
             router.push("/onboarding/phase-2");
         } catch (error: unknown) {
+            console.error("Phase1: Submission error:", error); // Debugging
             const err = error as AxiosError<{ message?: string }>;
             const message =
                 err.response?.data?.message ||

@@ -14,6 +14,7 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
+import apiClient from "@/lib/api";
 
 // List of states
 const STATES = [
@@ -76,11 +77,8 @@ export default function Phase2() {
             setOnboardingToken(localToken);
             setIsInitializing(false);
         } else if (urlToken) {
-            axios
-                .post(
-                    "https://trustlinc-backend.onrender.com/api/v1/auth/refresh-onboarding-token",
-                    { token: urlToken }
-                )
+            apiClient
+                .post("/auth/refresh-onboarding-token", { token: urlToken })
                 .then(() => {
                     localStorage.setItem("onboardingToken", urlToken);
                     setOnboardingToken(urlToken);
@@ -107,17 +105,25 @@ export default function Phase2() {
 
         setLoading(true);
         try {
-            const response = await axios.post(
-                "https://trustlinc-backend.onrender.com/api/v1/auth/onboard/phase2",
-                {
-                    username,
-                    state: selectedState,
-                    onboarding_token: onboardingToken,
-                }
-            );
+            const response = await apiClient.post("/auth/onboard/phase2", {
+                username,
+                state: selectedState,
+                onboarding_token: onboardingToken,
+            });
+
+            const { user, token } = response.data;
+            console.log("Phase2: API response:", { user, token }); // Debugging
+
+            // Validate user object
+            if (
+                !user ||
+                !user.role ||
+                !["SHIPPER", "COURIER"].includes(user.role)
+            ) {
+                throw new Error("Invalid user data: missing or invalid role");
+            }
 
             // Store user and token in localStorage
-            const { user, token } = response.data;
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
 

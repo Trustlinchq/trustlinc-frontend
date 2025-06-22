@@ -64,7 +64,7 @@ export default function StatsCards() {
         if (!mounted) return; //Skip until client-side
 
         const user = JSON.parse(localStorage.getItem("user") || "{}");
-        if (user.role === "SHIPPER") {
+        if (!user.role || user.role !== "SHIPPER") {
             setError("Access denied. Shipper role required.");
             setLoading(false);
             toast.error("Access denied. Shipper role required.");
@@ -79,7 +79,7 @@ export default function StatsCards() {
         }
 
         apiClient
-            .get("/admin/dashboard/stats")
+            .get("/shipper/dashboard/stats")
             .then((res) => {
                 setStats(res.data);
                 setLoading(false);
