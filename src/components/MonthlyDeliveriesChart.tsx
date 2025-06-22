@@ -158,7 +158,7 @@ export default function MonthlyDeliveriesChart() {
             {monthlyDeliveries.every(
                 (d) => d.delivered === 0 && d.inProgress === 0
             ) && (
-                <p className="text-center text-sm text-muted-foreground mt-4">
+                <p className="text-center text-xs sm:text-sm max-w-[70%] sm:max-w-full mx-auto text-muted-foreground mt-4">
                     You don&#39;t have any delivery data yet. Start sending
                     packages to see your stats here.
                 </p>
