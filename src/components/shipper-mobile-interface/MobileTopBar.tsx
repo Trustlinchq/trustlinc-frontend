@@ -52,17 +52,17 @@ export default function MobileTopBar() {
         <div className="w-full px-4 py-6 flex flex-col gap-7 bg-white md:hidden">
             <div className="flex items-center justify-between">
                 <div className="flex flex-col">
-                    <span className="text-sm font-bold text-accent3">
+                    <span className="text-base font-bold text-accent3">
                         Hello, {user?.username || "there"}!
                     </span>
-                    <span className="text-[10px] text-muted-foreground">
+                    <span className="text-xs text-muted-foreground">
                         {getGreeting()}
                     </span>
                 </div>
                 <NotificationBell />
             </div>
 
-            <div className="text-center text-[11px] text-muted-foreground border py-2 rounded-xl border-accent2">
+            <div className="text-center text-xs text-muted-foreground border py-2 rounded-xl border-accent2">
                 {communityUpdate ? (
                     <p>📢 {communityUpdate.message}</p>
                 ) : (

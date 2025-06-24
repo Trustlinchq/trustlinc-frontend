@@ -22,7 +22,7 @@ export default function MobileBottomNav() {
         const userData = localStorage.getItem("user");
         if (userData) {
             const parsedUser = JSON.parse(userData);
-            if (!parsedUser.role) parsedUser.role = "shipper";
+            if (!parsedUser.role) parsedUser.role = "SHIPPER";
             setUser(parsedUser);
         }
     }, []);
