@@ -30,7 +30,7 @@ export default function MobileBottomNav() {
     const isProfile = pathname === "/profile";
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around  bg-neutral2 p-2 py-4 shadow-md md:hidden">
+        <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around bg-neutral2 p-2 py-5 shadow-md md:hidden">
             {mobileNavItems.map((item) => {
                 const isActive = pathname === item.href;
                 const Icon = item.icon;
