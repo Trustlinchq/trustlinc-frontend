@@ -53,7 +53,7 @@ export default function MobileNotificationPage() {
                         <ArrowLeft className="h-5 w-5" />
                     </button>
                 </div>
-                <h1 className="text-lg text-backgroundPrimary font-bold text-center flex-1">
+                <h1 className="text-xl text-backgroundPrimary font-bold text-center flex-1">
                     Notifications
                 </h1>
                 <div className="w-8" />{" "}
@@ -63,7 +63,7 @@ export default function MobileNotificationPage() {
             {/* Notification List */}
             <div className="flex-1 overflow-y-auto px-4 py-2">
                 {loading ? (
-                    <p className="text-sm text-muted-foreground text-center mt-6">
+                    <p className="text-base text-accent4 text-center mt-9">
                         Loading notifications...
                     </p>
                 ) : notifications.length === 0 ? (
