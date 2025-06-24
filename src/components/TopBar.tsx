@@ -15,7 +15,7 @@ type CommunityUpdate = {
 type User = {
     username: string;
     full_name: string;
-    role: "shipper" | "carrier";
+    role: "SHIPPER" | "COURIER";
     image?: string | null;
 };
 
@@ -41,7 +41,7 @@ export default function TopBar() {
             const parsedUser = JSON.parse(userData);
             // Fallback to "shipper" if role is missing
             if (!parsedUser.role) {
-                parsedUser.role = "shipper";
+                parsedUser.role = "SHIPPER";
             }
             setUser(parsedUser);
         }

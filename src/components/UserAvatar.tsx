@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 type User = {
     username: string;
     full_name: string;
-    role: "shipper" | "carrier";
+    role: "SHIPPER" | "COURIER";
     image?: string | null;
 };
 
