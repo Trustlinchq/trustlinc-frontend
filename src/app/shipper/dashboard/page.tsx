@@ -6,10 +6,12 @@ import { toast } from "sonner";
 import StatsCards from "@/components/StatsCards";
 import MonthlyDeliveriesChart from "@/components/MonthlyDeliveriesChart";
 import ShipperDeliveries from "@/components/ShipperDeliveries";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function DashboardPage() {
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
+    const isMobile = useMediaQuery("(max-width: 768px)");
 
     useEffect(() => {
         setMounted(true);
@@ -35,16 +37,20 @@ export default function DashboardPage() {
         if (!user || user.role !== "SHIPPER") {
             toast.error("Access denied. Please log in as a Shipper.");
             router.push("/login");
-            return;
         }
     }, [router, mounted]);
 
+    if (!mounted) return null; // Prevent hydration issues
+
     return (
         <section className=" flex flex-col gap-5 mt-10">
-            {/* Stat cards and delivery chart here */}
-            <StatsCards />
-            <MonthlyDeliveriesChart />
-            <ShipperDeliveries />
+            {!isMobile && (
+                <>
+                    <StatsCards />
+                    <MonthlyDeliveriesChart />
+                    <ShipperDeliveries />
+                </>
+            )}
         </section>
     );
 }

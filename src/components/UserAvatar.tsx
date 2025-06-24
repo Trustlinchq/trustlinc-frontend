@@ -1,21 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
 type User = {
     username: string;
     full_name: string;
-    role: "shipper" | "carrier"; // assuming these are the two roles
+    role: "shipper" | "carrier";
     image?: string | null;
 };
 
 type Props = {
     user: User;
+    className?: string;
 };
 
-export default function UserAvatar({ user }: Props) {
-    // Optional: Emoji based on user role
-
+export default function UserAvatar({ user, className }: Props) {
     return (
-        <Avatar>
+        <Avatar className={cn(className)}>
             {user.image ? (
                 <AvatarImage src={user.image} alt={user.username} />
             ) : (

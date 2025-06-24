@@ -135,7 +135,7 @@ export default function MonthlyDeliveriesChart() {
     }
 
     return (
-        <div className="w-full px-4 sm:px-6 md:px-8 py-4 rounded-sm shadow-sm border mb-4">
+        <div className="w-full px-4 sm:px-6 md:px-8 py-4 rounded-sm shadow-sm border mb-1.3">
             <h2 className="text-base font-bold text-backgroundSecondary mb-4">
                 Monthly Deliveries
             </h2>

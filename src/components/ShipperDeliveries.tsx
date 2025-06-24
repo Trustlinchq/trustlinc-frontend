@@ -98,7 +98,7 @@ export default function ShipperDeliveries() {
     }, [filter, page]);
 
     return (
-        <div className="w-full px-4 sm:px-6 md:px-8 py-4 rounded-sm shadow-sm border mb-4">
+        <div className="w-full px-4 sm:px-6 md:px-8 py-4 rounded-sm shadow-sm border mb-3">
             {loading ? (
                 <div className="space-y-6">
                     {/* Header Skeleton */}
