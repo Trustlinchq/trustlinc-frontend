@@ -44,7 +44,7 @@ export default function MobileNotificationPage() {
     return (
         <div className="min-h-screen flex flex-col bg-background">
             {/* Top Bar */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-50 shadow-sm bg-white sticky top-0 z-10">
+            <div className="flex items-center justify-between px-4 pb-4 pt-10 border-b border-gray-50 shadow-sm bg-white sticky top-0 z-10">
                 <div className="w-8 flex items-center justify-start">
                     <button
                         onClick={() => router.back()}
@@ -53,7 +53,7 @@ export default function MobileNotificationPage() {
                         <ArrowLeft className="h-5 w-5" />
                     </button>
                 </div>
-                <h1 className="text-base text-accent4 font-semibold text-center flex-1">
+                <h1 className="text-lg text-backgroundPrimary font-bold text-center flex-1">
                     Notifications
                 </h1>
                 <div className="w-8" />{" "}
@@ -67,7 +67,7 @@ export default function MobileNotificationPage() {
                         Loading notifications...
                     </p>
                 ) : notifications.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center mt-6">
+                    <p className="text-sm text-accent4 text-center mt-9">
                         No notifications for now.
                     </p>
                 ) : (
