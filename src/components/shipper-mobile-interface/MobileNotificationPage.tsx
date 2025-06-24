@@ -67,7 +67,7 @@ export default function MobileNotificationPage() {
                         Loading notifications...
                     </p>
                 ) : notifications.length === 0 ? (
-                    <p className="text-sm text-accent4 text-center mt-9">
+                    <p className="text-base text-accent4 text-center mt-9">
                         No notifications for now.
                     </p>
                 ) : (
