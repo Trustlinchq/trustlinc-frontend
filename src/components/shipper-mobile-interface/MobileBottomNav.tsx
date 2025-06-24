@@ -47,7 +47,7 @@ export default function MobileBottomNav() {
                                 className={cn(
                                     "h-6 w-6",
                                     isActive
-                                        ? "text-backgroundPrimary fill-backgroundPrimary"
+                                        ? "text-backgroundPrimary fill-backgroundPrimary "
                                         : "text-neutral-400"
                                 )}
                             />

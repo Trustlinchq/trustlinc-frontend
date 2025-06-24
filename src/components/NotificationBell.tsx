@@ -3,6 +3,8 @@ import { Bell, CheckCheck, AlertTriangle, Info } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 type Notification = {
     id: string;
@@ -19,6 +21,9 @@ const typeIcons = {
 };
 
 export default function NotificationBell() {
+    const router = useRouter();
+    const isMobile = useMediaQuery("(max-width: 768px)");
+
     const [notifications, setNotifications] = useState<Notification[]>([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
@@ -61,6 +66,14 @@ export default function NotificationBell() {
             document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    const handleClick = () => {
+        if (isMobile) {
+            router.push("/shipper/notifications");
+        } else {
+            setIsOpen((prev) => !prev);
+        }
+    };
+
     const handleMarkAllAsRead = async () => {
         try {
             await axios.patch(
@@ -76,10 +89,10 @@ export default function NotificationBell() {
     return (
         <div className="relative" ref={dropdownRef}>
             <div
-                onClick={() => setIsOpen(!isOpen)}
-                className="cursor-pointer bg-accent3 p-2 rounded-full relative"
+                onClick={handleClick}
+                className="cursor-pointer  sm:bg-accent3 p-2 rounded-full relative"
             >
-                <Bell className="w-5 h-5 text-neutral1" />
+                <Bell className="w-6 h-6  text-backgroundPrimary fill-backgroundPrimary sm:text-neutral2 sm:fill-none" />
                 {unreadCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
                         {unreadCount}
@@ -87,7 +100,7 @@ export default function NotificationBell() {
                 )}
             </div>
 
-            {isOpen && (
+            {!isMobile && isOpen && (
                 <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                     <div className="flex justify-between items-center p-3 border-b font-semibold text-sm text-gray-700">
                         <span>Notifications</span>
