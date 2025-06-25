@@ -123,7 +123,7 @@ export default function MobileStatsCarousel() {
                                     key={card.title}
                                     className="keen-slider__slide flex flex-col items-center justify-center text-center"
                                 >
-                                    <h3 className="text-base text-accent4/60 mb-3 font-semibold">
+                                    <h3 className="text-sm text-accent4/60 mb-3 font-semibold">
                                         {card.title}
                                     </h3>
                                     <div className="text-3xl font-bold text-accent3 mb-3">
