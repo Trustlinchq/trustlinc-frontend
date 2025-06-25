@@ -62,7 +62,7 @@ export default function MobileTopBar() {
                 <NotificationBell />
             </div>
 
-            <div className="text-center text-sm text-muted-foreground bg-neutral3 border py-2 rounded-sm border-accent2">
+            <div className="text-center text-sm text-muted-foreground bg-neutral3 border py-2 rounded-xl border-accent2">
                 {communityUpdate ? (
                     <p>📢 {communityUpdate.message}</p>
                 ) : (
