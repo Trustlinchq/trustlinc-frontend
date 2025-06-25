@@ -53,12 +53,8 @@ export default function MobileStatsCarousel() {
         if (!mounted) return;
         apiClient
             .get("/shipper/dashboard/stats")
-            .then((res) => {
-                setStats(res.data);
-            })
-            .catch(() => {
-                setStats(null);
-            })
+            .then((res) => setStats(res.data))
+            .catch(() => setStats(null))
             .finally(() => setLoading(false));
     }, [mounted]);
 
@@ -91,7 +87,7 @@ export default function MobileStatsCarousel() {
         return (
             <div
                 className={cn(
-                    "flex items-center justify-center gap-1 text-sm",
+                    "flex items-center justify-center gap-2 text-sm",
                     isUp ? "text-green-600" : "text-red-600"
                 )}
             >
@@ -100,7 +96,7 @@ export default function MobileStatsCarousel() {
                 ) : (
                     <ArrowDownRight className="w-4 h-4" />
                 )}
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground/65">
                     {description}
                 </span>
             </div>
@@ -108,48 +104,54 @@ export default function MobileStatsCarousel() {
     };
 
     return (
-        <div className="w-full px-4">
+        <div className="w-full px-4 mt-7">
             {loading ? (
                 <div className="flex justify-center items-center py-10">
                     <Skeleton className="w-full h-32 rounded-xl" />
                 </div>
             ) : (
-                <div className="relative" style={{ overflow: "hidden" }}>
-                    <div ref={sliderRef} className="keen-slider">
-                        {cards.map((card) => (
-                            <div
-                                key={card.title}
-                                className="keen-slider__slide flex flex-col  items-center justify-center bg-white p-6 rounded-2xl shadow-md border border-accent1"
-                                style={{ minWidth: "100%" }}
-                            >
-                                <h3 className="text-xs text-accent4 mb-3 font-semibold">
-                                    {card.title}
-                                </h3>
-                                <div className="text-3xl font-bold text-accent3 mb-3">
-                                    {card.data.current}
-                                </div>
-                                {renderTrend(
-                                    card.data.trend,
-                                    card.data.percentageChange,
-                                    card.description
-                                )}
+                <div className="relative">
+                    {/* Fixed Card Container */}
+                    <div className="bg-white p-5 rounded-2xl border border-accent1 shadow-[0_12px_25px_-8px_rgba(0,0,0,0.12)]">
+                        {/* Slider Inside Card */}
+                        <div
+                            ref={sliderRef}
+                            className="keen-slider overflow-hidden"
+                        >
+                            {cards.map((card) => (
+                                <div
+                                    key={card.title}
+                                    className="keen-slider__slide flex flex-col items-center justify-center text-center"
+                                >
+                                    <h3 className="text-sm text-accent4/60 mb-3 font-semibold">
+                                        {card.title}
+                                    </h3>
+                                    <div className="text-3xl font-bold text-accent3 mb-3">
+                                        {card.data.current}
+                                    </div>
+                                    {renderTrend(
+                                        card.data.trend,
+                                        card.data.percentageChange,
+                                        card.description
+                                    )}
 
-                                {/* Dots inside the card */}
-                                <div className="flex justify-center mt-4 gap-2">
-                                    {cards.map((_, idx) => (
-                                        <div
-                                            key={idx}
-                                            className={cn(
-                                                "h-2 rounded-full transition-all",
-                                                currentSlide === idx
-                                                    ? "bg-accent2 w-4 h-1"
-                                                    : "bg-accent4/40 w-2 h-1"
-                                            )}
-                                        ></div>
-                                    ))}
+                                    {/* Dots inside the card */}
+                                    <div className="flex justify-center mt-4 gap-2">
+                                        {cards.map((_, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={cn(
+                                                    "h-2 rounded-full transition-all",
+                                                    currentSlide === idx
+                                                        ? "bg-accent2 w-4 h-2"
+                                                        : "bg-accent4/40 w-2 h-2"
+                                                )}
+                                            ></div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}
