@@ -107,7 +107,7 @@ export default function MobileStatsCarousel() {
         <div className="w-full px-4 mt-7">
             {loading ? (
                 <div className="flex justify-center items-center ">
-                    <Skeleton className="w-full h-40 rounded-xl bg-neutral2 border shadow-[0_12px_35px_-8px_rgba(0,0,0,0.12)] py-6" />
+                    <Skeleton className="w-full h-40 rounded-xl bg-neutral2 border shadow-[0_12px_35px_-8px_rgba(0,0,0,0.12)] py-9" />
                 </div>
             ) : (
                 <div className="relative">
