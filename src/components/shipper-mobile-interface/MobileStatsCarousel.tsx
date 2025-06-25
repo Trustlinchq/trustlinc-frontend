@@ -112,7 +112,7 @@ export default function MobileStatsCarousel() {
             ) : (
                 <div className="relative">
                     {/* Fixed Card Container */}
-                    <div className="bg-white p-5 rounded-2xl border border-accent1 shadow-[0_12px_25px_-8px_rgba(0,0,0,0.12)]">
+                    <div className="bg-white p-6 rounded-2xl border border-accent1 shadow-[0_12px_35px_-8px_rgba(0,0,0,0.12)]">
                         {/* Slider Inside Card */}
                         <div
                             ref={sliderRef}
@@ -123,7 +123,7 @@ export default function MobileStatsCarousel() {
                                     key={card.title}
                                     className="keen-slider__slide flex flex-col items-center justify-center text-center"
                                 >
-                                    <h3 className="text-sm text-accent4/60 mb-3 font-semibold">
+                                    <h3 className="text-base text-accent4/60 mb-3 font-semibold">
                                         {card.title}
                                     </h3>
                                     <div className="text-3xl font-bold text-accent3 mb-3">
@@ -143,8 +143,8 @@ export default function MobileStatsCarousel() {
                                                 className={cn(
                                                     "h-2 rounded-full transition-all",
                                                     currentSlide === idx
-                                                        ? "bg-accent2 w-4 h-2"
-                                                        : "bg-accent4/40 w-2 h-2"
+                                                        ? "bg-accent2 w-4 h-1"
+                                                        : "bg-accent4/40 w-2 h-1"
                                                 )}
                                             ></div>
                                         ))}
