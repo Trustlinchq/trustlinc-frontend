@@ -68,12 +68,12 @@ export default function MobileStatsCarousel() {
               {
                   title: "Delivered",
                   data: stats.delivered,
-                  description: "Past 1 months total.",
+                  description: "Delivered in past 1 months total.",
               },
               {
                   title: "In Progress",
                   data: stats.inProgress,
-                  description: "Past 1 months total.",
+                  description: "Ongoing deliveries now.",
               },
           ]
         : [];
@@ -106,13 +106,14 @@ export default function MobileStatsCarousel() {
     return (
         <div className="w-full px-4 mt-7">
             {loading ? (
-                <div className="flex justify-center items-center py-10">
-                    <Skeleton className="w-full h-32 rounded-xl" />
+                <div className="flex justify-center items-center ">
+                    <Skeleton className="w-full h-40 rounded-xl bg-neutral2 border shadow-[0_12px_35px_-8px_rgba(0,0,0,0.12)] py-6" />
                 </div>
             ) : (
                 <div className="relative">
                     {/* Fixed Card Container */}
-                    <div className="bg-white p-6 rounded-2xl border border-accent1 shadow-[0_12px_35px_-8px_rgba(0,0,0,0.12)]">
+                    <div className="bg-neutral2 p-6 rounded-2xl border border-accent1 shadow-[0_12px_35px_-8px_rgba(0,0,0,0.12)]">
+
                         {/* Slider Inside Card */}
                         <div
                             ref={sliderRef}
@@ -123,10 +124,10 @@ export default function MobileStatsCarousel() {
                                     key={card.title}
                                     className="keen-slider__slide flex flex-col items-center justify-center text-center"
                                 >
-                                    <h3 className="text-sm text-accent4/60 mb-3 font-semibold">
+                                    <h3 className="text-sm text-accent4/60 mb-5 font-semibold">
                                         {card.title}
                                     </h3>
-                                    <div className="text-3xl font-bold text-accent3 mb-3">
+                                    <div className="text-3xl font-bold text-accent3 mb-5">
                                         {card.data.current}
                                     </div>
                                     {renderTrend(
