@@ -23,6 +23,7 @@ export default {
                 accent4: "#636262",
                 neutral1: "#EFF3F7",
                 neutral2: "#FFFFFF",
+                neutral3: "#F9FCFF",
                 card: {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
