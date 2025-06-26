@@ -21,6 +21,7 @@ export default {
                 accent2: "#71D0FF",
                 accent3: "#544DDC",
                 accent4: "#636262",
+                accent5: "#CECECE",
                 neutral1: "#EFF3F7",
                 neutral2: "#FFFFFF",
                 neutral3: "#F9FCFF",

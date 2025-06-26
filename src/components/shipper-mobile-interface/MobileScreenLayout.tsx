@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import MobileBottomNav from "./MobileBottomNav";
 import MobileTopBar from "./MobileTopBar";
 import MobileStatsCarousel from "./MobileStatsCarousel";
+import MobileDeliveries from "./MobileDeliveries";
 
 export default function MobileScreenLayout({
     children,
@@ -17,7 +18,8 @@ export default function MobileScreenLayout({
     return (
         <div className="flex flex-col w-full bg-background text-foreground">
             {!hideLayout && <MobileTopBar />}
-            <MobileStatsCarousel />
+            {!hideLayout && <MobileStatsCarousel />}
+            {!hideLayout && <MobileDeliveries />}
             <div className="flex-1 overflow-y-auto p4">{children}</div>
             {!hideLayout && <MobileBottomNav />}
         </div>
