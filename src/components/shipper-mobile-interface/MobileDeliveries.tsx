@@ -34,7 +34,7 @@ export default function MobileDeliveries() {
             </Link>
 
             {/* Section Tile */}
-            <div className="flex justify-between items-center mb2">
+            <div className="flex justify-between items-center mb-9">
                 <h3 className="text-[15px] font-bold text-accent4">
                     Your current delivery
                 </h3>
@@ -47,10 +47,10 @@ export default function MobileDeliveries() {
             </div>
 
             {/* Delivery Card */}
-            <div className="bg-neutral3 rounded-2xl border border-accent1 shadow-[0px_3px_12px_rgba(0,0,0,0.08)] p-4 mt-6">
+            <div className="bg-neutral3 rounded-2xl border border-accent1 shadow-[0px_3px_12px_rgba(0,0,0,0.08)] p-4 ">
                 {/* Top: Icon + Title + ID */}
-                <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-7">
+                <div className="flex items-center justify-between mb-3 pt-2">
+                    <div className="flex items-center gap-6">
                         <div className="bg-neutral1 p-2 rounded-full">
                             <Package className="text-accent3 w-5 h-5" />
                         </div>
@@ -63,13 +63,13 @@ export default function MobileDeliveries() {
                             </p>
                         </div>
                     </div>
-                    <div className="text-accent3 text-lg">›</div>
+                    <div className="text-accent3 text-2xl">›</div>
                 </div>
 
-                <div className="border-t border-border my-3" />
+                <div className="border-t border-border my-7" />
 
                 {/* Pickup → Dropoff */}
-                <div className="flex flex-col gap-4 mb-4">
+                <div className="flex flex-col gap-4 mb-4 pl-4">
                     <div className="flex items-start gap-3">
                         <span className="w-2 h-2 mt-1 bg-accent3 rounded-full" />
                         <p className="text-sm text-muted-foreground">
