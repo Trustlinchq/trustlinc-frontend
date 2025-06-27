@@ -81,7 +81,7 @@ export default function MobileDeliveries() {
                     </div>
 
                     {/* vertical line */}
-                    <div className="ml-[9px] h-4 border-l border-dashed border-border" />
+                    <div className="ml-[3px] h-16 border-l border-dashed border-border" />
 
                     <div className="flex items-start gap-3">
                         <span className="w-2 h-2 mt-1 bg-accent4 rounded-full" />
@@ -97,7 +97,7 @@ export default function MobileDeliveries() {
                 <div className="border-t border-border my-7" />
 
                 {/* Status */}
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex items-center gap-2 text-sm pl-4">
                     <span className="text-muted-foreground">Status:</span>
                     <span className="flex items-center gap-1 text-yellow-600 font-medium">
                         <CircleDot className="w-3 h-3 fill-yellow-600 text-yellow-600" />
