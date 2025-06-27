@@ -42,7 +42,7 @@ export default function MobileDeliveries() {
                     href="/MyDeliveries"
                     className="text-xs font-medium text-accent3 flex items-center gap-1"
                 >
-                    View all delivery <span className="text-[18px]">›</span>
+                    View all delivery <span className="text-[20px]">›</span>
                 </Link>
             </div>
 
@@ -63,7 +63,7 @@ export default function MobileDeliveries() {
                             </p>
                         </div>
                     </div>
-                    <div className="text-accent3 text-2xl">›</div>
+                    <div className="text-accent3 text-3xl">›</div>
                 </div>
 
                 <div className="border-t border-border my-7" />
@@ -94,7 +94,7 @@ export default function MobileDeliveries() {
                     </div>
                 </div>
 
-                <div className="border-t border-border my-3" />
+                <div className="border-t border-border my-7" />
 
                 {/* Status */}
                 <div className="flex items-center gap-2 text-sm">
