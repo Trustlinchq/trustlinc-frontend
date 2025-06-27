@@ -1,8 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Plus, Package, CircleDot } from "lucide-react";
 // import { Button } from "@/components/ui/button";
+
+type Delivery = {
+    id: string;
+    description: string;
+    pickup: string;
+    dropoff: string;
+    status: string;
+};
+
+const currentDelivery: Delivery = {
+    id: "DLV-0001",
+    description: "Phone accessories",
+    pickup: "Lagos",
+    dropoff: "Enugu",
+    status: "In Progress",
+};
 
 export default function MobileDeliveries() {
     return (
@@ -28,6 +44,66 @@ export default function MobileDeliveries() {
                 >
                     View all delivery <span className="text-[18px]">›</span>
                 </Link>
+            </div>
+
+            {/* Delivery Card */}
+            <div className="bg-neutral3 rounded-2xl border border-accent1 shadow-[0px_3px_12px_rgba(0,0,0,0.08)] p-4 mt-6">
+                {/* Top: Icon + Title + ID */}
+                <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-7">
+                        <div className="bg-neutral1 p-2 rounded-full">
+                            <Package className="text-accent3 w-5 h-5" />
+                        </div>
+                        <div>
+                            <p className="font-semibold text-sm leading-tight text-backgroundSecondary">
+                                {currentDelivery.description}
+                            </p>
+                            <p className="text-[10px] text-accent4/60">
+                                Delivery ID: {currentDelivery.id}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="text-accent3 text-lg">›</div>
+                </div>
+
+                <div className="border-t border-border my-3" />
+
+                {/* Pickup → Dropoff */}
+                <div className="flex flex-col gap-4 mb-4">
+                    <div className="flex items-start gap-3">
+                        <span className="w-2 h-2 mt-1 bg-accent3 rounded-full" />
+                        <p className="text-sm text-muted-foreground">
+                            Pickup:{" "}
+                            <span className="text-backgroundSecondary font-semibold">
+                                {currentDelivery.pickup}
+                            </span>
+                        </p>
+                    </div>
+
+                    {/* vertical line */}
+                    <div className="ml-[9px] h-4 border-l border-dashed border-border" />
+
+                    <div className="flex items-start gap-3">
+                        <span className="w-2 h-2 mt-1 bg-accent4 rounded-full" />
+                        <p className="text-sm text-muted-foreground">
+                            Drop-off:{" "}
+                            <span className="text-backgroundSecondary font-semibold">
+                                {currentDelivery.dropoff}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div className="border-t border-border my-3" />
+
+                {/* Status */}
+                <div className="flex items-center gap-2 text-sm">
+                    <span className="text-muted-foreground">Status:</span>
+                    <span className="flex items-center gap-1 text-yellow-600 font-medium">
+                        <CircleDot className="w-3 h-3 fill-yellow-600 text-yellow-600" />
+                        {currentDelivery.status}
+                    </span>
+                </div>
             </div>
         </div>
     );
