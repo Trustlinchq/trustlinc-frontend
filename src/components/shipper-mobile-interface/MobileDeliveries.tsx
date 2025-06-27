@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 
 export default function MobileDeliveries() {
     return (
-        <div className="px-4 pt-4 pb-2 mt-9">
+        <div className="px-4 pt-4 pb-2 mt-10">
             {/* Create Delivery Button */}
             <Link href="/shipper/create-delivery">
                 <div className="w-full bg-neutral3 py-4 rounded-lg border border-accent5  mb-10">
