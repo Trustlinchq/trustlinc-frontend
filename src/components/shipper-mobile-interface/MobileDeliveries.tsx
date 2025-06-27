@@ -19,7 +19,7 @@ export default function MobileDeliveries() {
 
             {/* Section Tile */}
             <div className="flex justify-between items-center mb2">
-                <h3 className="text-sm font-bold text-accent4">
+                <h3 className="text-base font-bold text-accent4">
                     Your current delivery
                 </h3>
                 <Link
