@@ -9,9 +9,9 @@ export default function MobileDeliveries() {
         <div className="px-4 pt-4 pb-2 mt-9">
             {/* Create Delivery Button */}
             <Link href="/shipper/create-delivery">
-                <div className="w-full bg-neutral3 py-3 rounded-lg border border-accent5  mb-10">
+                <div className="w-full bg-neutral3 py-4 rounded-lg border border-accent5  mb-10">
                     <span className="text-backgroundPrimary text-sm flex items-center justify-center gap-2">
-                        <Plus className="w-4 h-4 text-accent3" />
+                        <Plus className="w-5 h-5 text-accent3" />
                         Create a delivery
                     </span>
                 </div>
@@ -19,7 +19,7 @@ export default function MobileDeliveries() {
 
             {/* Section Tile */}
             <div className="flex justify-between items-center mb2">
-                <h3 className="text-xs font-bold text-accent4">
+                <h3 className="text-sm font-bold text-accent4">
                     Your current delivery
                 </h3>
                 <Link
