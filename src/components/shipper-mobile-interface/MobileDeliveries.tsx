@@ -22,10 +22,10 @@ const currentDelivery: Delivery = {
 
 export default function MobileDeliveries() {
     return (
-        <div className="px-4 pt-4 pb-2 mt-10">
+        <div className="px-4 pt-4 pb-2 mt-7">
             {/* Create Delivery Button */}
             <Link href="/shipper/create-delivery">
-                <div className="w-full bg-neutral3 py-4 rounded-lg border border-accent5  mb-11">
+                <div className="w-full bg-neutral3 py-4 rounded-lg border border-accent5  mb-7">
                     <span className="text-backgroundPrimary text-sm flex items-center justify-center gap-2">
                         <Plus className="w-5 h-5 text-accent3" />
                         Create a delivery
@@ -35,12 +35,12 @@ export default function MobileDeliveries() {
 
             {/* Section Tile */}
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-[15px] font-bold text-accent4">
+                <h3 className="text-[15px]  text-accent4">
                     Your current delivery
                 </h3>
                 <Link
                     href="/MyDeliveries"
-                    className="text-xs font-medium text-accent3 flex items-center gap-1"
+                    className="text-xs font-bold text-accent3 flex items-center gap-1"
                 >
                     View all delivery <span className="text-[20px]">›</span>
                 </Link>
@@ -72,22 +72,22 @@ export default function MobileDeliveries() {
                 <div className="flex flex-col gap-4 mb-4 pl-4">
                     <div className="flex items-start gap-3">
                         <span className="w-2 h-2 mt-1 bg-accent3 rounded-full" />
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-accent4/50">
                             Pickup:{" "}
-                            <span className="text-backgroundSecondary font-semibold">
+                            <span className="text-backgroundSecondary font-semibold pl-3">
                                 {currentDelivery.pickup}
                             </span>
                         </p>
                     </div>
 
                     {/* vertical line */}
-                    <div className="ml-[3px] h-12 border-l border-dashed border-border" />
+                    <div className="ml-[3px] h-12 border-l border-dashed border-accent5" />
 
                     <div className="flex items-start gap-3">
-                        <span className="w-2 h-2 mt-1 bg-accent4 rounded-full" />
-                        <p className="text-sm text-muted-foreground">
+                        <span className="w-2 h-2 mt-1 border border-accent1 rounded-full" />
+                        <p className="text-sm text-accent4/50">
                             Drop-off:{" "}
-                            <span className="text-backgroundSecondary font-semibold">
+                            <span className="text-backgroundSecondary font-semibold pl-3">
                                 {currentDelivery.dropoff}
                             </span>
                         </p>
@@ -98,7 +98,7 @@ export default function MobileDeliveries() {
 
                 {/* Status */}
                 <div className="flex items-center gap-2 text-sm pl-4">
-                    <span className="text-muted-foreground">Status:</span>
+                    <span className="text-accent4/50">Status:</span>
                     <span className="flex items-center gap-1 text-yellow-600 font-medium">
                         <CircleDot className="w-3 h-3 fill-yellow-600 text-yellow-600" />
                         {currentDelivery.status}
