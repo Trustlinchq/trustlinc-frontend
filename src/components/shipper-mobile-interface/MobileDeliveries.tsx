@@ -25,7 +25,7 @@ export default function MobileDeliveries() {
         <div className="px-4 pt-4 pb-2 mt-7">
             {/* Create Delivery Button */}
             <Link href="/shipper/create-delivery">
-                <div className="w-full bg-neutral3 py-4 rounded-lg border border-accent5  mb-7">
+                <div className="w-full bg-neutral3 py-5 rounded-lg border border-accent5  mb-7">
                     <span className="text-backgroundPrimary text-sm flex items-center justify-center gap-2">
                         <Plus className="w-5 h-5 text-accent3" />
                         Create a delivery
