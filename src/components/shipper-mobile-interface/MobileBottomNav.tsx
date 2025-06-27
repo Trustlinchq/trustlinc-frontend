@@ -39,7 +39,7 @@ export default function MobileBottomNav() {
                     <Link key={item.name} href={item.href}>
                         <div
                             className={cn(
-                                "flex flex-col items-center justify-center gap-1 text-xs text-neutral-400",
+                                "flex flex-col items-center justify-center gap-1 text-xs text-accent5",
                                 isActive && "font-bold text-backgroundPrimary"
                             )}
                         >
@@ -48,7 +48,7 @@ export default function MobileBottomNav() {
                                     "h-6 w-6",
                                     isActive
                                         ? "text-backgroundPrimary fill-backgroundPrimary "
-                                        : "text-neutral-400"
+                                        : "text-accent5"
                                 )}
                             />
                             <span>{item.name}</span>
@@ -60,7 +60,7 @@ export default function MobileBottomNav() {
             <Link href="/profile">
                 <div
                     className={cn(
-                        "flex flex-col items-center justify-center gap-1 text-xs text-neutral-400",
+                        "flex flex-col items-center justify-center gap-1 text-xs text-accent5",
                         isProfile && "font-bold text-backgroundPrimary"
                     )}
                 >
