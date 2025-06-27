@@ -17,10 +17,12 @@ export default function MobileScreenLayout({
 
     return (
         <div className="flex flex-col w-full bg-background text-foreground">
-            {!hideLayout && <MobileTopBar />}
-            {!hideLayout && <MobileStatsCarousel />}
-            {!hideLayout && <MobileDeliveries />}
-            <div className="flex-1 overflow-y-auto p4">{children}</div>
+            <div className="flex-1 overflow-y-auto">
+                {!hideLayout && <MobileTopBar />}
+                {!hideLayout && <MobileStatsCarousel />}
+                {!hideLayout && <MobileDeliveries />}
+                <div className="p4 pb-20">{children}</div>
+            </div>
             {!hideLayout && <MobileBottomNav />}
         </div>
     );

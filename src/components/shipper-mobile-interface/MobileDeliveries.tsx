@@ -34,7 +34,7 @@ export default function MobileDeliveries() {
             </Link>
 
             {/* Section Tile */}
-            <div className="flex justify-between items-center mb-9">
+            <div className="flex justify-between items-center mb-6">
                 <h3 className="text-[15px] font-bold text-accent4">
                     Your current delivery
                 </h3>
@@ -81,7 +81,7 @@ export default function MobileDeliveries() {
                     </div>
 
                     {/* vertical line */}
-                    <div className="ml-[3px] h-16 border-l border-dashed border-border" />
+                    <div className="ml-[3px] h-12 border-l border-dashed border-border" />
 
                     <div className="flex items-start gap-3">
                         <span className="w-2 h-2 mt-1 bg-accent4 rounded-full" />
