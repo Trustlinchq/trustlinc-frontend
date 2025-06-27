@@ -24,7 +24,7 @@ export default function MobileDeliveries() {
                 </h3>
                 <Link
                     href="/MyDeliveries"
-                    className="text-[10px] font-medium text-accent3 flex items-center gap-1"
+                    className="text-xs font-medium text-accent3 flex items-center gap-1"
                 >
                     View all delivery <span className="text-[18px]">›</span>
                 </Link>
