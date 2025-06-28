@@ -18,6 +18,8 @@ export default function MobileCustomerSupport() {
                 <Link
                     href="https://api.whatsapp.com/send/?phone=2348061463767&text=Hi%20TrustLinc%20Support%2C%20I%20need%20some%20help%20and%20I%E2%80%99m%20reaching%20out%20from%20your%20page.&type=phone_number&app_absent=0
 "
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
                     <div className="flex items-center justify-between mb-3 pt-2">
                         <div className="flex items-center gap-4">
@@ -38,7 +40,11 @@ export default function MobileCustomerSupport() {
                     </div>
                 </Link>
 
-                <Link href="https://www.youtube.com/@TrustLinc">
+                <Link
+                    href="https://www.youtube.com/@TrustLinc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <div className="flex items-center justify-between mb-3 pt-2">
                         <div className="flex items-center gap-4">
                             <div className="bg-neutral1 p-2 rounded-full">
