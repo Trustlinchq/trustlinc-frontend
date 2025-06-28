@@ -2,6 +2,7 @@
 
 import { MessageSquareText, Play } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function MobileCustomerSupport() {
     return (
@@ -63,6 +64,18 @@ export default function MobileCustomerSupport() {
                         <div className="text-accent3 text-3xl">›</div>
                     </div>
                 </Link>
+            </div>
+
+            <div className="border-t border-border my-4" />
+
+            <div className="w-[60%] mx-auto flex justify-center items-center mt-10">
+                <Image
+                    src="/logo-white1.svg"
+                    alt="TrustLinc Logo"
+                    width={100}
+                    height={50}
+                    className="w-full max-w-[60%]"
+                />
             </div>
         </div>
     );
