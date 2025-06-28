@@ -5,6 +5,7 @@ import MobileBottomNav from "./MobileBottomNav";
 import MobileTopBar from "./MobileTopBar";
 import MobileStatsCarousel from "./MobileStatsCarousel";
 import MobileDeliveries from "./MobileDeliveries";
+import MobileCustomerSupport from "./MobileCustomerSupport";
 
 export default function MobileScreenLayout({
     children,
@@ -21,6 +22,7 @@ export default function MobileScreenLayout({
                 {!hideLayout && <MobileTopBar />}
                 {!hideLayout && <MobileStatsCarousel />}
                 {!hideLayout && <MobileDeliveries />}
+                {!hideLayout && <MobileCustomerSupport />}
                 <div className="p4 pb-20">{children}</div>
             </div>
             {!hideLayout && <MobileBottomNav />}

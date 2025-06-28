@@ -100,7 +100,7 @@ export default function MobileDeliveries() {
                     <div
                         className={cn(
                             "bg-neutral3 rounded-2xl border border-accent1 shadow-[0px_6px_20px_rgba(0,0,0,0.08)] p-4 transition",
-                            isDummy && "opacity-40 blur-sm pointer-events-none"
+                            isDummy && "opacity-90 blur-sm pointer-events-none"
                         )}
                     >
                         {/* Top: Icon + Title + ID */}
@@ -163,8 +163,8 @@ export default function MobileDeliveries() {
                     {/* Dummy Message */}
                     {isDummy && (
                         <div className="absolute inset-0 flex items-center justify-center z-10">
-                            <p className="text-sm font-medium text-accent4 bg-white/80 px-4 py-2 rounded-md shadow-sm border border-dashed border-accent4">
-                                You have no current delivery right now.
+                            <p className="text-sm font-medium text-accent4 bg-white/80 px-4 py-2 rounded-md shadow-sm border border-dashed border-accent3">
+                                You don’t have any deliveries at the moment.
                             </p>
                         </div>
                     )}
