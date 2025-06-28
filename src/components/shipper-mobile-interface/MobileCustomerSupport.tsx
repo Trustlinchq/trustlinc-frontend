@@ -68,7 +68,7 @@ export default function MobileCustomerSupport() {
 
             <div className="border-t border-border my-4" />
 
-            <div className="w-[60%] mx-auto flex justify-center items-center mt-10">
+            <div className="w-[80%] mx-auto flex justify-center items-center mt-10">
                 <Image
                     src="/logo-white1.svg"
                     alt="TrustLinc Logo"
