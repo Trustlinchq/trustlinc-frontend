@@ -23,7 +23,7 @@ export default function MobileScreenLayout({
                 {!hideLayout && <MobileStatsCarousel />}
                 {!hideLayout && <MobileDeliveries />}
                 {!hideLayout && <MobileCustomerSupport />}
-                <div className="p4 pb-20">{children}</div>
+                <div className="p4 pb-24">{children}</div>
             </div>
             {!hideLayout && <MobileBottomNav />}
         </div>
