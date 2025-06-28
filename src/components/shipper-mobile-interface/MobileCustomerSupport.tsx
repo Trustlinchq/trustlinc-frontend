@@ -19,12 +19,32 @@ export default function MobileCustomerSupport() {
                             <MessageSquareText className="text-accent3 w-5 h-5" />
                         </div>
                         <div>
-                            <p className="font-semibold text-sm leading-tight text-backgroundSecondary">
+                            <p className="font-semibold text-sm leading-tight text-backgroundSecondary/80">
                                 Talk to us
                             </p>
-                            <p className="text-[10px] text-accent4/60 max-w-[75%]">
+                            <p className="text-[10px] text-accent4/60 max-w-[85%]">
                                 Chat with someone from the TrustLinc community
-                                team — we’re happy to help.
+                                team,we’re happy to help.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="text-accent3 text-3xl">›</div>
+                </div>
+            </Link>
+
+            <Link href="https://www.youtube.com/@TrustLinc">
+                <div className="flex items-center justify-between mb-3 pt-2">
+                    <div className="flex items-center gap-4">
+                        <div className="bg-neutral1 p-2 rounded-full">
+                            <MessageSquareText className="text-accent3 w-5 h-5" />
+                        </div>
+                        <div>
+                            <p className="font-semibold text-sm leading-tight text-backgroundSecondary/80">
+                                Start Your Journey
+                            </p>
+                            <p className="text-[10px] text-accent4/60 max-w-[85%]">
+                                Watch short videos to see how TrustLinc makes
+                                sending and delivering easy.
                             </p>
                         </div>
                     </div>
