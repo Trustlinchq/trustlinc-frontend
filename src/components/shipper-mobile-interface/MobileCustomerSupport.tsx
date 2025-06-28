@@ -9,7 +9,7 @@ export default function MobileCustomerSupport() {
         <div className="px-4 pt-4 pb-2 mt-7">
             {/* Section Tile */}
             <div>
-                <h3 className="text-[15px]  text-accent4">Community Support</h3>
+                <h3 className="text-[15px]text-accent4">Community Support</h3>
             </div>
 
             <div className="border-t border-border my-4" />
@@ -68,13 +68,13 @@ export default function MobileCustomerSupport() {
 
             <div className="border-t border-border my-4" />
 
-            <div className="w-[80%] mx-auto flex justify-center items-center mt-10">
+            <div className="mx-auto flex justify-center items-center mt-10 px-8">
                 <Image
                     src="/logo-white1.svg"
                     alt="TrustLinc Logo"
                     width={100}
                     height={50}
-                    className="w-full max-w-[60%]"
+                    className="w-full max-w-[140px] sm:max-w-[160px]"
                 />
             </div>
         </div>
