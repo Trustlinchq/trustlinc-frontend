@@ -9,7 +9,7 @@ export default function MobileCustomerSupport() {
         <div className="px-4 pt-4 pb-2 mt-7">
             {/* Section Tile */}
             <div>
-                <h3 className="text-[15px]text-accent4">Community Support</h3>
+                <h3 className="text-[15px] text-accent4">Community Support</h3>
             </div>
 
             <div className="border-t border-border my-4" />
@@ -31,7 +31,7 @@ export default function MobileCustomerSupport() {
                                 <p className="font-semibold text-sm leading-tight text-backgroundSecondary/80">
                                     Talk to us
                                 </p>
-                                <p className="text-xs text-accent4/60 max-w-[85%]">
+                                <p className="text-xs text-accent4/55 max-w-[85%]">
                                     Chat with someone from the TrustLinc
                                     community team,we’re happy to help.
                                 </p>
@@ -55,7 +55,7 @@ export default function MobileCustomerSupport() {
                                 <p className="font-semibold text-sm leading-tight text-backgroundSecondary/80">
                                     Start Your Journey
                                 </p>
-                                <p className="text-xs text-accent4/60 max-w-[85%]">
+                                <p className="text-xs text-accent4/55 max-w-[85%]">
                                     Watch short videos to see how TrustLinc
                                     makes sending and delivering easy.
                                 </p>
