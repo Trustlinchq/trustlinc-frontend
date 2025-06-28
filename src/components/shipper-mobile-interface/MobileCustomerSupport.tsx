@@ -74,7 +74,7 @@ export default function MobileCustomerSupport() {
                     alt="TrustLinc Logo"
                     width={100}
                     height={50}
-                    className="w-full max-w-[140px] sm:max-w-[160px]"
+                    className="w-full max-w-[160px]"
                 />
             </div>
         </div>
