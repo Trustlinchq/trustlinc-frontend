@@ -9,7 +9,7 @@ export default function MobileCustomerSupport() {
         <div className="px-4 pt-4 pb-2 mt-7">
             {/* Section Tile */}
             <div>
-                <h3 className="text-[15px] text-accent4">Community Support</h3>
+                <h3 className="text-[15px] text-accent4">Community support</h3>
             </div>
 
             <div className="border-t border-border my-4" />
