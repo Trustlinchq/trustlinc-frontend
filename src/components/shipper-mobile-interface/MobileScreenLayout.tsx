@@ -14,7 +14,12 @@ export default function MobileScreenLayout({
 }) {
     const pathname = usePathname();
 
-    const hideLayout = pathname === "/shipper/notifications";
+    const EXCLUDED_PATHS = [
+        "/shipper/create-delivery",
+        "/shipper/notifications",
+    ];
+
+    const hideLayout = EXCLUDED_PATHS.includes(pathname);
 
     return (
         <div className="flex flex-col w-full bg-background text-foreground">
