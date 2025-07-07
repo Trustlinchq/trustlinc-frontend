@@ -99,21 +99,21 @@ export default function CreatePackageStepper() {
         setStep((prev) => (prev > 1 ? ((prev - 1) as Step) : prev));
 
     // Optional: Reset all
-    const resetForm = () => {
-        setStep(1);
-        setFormData({
-            category: "",
-            description: "",
-            size: "",
-            price: "",
-            pickup_location: "",
-            pickup_location_details: "",
-            destination: "",
-            destination_details: "",
-            recipient_name: "",
-            recipient_number: "",
-        });
-    };
+    // const resetForm = () => {
+    //     setStep(1);
+    //     setFormData({
+    //         category: "",
+    //         description: "",
+    //         size: "",
+    //         price: "",
+    //         pickup_location: "",
+    //         pickup_location_details: "",
+    //         destination: "",
+    //         destination_details: "",
+    //         recipient_name: "",
+    //         recipient_number: "",
+    //     });
+    // };
 
     return (
         <>
