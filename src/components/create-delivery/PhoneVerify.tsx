@@ -7,7 +7,6 @@ import axios from "axios";
 import { toast } from "sonner";
 
 interface PhoneVerifyProps {
-    phone: string;
     onSuccess: () => void;
     onBack?: () => void;
 }
