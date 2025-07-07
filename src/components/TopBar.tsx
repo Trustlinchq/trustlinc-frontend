@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+import apiClient from "@/lib/api";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import UserAvatar from "./UserAvatar";
@@ -29,23 +29,20 @@ export default function TopBar() {
         pathname.split("/").pop()?.replace(/-/g, " ") ?? "Dashboard";
 
     useEffect(() => {
-        axios
-            .get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/community-update"
-            )
+        apiClient
+            .get("/shipper/dashboard/community-update")
             .then((res) => setCommunityUpdate(res.data))
             .catch(() => setCommunityUpdate(null));
 
         const userData = localStorage.getItem("user");
         if (userData) {
             const parsedUser = JSON.parse(userData);
-            // Fallback to "shipper" if role is missing
+            // Fallback to "SHIPPER" if role is missing
             if (!parsedUser.role) {
                 parsedUser.role = "SHIPPER";
             }
             setUser(parsedUser);
         }
-        if (userData) setUser(JSON.parse(userData));
     }, []);
 
     return (
