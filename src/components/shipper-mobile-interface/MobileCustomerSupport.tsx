@@ -33,7 +33,7 @@ export default function MobileCustomerSupport() {
                                 </p>
                                 <p className="text-xs text-accent4/55 max-w-[85%]">
                                     Chat with someone from the TrustLinc
-                                    community team,we’re happy to help.
+                                    community team, we’re happy to help.
                                 </p>
                             </div>
                         </div>

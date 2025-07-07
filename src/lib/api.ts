@@ -1,23 +1,26 @@
 // utils/api.ts
 import axios from "axios";
 import { toast } from "sonner";
-import { logout } from "@/lib/logout"; // Import your logout function
+import { logout } from "@/lib/logout";
 
 const apiClient = axios.create({
     baseURL: "https://trustlinc-backend.onrender.com/api/v1",
 });
 
 apiClient.interceptors.request.use(async (config) => {
-    const token = localStorage.getItem("token"); // Use const instead of let
+    const token = localStorage.getItem("token");
+    console.log("Token retrieved from localStorage:", token);
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
+    } else {
+        console.log("No token found in localStorage for request:", config.url);
     }
     return config;
 });
 
 apiClient.interceptors.response.use(
     (response) => {
-        console.log(`API call succeeded: ${response.config.url}`); // Debug logging
+        console.log(`API call succeeded: ${response.config.url}`);
         return response;
     },
     async (error) => {
@@ -52,7 +55,7 @@ apiClient.interceptors.response.use(
                 return apiClient(originalRequest); // Retry original request
             } catch (err) {
                 console.error("Token refresh failed:", err); // Log refresh error
-                const logoutResult = await logout(); // Use your logout function
+                const logoutResult = await logout();
                 if (logoutResult.success) {
                     toast.error("Session expired. Redirecting to login...");
                     setTimeout(() => {
