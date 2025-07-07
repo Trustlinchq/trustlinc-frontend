@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Bell, CheckCheck, AlertTriangle, Info } from "lucide-react";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import { cn } from "@/lib/utils";
 
 type Notification = {
@@ -26,10 +26,8 @@ export default function MobileNotificationPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios
-            .get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/notifications"
-            )
+        apiClient
+            .get("/shipper/dashboard/notifications")
             .then((res) => {
                 setNotifications(res.data.data);
             })

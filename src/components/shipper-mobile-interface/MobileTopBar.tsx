@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import NotificationBell from "../NotificationBell";
 
 type CommunityUpdate = {
@@ -30,10 +30,8 @@ export default function MobileTopBar() {
         useState<CommunityUpdate | null>(null);
 
     useEffect(() => {
-        axios
-            .get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/community-update"
-            )
+        apiClient
+            .get("/shipper/dashboard/community-update")
             .then((res) => setCommunityUpdate(res.data))
             .catch(() => setCommunityUpdate(null));
 

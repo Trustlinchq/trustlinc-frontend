@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Bell, CheckCheck, AlertTriangle, Info } from "lucide-react";
 import axios from "axios";
+import apiClient from "@/lib/api";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -30,10 +31,8 @@ export default function NotificationBell() {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const fetchNotifications = () => {
-        axios
-            .get(
-                "https://trustlinc-backend.onrender.com/api/v1/shipper/dashboard/notifications"
-            )
+        apiClient
+            .get("/shipper/dashboard/notifications")
             .then((res) => {
                 setNotifications(res.data.data);
                 const unread = res.data.data.filter(

@@ -1,4 +1,3 @@
-// utils/api.ts
 import axios from "axios";
 import { toast } from "sonner";
 import { logout } from "@/lib/logout";
