@@ -21,14 +21,13 @@ export default function LoginVerifyClient() {
         if (!email) {
             router.push("/login");
         }
-
         otpInputRef.current?.focus();
     }, [email, router]);
 
     useEffect(() => {
         if (resendCooldown > 0) {
             const timer = setTimeout(
-                () => setResendCooldown(resendCooldown - 1),
+                () => setResendCooldown((prev) => prev - 1),
                 1000
             );
             return () => clearTimeout(timer);
@@ -148,7 +147,11 @@ export default function LoginVerifyClient() {
                         <button
                             type="button"
                             onClick={handleResend}
-                            className="text-accent3 hover:text-backgroundPrimary font-medium"
+                            className={`font-medium ${
+                                resendCooldown > 0
+                                    ? "text-accent4/60 cursor-not-allowed"
+                                    : "text-accent3 hover:text-backgroundPrimary"
+                            }`}
                             disabled={resendCooldown > 0}
                         >
                             {resendCooldown > 0
