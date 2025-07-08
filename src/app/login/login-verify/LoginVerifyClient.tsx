@@ -158,7 +158,7 @@ export default function LoginVerifyClient() {
                         value={otp}
                         onChange={(e) => setOtp(e.target.value)}
                         required
-                        className="w-full pr-10 pl-4 py-6 rounded-full text-sm bg-gray-100 border border-gray-300 mt-3 overflow-hidden max-w-[90%] mx-auto"
+                        className="w-full pr-10 pl-4 py-6 rounded-lg text-sm bg-gray-100 border border-gray-300 mt-3 overflow-hidden max-w-[90%] mx-auto"
                     />
 
                     <Button
