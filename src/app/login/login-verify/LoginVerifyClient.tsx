@@ -20,7 +20,7 @@ export default function LoginVerifyClient() {
     const [resendCooldown, setResendCooldown] = useState(0);
     const otpInputRef = useRef<HTMLInputElement>(null);
 
-    // Check if OTP was already sent
+    // Init OTP and timer on page load
     useEffect(() => {
         if (!email) {
             router.push("/login");
@@ -43,13 +43,14 @@ export default function LoginVerifyClient() {
         otpInputRef.current?.focus();
     }, [email, router]);
 
-    // Decrement timer
+    // Count down timer
     useEffect(() => {
         if (resendCooldown > 0) {
             const interval = setInterval(() => {
                 setResendCooldown((prev) => {
                     if (prev <= 1) {
                         localStorage.removeItem(TIMER_KEY);
+                        clearInterval(interval);
                         return 0;
                     }
                     return prev - 1;
@@ -113,6 +114,7 @@ export default function LoginVerifyClient() {
                 "https://trustlinc-backend.onrender.com/api/v1/auth/requestLoginOtp",
                 { email }
             );
+
             if (res.status === 200) {
                 toast.success("OTP resent successfully!");
                 const expiration = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
@@ -173,20 +175,17 @@ export default function LoginVerifyClient() {
                         <button
                             type="button"
                             onClick={handleResend}
-                            className={`text-accent3 hover:text-backgroundPrimary font-medium ${
-                                resendCooldown > 0
-                                    ? "opacity-50 cursor-not-allowed"
-                                    : ""
-                            }`}
                             disabled={resendCooldown > 0}
+                            className={`${
+                                resendCooldown > 0
+                                    ? "text-muted cursor-not-allowed"
+                                    : "text-accent3 hover:text-backgroundPrimary font-medium"
+                            }`}
                         >
-                            Resend
-                        </button>{" "}
-                        {resendCooldown > 0 && (
-                            <span className="text-xs text-muted ml-1">
-                                ({resendCooldown}s)
-                            </span>
-                        )}
+                            {resendCooldown > 0
+                                ? `Resend in ${resendCooldown}s`
+                                : "Resend"}
+                        </button>
                     </p>
                 </form>
             </div>
