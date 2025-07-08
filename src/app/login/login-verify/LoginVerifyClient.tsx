@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 
+const RESEND_COOLDOWN_SECONDS = 30;
+const TIMER_KEY = "trustlinc-login-resend-expiration";
+
 export default function LoginVerifyClient() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -17,20 +20,43 @@ export default function LoginVerifyClient() {
     const [resendCooldown, setResendCooldown] = useState(0);
     const otpInputRef = useRef<HTMLInputElement>(null);
 
+    // Check if OTP was already sent
     useEffect(() => {
         if (!email) {
             router.push("/login");
+        } else {
+            const savedExpiration = localStorage.getItem(TIMER_KEY);
+            const now = Date.now();
+
+            if (savedExpiration && Number(savedExpiration) > now) {
+                const remaining = Math.ceil(
+                    (Number(savedExpiration) - now) / 1000
+                );
+                setResendCooldown(remaining);
+            } else {
+                const expiration = now + RESEND_COOLDOWN_SECONDS * 1000;
+                localStorage.setItem(TIMER_KEY, expiration.toString());
+                setResendCooldown(RESEND_COOLDOWN_SECONDS);
+            }
         }
+
         otpInputRef.current?.focus();
     }, [email, router]);
 
+    // Decrement timer
     useEffect(() => {
         if (resendCooldown > 0) {
-            const timer = setTimeout(
-                () => setResendCooldown((prev) => prev - 1),
-                1000
-            );
-            return () => clearTimeout(timer);
+            const interval = setInterval(() => {
+                setResendCooldown((prev) => {
+                    if (prev <= 1) {
+                        localStorage.removeItem(TIMER_KEY);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+
+            return () => clearInterval(interval);
         }
     }, [resendCooldown]);
 
@@ -47,12 +73,11 @@ export default function LoginVerifyClient() {
             if (res.status === 200) {
                 const { user, token } = res.data;
 
-                if (token && typeof token === "string" && user && user.role) {
+                if (token && user?.role) {
                     localStorage.setItem("token", token);
                     localStorage.setItem("user", JSON.stringify(user));
                     toast.success("OTP verified successfully! Redirecting...");
 
-                    // Redirect based on user role
                     if (user.role === "COURIER") {
                         router.push("/dashboard/courier");
                     } else if (user.role === "SHIPPER") {
@@ -80,10 +105,9 @@ export default function LoginVerifyClient() {
     };
 
     const handleResend = async () => {
-        if (resendCooldown > 0) return;
+        if (resendCooldown > 0 || !email) return;
 
         setLoading(true);
-
         try {
             const res = await axios.post(
                 "https://trustlinc-backend.onrender.com/api/v1/auth/requestLoginOtp",
@@ -91,7 +115,9 @@ export default function LoginVerifyClient() {
             );
             if (res.status === 200) {
                 toast.success("OTP resent successfully!");
-                setResendCooldown(30); // 30 seconds cooldown
+                const expiration = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
+                localStorage.setItem(TIMER_KEY, expiration.toString());
+                setResendCooldown(RESEND_COOLDOWN_SECONDS);
             }
         } catch (err: unknown) {
             const error =
@@ -147,17 +173,20 @@ export default function LoginVerifyClient() {
                         <button
                             type="button"
                             onClick={handleResend}
-                            className={`font-medium ${
+                            className={`text-accent3 hover:text-backgroundPrimary font-medium ${
                                 resendCooldown > 0
-                                    ? "text-accent4/60 cursor-not-allowed"
-                                    : "text-accent3 hover:text-backgroundPrimary"
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : ""
                             }`}
                             disabled={resendCooldown > 0}
                         >
-                            {resendCooldown > 0
-                                ? `Resend in ${resendCooldown}s`
-                                : "Resend"}
-                        </button>
+                            Resend
+                        </button>{" "}
+                        {resendCooldown > 0 && (
+                            <span className="text-xs text-muted ml-1">
+                                ({resendCooldown}s)
+                            </span>
+                        )}
                     </p>
                 </form>
             </div>
