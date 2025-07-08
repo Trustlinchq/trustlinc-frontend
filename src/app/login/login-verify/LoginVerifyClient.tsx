@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 
-const RESEND_COOLDOWN_SECONDS = 30;
+const RESEND_COOLDOWN_SECONDS = 60;
 const TIMER_KEY = "trustlinc-login-resend-expiration";
 
 export default function LoginVerifyClient() {
