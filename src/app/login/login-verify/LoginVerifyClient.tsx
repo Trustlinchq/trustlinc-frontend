@@ -20,37 +20,35 @@ export default function LoginVerifyClient() {
     const [resendCooldown, setResendCooldown] = useState(0);
     const otpInputRef = useRef<HTMLInputElement>(null);
 
-    // Init OTP and timer on page load
+    // On mount: setup cooldown from localStorage or start fresh
     useEffect(() => {
         if (!email) {
             router.push("/login");
-        } else {
-            const savedExpiration = localStorage.getItem(TIMER_KEY);
-            const now = Date.now();
-
-            if (savedExpiration && Number(savedExpiration) > now) {
-                const remaining = Math.ceil(
-                    (Number(savedExpiration) - now) / 1000
-                );
-                setResendCooldown(remaining);
-            } else {
-                const expiration = now + RESEND_COOLDOWN_SECONDS * 1000;
-                localStorage.setItem(TIMER_KEY, expiration.toString());
-                setResendCooldown(RESEND_COOLDOWN_SECONDS);
-            }
         }
 
         otpInputRef.current?.focus();
+
+        const savedExpiration = localStorage.getItem(TIMER_KEY);
+        const now = Date.now();
+
+        if (savedExpiration && Number(savedExpiration) > now) {
+            const remaining = Math.ceil((Number(savedExpiration) - now) / 1000);
+            setResendCooldown(remaining);
+        } else {
+            const expiration = now + RESEND_COOLDOWN_SECONDS * 1000;
+            localStorage.setItem(TIMER_KEY, expiration.toString());
+            setResendCooldown(RESEND_COOLDOWN_SECONDS);
+        }
     }, [email, router]);
 
-    // Count down timer
+    // Countdown timer logic
     useEffect(() => {
         if (resendCooldown > 0) {
             const interval = setInterval(() => {
                 setResendCooldown((prev) => {
                     if (prev <= 1) {
-                        localStorage.removeItem(TIMER_KEY);
                         clearInterval(interval);
+                        localStorage.removeItem(TIMER_KEY);
                         return 0;
                     }
                     return prev - 1;
@@ -109,6 +107,7 @@ export default function LoginVerifyClient() {
         if (resendCooldown > 0 || !email) return;
 
         setLoading(true);
+
         try {
             const res = await axios.post(
                 "https://trustlinc-backend.onrender.com/api/v1/auth/requestLoginOtp",
@@ -170,23 +169,23 @@ export default function LoginVerifyClient() {
                         {loading ? "Verifying..." : "Continue"}
                     </Button>
 
-                    <p className="text-sm text-accent4 text-center w-full">
+                    <div className="text-sm text-accent4 text-center w-full mt-2">
                         Didn&apos;t get the code?{" "}
                         <button
                             type="button"
                             onClick={handleResend}
                             disabled={resendCooldown > 0}
-                            className={`${
+                            className={`font-medium transition-colors ${
                                 resendCooldown > 0
-                                    ? "text-muted cursor-not-allowed"
-                                    : "text-accent3 hover:text-backgroundPrimary font-medium"
+                                    ? "text-accent4/50 cursor-not-allowed"
+                                    : "text-accent3 hover:text-backgroundPrimary"
                             }`}
                         >
                             {resendCooldown > 0
                                 ? `Resend in ${resendCooldown}s`
                                 : "Resend"}
                         </button>
-                    </p>
+                    </div>
                 </form>
             </div>
         </section>
