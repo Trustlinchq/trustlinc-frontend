@@ -14,7 +14,7 @@ const ubuntu = Ubuntu({
 export const metadata: Metadata = {
     title: "TrustLinc | Promises Delivered, Connections Made",
     description:
-        "TrustLinc is a community-powered delivery platform redefining the last mile. We turn everyday deliveries into meaningful connections—built on trust, fulfilled with care, and driven by people already on the move.",
+        "TrustLinc is a community-powered delivery platform redefining the last mile. We transform everyday deliveries into meaningful connections—built on trust, powered by people on the move, and fulfilled with care.",
 };
 
 export default function RootLayout({
