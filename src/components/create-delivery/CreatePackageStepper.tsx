@@ -4,7 +4,7 @@ import { useState } from "react";
 import CreatePackageStepOne from "./CreatePackageStepOne";
 import CreatePackageStepTwo from "./CreatePackageStepTwo";
 import CreatePackageStepThree from "./CreatePackageStepThree";
-// import CreatePackageStepFour from "./CreatePackageStepFour";
+import CreatePackageStepFour from "./CreatePackageStepFour";
 
 export type PackageSize = "SMALL" | "MEDIUM" | "LARGE";
 
@@ -97,23 +97,26 @@ export default function CreatePackageStepper() {
         setStep((prev) => (prev < 4 ? ((prev + 1) as Step) : prev));
     const goToPrev = () =>
         setStep((prev) => (prev > 1 ? ((prev - 1) as Step) : prev));
+    const [platformFee, setPlatformFee] = useState<number | null>(null);
+    const [remainingFreeDeliveries, setRemainingFreeDeliveries] = useState<
+        number | null
+    >(null);
 
-    // Optional: Reset all
-    // const resetForm = () => {
-    //     setStep(1);
-    //     setFormData({
-    //         category: "",
-    //         description: "",
-    //         size: "",
-    //         price: "",
-    //         pickup_location: "",
-    //         pickup_location_details: "",
-    //         destination: "",
-    //         destination_details: "",
-    //         recipient_name: "",
-    //         recipient_number: "",
-    //     });
-    // };
+    function resetForm(): void {
+        setStep(1);
+        setFormData({
+            category: "",
+            description: "",
+            size: "",
+            price: "",
+            pickup_location: "",
+            pickup_location_details: "",
+            destination: "",
+            destination_details: "",
+            recipient_name: "",
+            recipient_number: "",
+        });
+    }
 
     return (
         <>
@@ -122,6 +125,10 @@ export default function CreatePackageStepper() {
                     data={formData}
                     updateData={updateFormData}
                     onNext={goToNext}
+                    setPlatformFee={setPlatformFee}
+                    setRemainingFreeDeliveries={setRemainingFreeDeliveries}
+                    platformFee={platformFee}
+                    remainingFreeDeliveries={remainingFreeDeliveries}
                 />
             )}
 
@@ -143,13 +150,15 @@ export default function CreatePackageStepper() {
                 />
             )}
 
-            {/* {step === 4 && (
+            {step === 4 && (
                 <CreatePackageStepFour
                     data={formData}
                     onBack={goToPrev}
                     onSuccess={resetForm}
+                    platformFee={platformFee}
+                    remainingFreeDeliveries={remainingFreeDeliveries}
                 />
-            )}  */}
+            )}
         </>
     );
 }

@@ -100,7 +100,7 @@ export default function NotificationBell() {
             </div>
 
             {!isMobile && isOpen && (
-                <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                     <div className="flex justify-between items-center p-3 border-b font-semibold text-sm text-gray-700">
                         <span>Notifications</span>
                         {notifications.length > 0 && (

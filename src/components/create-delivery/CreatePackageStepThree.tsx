@@ -49,7 +49,9 @@ export default function CreatePackageStepThree({
                 <Input
                     id="recipient_name"
                     value={data.recipient_name}
-                    onChange={(e) => updateData({ recipient_name: e.target.value })}
+                    onChange={(e) =>
+                        updateData({ recipient_name: e.target.value })
+                    }
                     placeholder="e.g. Nnalunwa Rachel"
                     className="mt-4 w-full pr-10 pl-4 py-5 bg-neutral1 border border-gray-300 rounded-lg placeholder:text-accent4/45"
                 />
@@ -66,7 +68,9 @@ export default function CreatePackageStepThree({
                 <Input
                     id="recipient_phone_number"
                     value={data.recipient_number}
-                    onChange={(e) => updateData({ recipient_number: e.target.value })}
+                    onChange={(e) =>
+                        updateData({ recipient_number: e.target.value })
+                    }
                     placeholder="e.g. 2349012345678"
                     className="mt-4 w-full pr-10 pl-4 py-5 bg-neutral1 border border-gray-300 rounded-lg placeholder:text-accent4/45"
                 />
@@ -96,4 +100,3 @@ export default function CreatePackageStepThree({
         </section>
     );
 }
- 

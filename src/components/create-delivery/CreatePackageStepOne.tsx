@@ -11,7 +11,7 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
-import axios from "axios";
+import apiClient from "@/lib/api";
 import { toast } from "sonner";
 
 export type PackageSize = "SMALL" | "MEDIUM" | "LARGE";
@@ -40,12 +40,20 @@ interface Props {
     };
     updateData: (data: Partial<Props["data"]>) => void;
     onNext: () => void;
+    setPlatformFee: (value: number) => void;
+    setRemainingFreeDeliveries: (value: number | null) => void;
+    platformFee: number | null;
+    remainingFreeDeliveries: number | null;
 }
 
 export default function CreatePackageStepOne({
     data,
     updateData,
     onNext,
+    setPlatformFee,
+    setRemainingFreeDeliveries,
+    platformFee,
+    remainingFreeDeliveries,
 }: Props) {
     const [priceRange, setPriceRange] = useState<string | null>(null);
     const [recommendedPrice, setRecommendedPrice] = useState<number | null>(
@@ -53,6 +61,7 @@ export default function CreatePackageStepOne({
     );
     const [lowerLimit, setLowerLimit] = useState(0);
     const [upperLimit, setUpperLimit] = useState(0);
+
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSizeChange = useCallback(
@@ -62,19 +71,18 @@ export default function CreatePackageStepOne({
 
             setIsLoading(true);
             try {
-                const res = await axios.get(
-                    `https://trustlinc-backend.onrender.com/api/v1/packages/price-suggestion?size=${val}`,
-                    { timeout: 10000 }
-                );
+                const [priceRes, feeRes] = await Promise.all([
+                    apiClient.get(`/packages/price-suggestion?size=${val}`),
+                    apiClient.get(`/shipper/delivery-count`),
+                ]);
 
-                const range = res.data?.price_range;
-                const suggested = res.data?.recommended_price;
+                const range = priceRes.data?.price_range;
+                const suggested = priceRes.data?.recommended_price;
 
                 if (typeof range === "string" && range.includes("-")) {
                     const [low, high] = range
                         .split("-")
                         .map((v: string) => parseInt(v.trim()));
-
                     if (!isNaN(low) && !isNaN(high)) {
                         setPriceRange(range);
                         setLowerLimit(low);
@@ -86,19 +94,26 @@ export default function CreatePackageStepOne({
                     setRecommendedPrice(suggested);
                     updateData({ price: suggested.toString() });
                 }
+
+                const fee = feeRes.data?.platformFee;
+                setPlatformFee(typeof fee === "number" ? fee : 0);
+
+                const remaining = feeRes.data?.remainingFreeDeliveries;
+                setRemainingFreeDeliveries(
+                    typeof remaining === "number" ? remaining : null
+                );
             } catch (error) {
-                console.error("Failed to fetch price suggestion:", error);
+                console.error("Failed to fetch suggestion or fee:", error);
                 toast.error(
-                    "Unable to fetch price suggestion. Please try again."
+                    "Unable to fetch suggestion or fee. Please try again."
                 );
             } finally {
                 setIsLoading(false);
             }
         },
-        [updateData]
+        [updateData, setPlatformFee, setRemainingFreeDeliveries]
     );
 
-    // Fetch price suggestion for pre-selected size (e.g., returning to step)
     useEffect(() => {
         if (data.size && !priceRange && !isLoading) {
             handleSizeChange(data.size);
@@ -113,7 +128,6 @@ export default function CreatePackageStepOne({
         Number(data.price) >= lowerLimit &&
         Number(data.price) <= upperLimit;
 
-    // Static placeholder to avoid server-client mismatch
     const pricePlaceholder =
         recommendedPrice !== null
             ? `₦${recommendedPrice}`
@@ -133,7 +147,7 @@ export default function CreatePackageStepOne({
                     htmlFor="category"
                     className="text-sm text-accent4 font-normal"
                 >
-                    Item Category
+                    Category
                 </Label>
                 <Select
                     value={data.category || ""}
@@ -159,7 +173,7 @@ export default function CreatePackageStepOne({
                 </Select>
             </div>
 
-            {/* Description for "OTHERS" */}
+            {/* Description */}
             {data.category === "OTHERS" && (
                 <div className="mb-6 mt-6">
                     <Label
@@ -175,7 +189,7 @@ export default function CreatePackageStepOne({
                             updateData({ description: e.target.value })
                         }
                         placeholder="e.g. Custom handcrafted souvenir"
-                        className="w-full pr-10 pl-4 py-5 bg-neutral1 border border-gray-300 overflow-hidden rounded-lg mx-auto placeholder:text-accent4/45 mt-3"
+                        className="w-full pr-10 pl-4 py-5 bg-neutral1 border border-gray-300 rounded-lg placeholder:text-accent4/45 mt-3"
                     />
                 </div>
             )}
@@ -239,11 +253,24 @@ export default function CreatePackageStepOne({
                     type="number"
                     disabled={isLoading || !data.size}
                 />
-                {priceRange !== null && (
+                {priceRange && (
                     <p className="text-xs mt-1 text-accent4/65">
                         ₦{priceRange} based on item size
                     </p>
                 )}
+                {platformFee !== null && (
+                    <p className="text-xs mt-1 text-accent3/85">
+                        Platform fee: ₦{platformFee}{" "}
+                        {platformFee === 0 &&
+                        remainingFreeDeliveries !== null &&
+                        remainingFreeDeliveries > 0
+                            ? `(You have ${remainingFreeDeliveries} free deliver${
+                                  remainingFreeDeliveries === 1 ? "y" : "ies"
+                              } left)`
+                            : "(applies after your 5 free deliveries)"}
+                    </p>
+                )}
+
                 {data.price && limitsFetched && !isValidPrice && (
                     <p className="text-xs mt-1 text-red-500">
                         Price must be between ₦{lowerLimit} and ₦{upperLimit}

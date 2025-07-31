@@ -163,7 +163,7 @@ export default function LoginVerifyClient() {
 
                     <Button
                         type="submit"
-                        className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-full mt-5 mb-5 max-w-[90%] mx-auto"
+                        className="w-full py-6 bg-accent3 hover:bg-backgroundPrimary rounded-lg mt-5 mb-5 max-w-[90%] mx-auto"
                         disabled={loading || !otp}
                     >
                         {loading ? "Verifying..." : "Continue"}
