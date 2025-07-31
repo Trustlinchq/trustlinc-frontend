@@ -42,13 +42,6 @@ export const metadata: Metadata = {
         ],
         type: "website",
     },
-    twitter: {
-        card: "summary_large_image",
-        title: "TrustLinc | Promises Delivered, Connections Made",
-        description:
-            "A people-powered last-mile delivery network built on trust and community.",
-        images: ["https://www.trustlinc.app/og-image.jpg"],
-    },
 };
 
 export default function RootLayout({
@@ -58,6 +51,36 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <head>
+                {/* Twitter Meta Tags */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta
+                    name="twitter:title"
+                    content="TrustLinc | Promises Delivered, Connections Made"
+                />
+                <meta
+                    name="twitter:description"
+                    content="A people-powered last-mile delivery network built on trust and community."
+                />
+                <meta
+                    name="twitter:image"
+                    content="https://www.trustlinc.app/og-image.jpg"
+                />
+
+                {/* OG fallback (good for Telegram/WhatsApp) */}
+                <meta
+                    property="og:image"
+                    content="https://www.trustlinc.app/og-image.jpg"
+                />
+                <meta
+                    property="og:title"
+                    content="TrustLinc | Promises Delivered, Connections Made"
+                />
+                <meta
+                    property="og:description"
+                    content="A people-powered last-mile delivery network built on trust and community."
+                />
+            </head>
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
                 {children}
