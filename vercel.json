@@ -11,5 +11,16 @@
             "destination": "https://trustlinc.app",
             "permanent": true
         }
+    ],
+    "headers": [
+        {
+            "source": "/og-image.jpg",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "no-store"
+                }
+            ]
+        }
     ]
 }
