@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         title: "TrustLinc | Promises Delivered, Connections Made",
         description:
             "A people-powered last-mile delivery network built on trust and community.",
-        images: ["/twitter-image.png"],
+        images: ["/opengraph-image.png"],
     },
 };
 
