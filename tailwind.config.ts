@@ -9,6 +9,10 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+                // custom breakpoint
+                'colBreak': '900px',
+            },
             fontFamily: {
                 sans: ["var(--font-ubuntu)", "sans-serif"],
             },
