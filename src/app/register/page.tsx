@@ -2,7 +2,7 @@ import AuthForm from "@/components/AuthForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "TrustLinc Register | Create Your TrustLinc Account",
+    title: "Sign Up and Register a TrustLinc Account | TrustLinc",
     description:
         "Join TrustLinc today! Sign up to start delivering promises and fulfilling connections in your community.",
 };
@@ -20,7 +20,7 @@ export default function RegisterPage() {
             redirectLabel="Have an account already?"
             redirectHref="/login"
             redirectText="Log in here"
-            redirectToVerification="/verify" // 👈 Default, but shown for clarity
+            redirectToVerification="/verify" // Default, but shown for clarity
             terms
         />
     );
