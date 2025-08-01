@@ -1,4 +1,11 @@
 import AuthForm from "@/components/AuthForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: " TrustLinc Login | Sign in to TrustLinc Account",
+    description:
+        "Sign in to your TrustLinc account to continue delivering promises and fulfilling connections.",
+};
 
 export default function LoginPage() {
     return (
@@ -9,7 +16,7 @@ export default function LoginPage() {
             redirectLabel="New to TrustLinc?"
             redirectHref="/register"
             redirectText="Register an account"
-            redirectToVerification="/login/login-verify" // 👈 Custom redirect for login OTP
+            redirectToVerification="/login/login-verify" // Custom redirect for login OTP
         />
     );
 }

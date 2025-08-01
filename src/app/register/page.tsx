@@ -1,5 +1,11 @@
-// app/register/page.tsx
 import AuthForm from "@/components/AuthForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "TrustLinc Register | Create Your TrustLinc Account",
+    description:
+        "Join TrustLinc today! Sign up to start delivering promises and fulfilling connections in your community.",
+};
 
 export default function RegisterPage() {
     return (
