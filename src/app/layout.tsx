@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         siteName: "TrustLinc",
         images: [
             {
-                url: "/opengraph-image.png",
+                url: "https://trustlinc.app/opengraph-image.png",
                 alt: "TrustLinc - Promises Delivered, Connections Made",
             },
         ],
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         title: "TrustLinc | Promises Delivered, Connections Made",
         description:
             "A people-powered last-mile delivery network built on trust and community.",
-        images: ["/opengraph-image.png"],
+        images: ["https://trustlinc.app/opengraph-image.png"],
     },
 };
 
