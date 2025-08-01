@@ -25,18 +25,16 @@ export const metadata: Metadata = {
         "courier earnings",
         "trust delivery",
     ],
-    metadataBase: new URL("https://www.trustlinc.app"),
+    metadataBase: new URL("https://trustlinc.app"),
     openGraph: {
         title: "TrustLinc | Promises Delivered, Connections Made",
         description:
             "A new kind of delivery platform that connects people through trust, community, and purpose. Join the movement today.",
-        url: "https://www.trustlinc.app",
+        url: "https://trustlinc.app",
         siteName: "TrustLinc",
         images: [
             {
-                url: "/og-image.jpg",
-                width: 1200,
-                height: 630,
+                url: "/og-image.png",
                 alt: "TrustLinc - Promises Delivered, Connections Made",
             },
         ],
@@ -44,11 +42,12 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
+        site: "trustlinc.app",
+        creator: "@TrustLinchq",
         title: "TrustLinc | Promises Delivered, Connections Made",
         description:
             "A people-powered last-mile delivery network built on trust and community.",
-        images: ["/og-image.jpg"],
-        site: "@TrustLinchq",
+        images: ["/og-image.png"],
     },
 };
 
