@@ -11,10 +11,8 @@ const ubuntu = Ubuntu({
     display: "swap",
 });
 
+// Simplified metadata object to avoid conflicts with explicit meta tags
 export const metadata: Metadata = {
-    title: "TrustLinc | Promises Delivered, Connections Made",
-    description:
-        "TrustLinc is a community-powered delivery platform redefining the last mile. We transform everyday deliveries into meaningful connections—built on trust, powered by people on the move, and fulfilled with care.",
     keywords: [
         "TrustLinc",
         "peer to peer delivery",
@@ -26,32 +24,6 @@ export const metadata: Metadata = {
         "trust delivery",
     ],
     metadataBase: new URL("https://trustlinc.app"),
-    openGraph: {
-        title: "TrustLinc | Promises Delivered, Connections Made",
-        description:
-            "A new kind of delivery platform that connects people through trust, community, and purpose. Join the movement today.",
-        url: "https://trustlinc.app",
-        siteName: "TrustLinc",
-        images: [
-            {
-                url: "https://trustlinc.app/opengraph-image.png",
-                width: 1200,
-                height: 630,
-                alt: "TrustLinc - Promises Delivered, Connections Made",
-            },
-        ],
-        type: "website",
-        locale: "en_US",
-    },
-    twitter: {
-        card: "summary_large_image",
-        site: "@TrustLinchq",
-        creator: "@TrustLinchq",
-        title: "TrustLinc | Promises Delivered, Connections Made",
-        description:
-            "A people-powered last-mile delivery network built on trust and community.",
-        images: ["https://trustlinc.app/opengraph-image.png"],
-    },
 };
 
 export default function RootLayout({
@@ -62,34 +34,33 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                {/* ✅ Explicit meta tags for maximum compatibility */}
+                {/* HTML Meta Tags - from opengraph.xyz */}
+                <title>TrustLinc | Promises Delivered, Connections Made</title>
+                <meta
+                    name="description"
+                    content="A people-powered last-mile delivery network built on trust and community."
+                />
+
+                {/* Facebook Meta Tags - from opengraph.xyz */}
+                <meta property="og:url" content="https://trustlinc.app/" />
+                <meta property="og:type" content="website" />
                 <meta
                     property="og:title"
                     content="TrustLinc | Promises Delivered, Connections Made"
                 />
                 <meta
                     property="og:description"
-                    content="A new kind of delivery platform that connects people through trust, community, and purpose. Join the movement today."
+                    content="A people-powered last-mile delivery network built on trust and community."
                 />
                 <meta
                     property="og:image"
-                    content="https://trustlinc.app/opengraph-image.png"
-                />
-                <meta property="og:url" content="https://trustlinc.app" />
-                <meta property="og:type" content="website" />
-                <meta property="og:site_name" content="TrustLinc" />
-                <meta property="og:locale" content="en_US" />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
-                <meta property="og:image:type" content="image/png" />
-                <meta
-                    property="og:image:alt"
-                    content="TrustLinc - Promises Delivered, Connections Made"
+                    content="https://opengraph.b-cdn.net/production/images/2f603b9a-716a-469a-9922-3b6ab6ebf3e9.png?token=km3PA9L_H5_xRaknjvnYniGPc4_fJfRziqxTFonOIg0&height=630&width=1200&expires=33290097346"
                 />
 
+                {/* Twitter Meta Tags - from opengraph.xyz */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:site" content="@TrustLinchq" />
-                <meta name="twitter:creator" content="@TrustLinchq" />
+                <meta property="twitter:domain" content="trustlinc.app" />
+                <meta property="twitter:url" content="https://trustlinc.app/" />
                 <meta
                     name="twitter:title"
                     content="TrustLinc | Promises Delivered, Connections Made"
@@ -100,10 +71,25 @@ export default function RootLayout({
                 />
                 <meta
                     name="twitter:image"
-                    content="https://trustlinc.app/opengraph-image.png"
+                    content="https://opengraph.b-cdn.net/production/images/2f603b9a-716a-469a-9922-3b6ab6ebf3e9.png?token=km3PA9L_H5_xRaknjvnYniGPc4_fJfRziqxTFonOIg0&height=630&width=1200&expires=33290097346"
                 />
-                <meta name="twitter:domain" content="trustlinc.app" />
-                <meta name="twitter:url" content="https://trustlinc.app" />
+
+                {/* Additional meta tags for better compatibility */}
+                <meta property="og:site_name" content="TrustLinc" />
+                <meta property="og:locale" content="en_US" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:type" content="image/png" />
+                <meta
+                    property="og:image:alt"
+                    content="TrustLinc - Promises Delivered, Connections Made"
+                />
+
+                {/* Additional Twitter meta tags */}
+                <meta name="twitter:site" content="@TrustLinchq" />
+                <meta name="twitter:creator" content="@TrustLinchq" />
+
+                {/* Meta Tags Generated via https://www.opengraph.xyz */}
             </head>
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
