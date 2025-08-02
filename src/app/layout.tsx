@@ -26,6 +26,33 @@ export const metadata: Metadata = {
         "trust delivery",
     ],
     metadataBase: new URL("https://trustlinc.app"),
+    openGraph: {
+        title: "TrustLinc | Promises Delivered, Connections Made",
+        description:
+            "A people-powered last-mile delivery network built on trust and community.",
+        url: "https://trustlinc.app/",
+        siteName: "TrustLinc",
+        images: [
+            {
+                url: "https://www.trustlinc.app/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "TrustLinc - Promises Delivered, Connections Made",
+                type: "image/jpeg",
+            },
+        ],
+        locale: "en_US",
+        type: "website",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "TrustLinc | Promises Delivered, Connections Made",
+        description:
+            "A people-powered last-mile delivery network built on trust and community.",
+        site: "@TrustLinchq",
+        creator: "@TrustLinchq",
+        images: ["https://www.trustlinc.app/og-image.jpg"],
+    },
 };
 
 export default function RootLayout({
@@ -35,62 +62,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <head>
-                {/* HTML Meta Tags - from opengraph.xyz */}
-                <title>TrustLinc | Promises Delivered, Connections Made</title>
-                <meta
-                    name="description"
-                    content="A people-powered last-mile delivery network built on trust and community."
-                />
-
-                {/* Facebook Meta Tags - from opengraph.xyz */}
-                <meta property="og:url" content="https://trustlinc.app/" />
-                <meta property="og:type" content="website" />
-                <meta
-                    property="og:title"
-                    content="TrustLinc | Promises Delivered, Connections Made"
-                />
-                <meta
-                    property="og:description"
-                    content="A people-powered last-mile delivery network built on trust and community."
-                />
-                <meta
-                    property="og:image"
-                    content="https://opengraph.b-cdn.net/production/images/2f603b9a-716a-469a-9922-3b6ab6ebf3e9.png?token=km3PA9L_H5_xRaknjvnYniGPc4_fJfRziqxTFonOIg0&height=630&width=1200&expires=33290097346"
-                />
-
-                {/* Twitter Meta Tags - from opengraph.xyz */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta property="twitter:domain" content="trustlinc.app" />
-                <meta property="twitter:url" content="https://trustlinc.app/" />
-                <meta
-                    name="twitter:title"
-                    content="TrustLinc | Promises Delivered, Connections Made"
-                />
-                <meta
-                    name="twitter:description"
-                    content="A people-powered last-mile delivery network built on trust and community."
-                />
-                <meta
-                    name="twitter:image"
-                    content="https://opengraph.b-cdn.net/production/images/2f603b9a-716a-469a-9922-3b6ab6ebf3e9.png?token=km3PA9L_H5_xRaknjvnYniGPc4_fJfRziqxTFonOIg0&height=630&width=1200&expires=33290097346"
-                />
-
-                {/* Additional meta tags for better compatibility */}
-                <meta property="og:site_name" content="TrustLinc" />
-                <meta property="og:locale" content="en_US" />
-                <meta property="og:image:width" content="1200" />
-                <meta property="og:image:height" content="630" />
-                <meta property="og:image:type" content="image/png" />
-                <meta
-                    property="og:image:alt"
-                    content="TrustLinc - Promises Delivered, Connections Made"
-                />
-
-                {/* Additional Twitter meta tags */}
-                <meta name="twitter:site" content="@TrustLinchq" />
-                <meta name="twitter:creator" content="@TrustLinchq" />
-            </head>
+            <head />
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
                 {children}
