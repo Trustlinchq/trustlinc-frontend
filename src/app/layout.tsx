@@ -11,8 +11,10 @@ const ubuntu = Ubuntu({
     display: "swap",
 });
 
-// Simplified metadata object to avoid conflicts with explicit meta tags
 export const metadata: Metadata = {
+    title: "TrustLinc | Promises Delivered, Connections Made",
+    description:
+        "TrustLinc is a community-powered delivery platform redefining the last mile. We transform everyday deliveries into meaningful connections—built on trust, powered by people on the move, and fulfilled with care.",
     keywords: [
         "TrustLinc",
         "peer to peer delivery",
@@ -88,8 +90,6 @@ export default function RootLayout({
                 {/* Additional Twitter meta tags */}
                 <meta name="twitter:site" content="@TrustLinchq" />
                 <meta name="twitter:creator" content="@TrustLinchq" />
-
-                {/* Meta Tags Generated via https://www.opengraph.xyz */}
             </head>
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
