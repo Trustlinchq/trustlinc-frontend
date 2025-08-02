@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         siteName: "TrustLinc",
         images: [
             {
-                url: "https://www.trustlinc.app/opengraph-image.png",
+                url: "https://www.trustlinc.app/opengraph-image.jpg",
                 width: 1200,
                 height: 630,
                 alt: "TrustLinc - Promises Delivered, Connections Made",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
             "A people-powered last-mile delivery network built on trust and community.",
         site: "@TrustLinchq",
         creator: "@TrustLinchq",
-        images: ["https://www.trustlinc.app/opengraph-image.png"],
+        images: ["https://www.trustlinc.app/opengraph-image.jpg"],
     },
 };
 
@@ -63,6 +63,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head />
+            <meta
+                property="og:image"
+                content="https://www.trustlinc.app/opengraph-image.jpg"
+            />
+
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
                 {children}
