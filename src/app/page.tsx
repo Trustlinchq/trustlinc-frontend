@@ -325,131 +325,142 @@ export default function Home() {
                         Effortless Shipping,
                         <br className="hidden sm:block" /> Powered by People.
                     </h2>
-                    <div className="columns-1 lg:columns-2 gap-2 space-y-4 max-w-5xl mx-auto">
-                        {/* Card 1 - Original Layout */}
-                        <div className="bg-neutral2 rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
-                            <div>
-                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-2">
+
+                    {/* Fixed Grid Layout - Replace the columns layout */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                        {/* Card 1 */}
+                        <div className="bg-neutral2 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full min-h-[400px]">
+                            <div className="flex-1">
+                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-4">
                                     Secure & Trust-Based Deliveries
                                 </h3>
-                                <p className="text-sm text-center lg:text-left m-auto lg:m-0 text-accent4 max-w-[90%] sm:max-w-[80%] ">
+                                <p className="text-sm text-center lg:text-left text-accent4 mb-6 sm:max-w-[85%]">
                                     Send and deliver with confidence—every
                                     transaction is securely protected by
-                                    TrustLinc’s escrow system.
+                                    TrustLinc&#39;s escrow system.
                                 </p>
                             </div>
-                            <Image
-                                src="/secure-delivery.svg"
-                                alt="Secure Delivery"
-                                width={500}
-                                height={300}
-                                quality={100}
-                                className="mx-auto w-full max-w-[250px] sm:max-w-[200px] h-auto object-contain"
-                            />
-                        </div>
-
-                        {/* Card 2 - Modified for consistent small screen layout */}
-                        <div className="bg-neutral2 rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
-                            <div>
-                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-2">
-                                    Smart Matching
-                                </h3>
-                                <p className="text-sm text-center lg:text-left m-auto lg:m-0 text-accent4 max-w-[75%] sm:max-w-[80%]">
-                                    Match with trusted travelers headed your way
-                                    for seamless and secure deliveries.
-                                </p>
+                            <div className="flex-shrink-0 flex justify-center items-end">
+                                <Image
+                                    src="/secure-delivery.svg"
+                                    alt="Secure Delivery"
+                                    width={500}
+                                    height={300}
+                                    quality={100}
+                                    className="w-full max-w-[280px] h-auto object-contain"
+                                />
                             </div>
-                            <Image
-                                src="/smart-matching.svg"
-                                alt="Smart Matching"
-                                width={120}
-                                height={120}
-                                quality={100}
-                                className="mx-auto w-full max-w-[250px] sm:max-w-[200px] h-auto object-contain"
-                            />
                         </div>
 
-                        {/* Card 3 - Modified for consistent small screen layout */}
-                        <div className="bg-neutral2 rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
-                            <div>
-                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-2">
+                        {/* Card 2 */}
+                        <div className="bg-neutral2 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full min-h-[400px]">
+                            <div className="flex-1">
+                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-4">
                                     Community-Driven
                                 </h3>
-                                <p className="text-sm text-center lg:text-left m-auto lg:m-0 text-accent4 max-w-[80%] sm:max-w-[90%]">
+                                <p className="text-sm text-center lg:text-left text-accent4 mb-6 sm:max-w-[90%]">
                                     Leverage everyday travelers to move packages
                                     faster and more efficiently, reducing costs
                                     and promoting sustainability.
                                 </p>
                             </div>
-                            <Image
-                                src="/community-driven.svg"
-                                alt="Community Driven"
-                                width={120}
-                                height={120}
-                                quality={100}
-                                className="mx-auto w-full max-w-[250px] sm:max-w-[200px] h-auto object-contain"
-                            />
+                            <div className="flex-shrink-0 flex justify-center items-end">
+                                <Image
+                                    src="/community-driven.svg"
+                                    alt="Community Driven"
+                                    width={120}
+                                    height={120}
+                                    quality={100}
+                                    className="w-full max-w-[280px] h-auto object-contain"
+                                />
+                            </div>
                         </div>
 
-                        {/* Card 4 - Modified for consistent small screen layout */}
-                        <div className="bg-neutral2 rounded-xl shadow-lg p-3 sm:p-6 flex flex-col gap-2 sm:gap-8 break-inside-avoid">
-                            <div>
-                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-2">
+                        {/* Card 3 */}
+                        <div className="bg-neutral2 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full min-h-[400px]">
+                            <div className="flex-1">
+                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-4">
+                                    Smart Matching
+                                </h3>
+                                <p className="text-sm text-center lg:text-left text-accent4 mb-6 sm:max-w-[65%]">
+                                    Match with trusted travelers headed your way
+                                    for seamless and secure deliveries.
+                                </p>
+                            </div>
+                            <div className="flex-shrink-0 flex justify-center items-end">
+                                <Image
+                                    src="/smart-matching.svg"
+                                    alt="Smart Matching"
+                                    width={120}
+                                    height={120}
+                                    quality={100}
+                                    className="w-full max-w-[280px] h-auto object-contain"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Card 4 */}
+                        <div className="bg-neutral2 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full min-h-[400px]">
+                            <div className="flex-1">
+                                <h3 className="text-lg sm:text-[20px] text-center lg:text-left text-backgroundPrimary font-semibold mb-4">
                                     Flexible & Rewarding
                                 </h3>
-                                <p className="text-sm text-center lg:text-left m-auto lg:m-0 text-accent4 max-w-[80%]">
+                                <p className="text-sm text-center lg:text-left text-accent4 mb-6 sm:max-w-[85%]">
                                     Set your own delivery price, earn while
                                     traveling, and enjoy a delivery system that
                                     works around your schedule.
                                 </p>
                             </div>
-                            <Image
-                                src="/rewarding.svg"
-                                alt="Flexible"
-                                width={500}
-                                height={300}
-                                quality={100}
-                                className="mx-auto w-full max-w-[250px] sm:max-w-[200px] h-auto object-contain"
-                            />
+                            <div className="flex-shrink-0 flex justify-center items-end">
+                                <Image
+                                    src="/rewarding.svg"
+                                    alt="Flexible"
+                                    width={120}
+                                    height={120}
+                                    quality={100}
+                                    className="w-full max-w-[280px] h-auto object-contain"
+                                />
+                            </div>
                         </div>
                     </div>
                 </section>
+
                 {/*What We Believe Section*/}
                 <section className="bg-backgroundPrimary py-10 sm:py-24 px-6 sm:px-8">
                     <div className="max-w-5xl mx-auto flex flex-col colBreak:flex-row items-center gap-8 colBreak:gap-16">
-    {/* Text Section */}
-    <div className="text-left max-w-xl">
-        <div className="flex items-center gap-3 mb-6">
-            <span className="w-2 h-2 bg-neutral2 rounded-full"></span>
-            <p className="text-sm flex font-semibold text-accent1">
-                What We Believe
-            </p>
-        </div>
-        <p className="text-lg sm:text-2xl font-medium sm:max-w-[80%] text-neutral2 mb-6">
-            “TrustLinc isn’t just about deliveries—it’s
-            about people helping people. We’re building a
-            community-driven solution that makes shipping
-            more personal, reliable, and rewarding for
-            everyone.”
-        </p>
-        <p className="text-sm text-neutral1 font-medium">
-            Chiemela Nwankwo, Co-Founder & CEO
-            <br />
-            <span className="text-accent1">TrustLinc</span>
-        </p>
-    </div>
-    {/* Image Section */}
-    <div className="flex-shrink-0">
-        <Image
-            src="/chiemela-portrait.png"
-            alt="Chiemela Nwankwo"
-            width={500}
-            height={300}
-            quality={100}
-            className="rounded-xl w-[400px] rotate-[-2deg] mx-auto sm:mx-0"
-        />
-    </div>
-</div>
+                        {/* Text Section */}
+                        <div className="text-left max-w-xl">
+                            <div className="flex items-center gap-3 mb-6">
+                                <span className="w-2 h-2 bg-neutral2 rounded-full"></span>
+                                <p className="text-sm flex font-semibold text-accent1">
+                                    What We Believe
+                                </p>
+                            </div>
+                            <p className="text-lg sm:text-2xl font-medium sm:max-w-[80%] text-neutral2 mb-6">
+                                “TrustLinc isn’t just about deliveries—it’s
+                                about people helping people. We’re building a
+                                community-driven solution that makes shipping
+                                more personal, reliable, and rewarding for
+                                everyone.”
+                            </p>
+                            <p className="text-sm text-neutral1 font-medium">
+                                Chiemela Nwankwo, Co-Founder & CEO
+                                <br />
+                                <span className="text-accent1">TrustLinc</span>
+                            </p>
+                        </div>
+                        {/* Image Section */}
+                        <div className="flex-shrink-0">
+                            <Image
+                                src="/chiemela-portrait.png"
+                                alt="Chiemela Nwankwo"
+                                width={500}
+                                height={300}
+                                quality={100}
+                                className="rounded-xl w-[400px] rotate-[-2deg] mx-auto sm:mx-0"
+                            />
+                        </div>
+                    </div>
                 </section>
                 {/* FAQ Section */}
                 <section className="bg-neutral2 py-10 sm:py-24 px-4 sm:px-8">
@@ -576,127 +587,136 @@ export default function Home() {
                             </Link>
                         </div>
                         <div className="px-3 sm:max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-4">
-    {/* Left section: Logo and contact info */}
-    <div className="text-sm text-neutral2">
-        <p className="mb-1 sm:mb-2 font-bold">
-            <a
-                href="mailto:support@trustlinc.app"
-                className="text-sm sm:text-base font-medium hover:text-accent1 hover:underline"
-            >
-                support@trustlinc.app
-            </a>
-        </p>
-        <p className="text-xs sm:text-sm text-neutral-400">
-            KM1 Aba | Port Harcourt <br />
-            Express Way Umuahia, Abia State.
-        </p>
-    </div>
-    {/* Right section: Footer links */}
-    <div className="grid grid-cols-3 sm:grid-cols-4 gap-8 sm:gap-10">
-        {/* Products */}
-        <div>
-            <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
-                Products
-            </h3>
-            <ul className="space-y-4 text-neutral-400">
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/shippers">
-                        Shippers
-                    </Link>
-                </li>
-                <li className="text-sm hover:text-accent1 hover:underline">
-                    <Link href="/couriers">
-                        Couriers
-                    </Link>
-                </li>
-            </ul>
-        </div>
-        {/* Company */}
-        <div>
-            <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
-                Company
-            </h3>
-            <ul className="space-y-4 text-neutral-400">
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/about">About</Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/careers">Careers</Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/blog">Blog</Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/security">
-                        Security
-                    </Link>
-                </li>
-            </ul>
-        </div>
-        {/* Resources */}
-        <div>
-            <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
-                Resources
-            </h3>
-            <ul className="space-y-4 text-neutral-400">
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/docs">Docs</Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/newsrooms">
-                        Newsrooms
-                    </Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/privacy">Privacy</Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/terms">Terms</Link>
-                </li>
-            </ul>
-        </div>
-        {/* Support */}
-        <div>
-            <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6 -mt-12 sm:mt-0">
-                Support
-            </h3>
-            <ul className="space-y-4 text-neutral-400">
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <Link href="/contact">
-                        Contact us
-                    </Link>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <a
-                        href="https://x.com/TrustLinchq"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        X (Twitter)
-                    </a>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <a
-                        href="https://www.instagram.com/trustlinchq/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Instagram
-                    </a>
-                </li>
-                <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
-                    <a
-                        href="#"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Facebook
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+                            {/* Left section: Logo and contact info */}
+                            <div className="text-sm text-neutral2">
+                                <p className="mb-1 sm:mb-2 font-bold">
+                                    <a
+                                        href="mailto:support@trustlinc.app"
+                                        className="text-sm sm:text-base font-medium hover:text-accent1 hover:underline"
+                                    >
+                                        support@trustlinc.app
+                                    </a>
+                                </p>
+                                <p className="text-xs sm:text-sm text-neutral-400 l:mb-20 sm:mb-4">
+                                    KM1 Aba | Port Harcourt <br />
+                                    Express Way Umuahia, Abia State.
+                                </p>
+                            </div>
+                            {/* Right section: Footer links */}
+                            <div className="grid grid-cols-3 sm:grid-cols-4 gap-8 sm:gap-10">
+                                {/* Products */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
+                                        Products
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/shippers">
+                                                Shippers
+                                            </Link>
+                                        </li>
+                                        <li className="text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/couriers">
+                                                Couriers
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {/* Company */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
+                                        Company
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/about">About</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/careers">Careers</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/blog">Blog</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/security">
+                                                Security
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {/* Resources */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6">
+                                        Resources
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/docs">Docs</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/newsrooms">
+                                                Newsrooms
+                                            </Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/privacy">Privacy</Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/terms">Terms</Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                                {/* Support */}
+                                <div>
+                                    <h3 className="text-sm sm:text-base font-medium text-neutral1 mb-4 sm:mb-6 -mt-12 sm:mt-0">
+                                        Support
+                                    </h3>
+                                    <ul className="space-y-4 text-neutral-400">
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <Link href="/contact">
+                                                Contact us
+                                            </Link>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <a
+                                                href="https://x.com/TrustLinchq"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                X (Twitter)
+                                            </a>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <a
+                                                href="https://www.instagram.com/trustlinchq/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                Instagram
+                                            </a>
+                                        </li>
+                                        <li className="text-xs sm:text-sm hover:text-accent1 hover:underline">
+                                            <a
+                                                href="#"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                Facebook
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Copyright Section - Added */}
+                        <div className="border-t sm:max-w-4xl mx-auto border-neutral-700/40 mt-12 sm:mt-16 pt-6 sm:pt-8">
+                            <div className="text-center">
+                                <p className="text-xs sm:text-sm text-neutral-400">
+                                    © 2025 TrustLinc, Ltd.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </footer>
             </main>

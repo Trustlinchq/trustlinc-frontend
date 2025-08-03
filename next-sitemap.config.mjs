@@ -6,6 +6,9 @@ const config = {
     exclude: [
         "/verify",
         "/verify/*",
+        "/welcome",
+        "/welcome/*",
+        "/login-verify",
         "/onboarding/*",
         "/restart-onboarding",
         "/shipper/dashboard",
