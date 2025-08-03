@@ -62,12 +62,28 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <head />
-            <meta
-                property="og:image"
-                content="https://www.trustlinc.app/opengraph-image.jpg"
-            />
-
+            <head>
+                <script
+                    key="organization-schema"
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Organization",
+                            name: "TrustLinc",
+                            url: "https://www.trustlinc.app",
+                            logo: "https://www.trustlinc.app/logo.png",
+                            description:
+                                "TrustLinc is a people-powered last-mile delivery network, built on trust and community.",
+                            sameAs: [
+                                "https://www.instagram.com/trustlinchq",
+                                "https://x.com/TrustLinchq",
+                                "https://www.linkedin.com/company/trustlinchq",
+                            ],
+                        }),
+                    }}
+                />
+            </head>
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
                 {children}
