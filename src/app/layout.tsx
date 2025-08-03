@@ -117,6 +117,11 @@ export default function RootLayout({
                             },
                             url: "https://www.trustlinc.app/",
                             logo: "https://www.trustlinc.app/logo.png",
+                            aggregateRating: {
+                                "@type": "AggregateRating",
+                                ratingValue: "4.8",
+                                reviewCount: "137",
+                            },
                         }),
                     }}
                 />
