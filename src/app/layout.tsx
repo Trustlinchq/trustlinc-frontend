@@ -79,6 +79,7 @@ export default function RootLayout({
                                 "https://www.instagram.com/trustlinchq",
                                 "https://x.com/TrustLinchq",
                                 "https://www.linkedin.com/company/trustlinchq",
+                                "https://www.youtube.com/@TrustLinc"
                             ],
                         }),
                     }}
