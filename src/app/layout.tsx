@@ -63,6 +63,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
+                {/* Organization Structured Data */}
                 <script
                     key="organization-schema"
                     type="application/ld+json"
@@ -79,12 +80,48 @@ export default function RootLayout({
                                 "https://www.instagram.com/trustlinchq",
                                 "https://x.com/TrustLinchq",
                                 "https://www.linkedin.com/company/trustlinchq",
-                                "https://www.youtube.com/@TrustLinc"
+                                "https://www.youtube.com/@TrustLinc",
                             ],
                         }),
                     }}
                 />
+
+                {/* WebSite Structured Data */}
+                <script
+                    key="website-schema"
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            name: "TrustLinc",
+                            url: "https://www.trustlinc.app",
+                        }),
+                    }}
+                />
+
+                {/* Product Structured Data */}
+                <script
+                    key="product-schema"
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Product",
+                            name: "TrustLinc",
+                            description:
+                                "A peer-to-peer delivery platform where senders connect with everyday travelers for affordable, safe, and community-powered last-mile delivery.",
+                            brand: {
+                                "@type": "Brand",
+                                name: "TrustLinc",
+                            },
+                            url: "https://www.trustlinc.app/",
+                            logo: "https://www.trustlinc.app/logo.png",
+                        }),
+                    }}
+                />
             </head>
+
             <body className={`${ubuntu.variable} font-sans antialiased`}>
                 <AppHeader />
                 {children}
