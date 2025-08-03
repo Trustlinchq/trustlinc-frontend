@@ -1,4 +1,4 @@
-export default function Head() {
+export default function RegisterHead() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "WebPage",
@@ -16,6 +16,7 @@ export default function Head() {
     return (
         <>
             <script
+                key="ld-json"
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
