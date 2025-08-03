@@ -1,4 +1,4 @@
-export default function RegisterHead() {
+export default function Head() {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "WebPage",
