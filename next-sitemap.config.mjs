@@ -9,6 +9,7 @@ const config = {
         "/welcome",
         "/welcome/*",
         "/login-verify",
+        "/login/login-verify",
         "/onboarding/*",
         "/restart-onboarding",
         "/shipper/dashboard",

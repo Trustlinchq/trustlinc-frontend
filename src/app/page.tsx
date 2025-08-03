@@ -197,6 +197,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
                 {/*Our Value Section*/}
                 <section className="bg-neutral1 text-center py-10 sm:py-24 mt-24">
                     <div className="max-w-3xl mx-auto">
@@ -217,6 +218,7 @@ export default function Home() {
                         </h2>
                     </div>
                 </section>
+
                 {/*How It Works Section*/}
                 <section className="w-full bg-backgroundPrimary text-white py-10 px-6 sm:py-24">
                     <div className="max-w-5xl mx-auto">
@@ -313,6 +315,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
                 {/*Our Features Section*/}
                 <section className="py-10 sm:py-24 px-6 bg-neutral1">
                     <div className="flex items-center justify-center gap-3 mb-4">
@@ -326,7 +329,7 @@ export default function Home() {
                         <br className="hidden sm:block" /> Powered by People.
                     </h2>
 
-                    {/* Fixed Grid Layout - Replace the columns layout */}
+                    {/* Columns layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
                         {/* Card 1 */}
                         <div className="bg-neutral2 rounded-xl shadow-lg p-6 flex flex-col justify-between h-full min-h-[400px]">
@@ -462,6 +465,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
                 {/* FAQ Section */}
                 <section className="bg-neutral2 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
@@ -532,6 +536,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
                 {/* Join the Community Section */}
                 <section className="bg-neutral1 py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto items-center text-center">
@@ -570,6 +575,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
                 {/* Footer */}
                 <footer className="bg-backgroundPrimary py-10 sm:py-24 px-4 sm:px-8">
                     <div className="max-w-5xl mx-auto">
@@ -709,7 +715,7 @@ export default function Home() {
                             </div>
                         </div>
 
-                        {/* Copyright Section - Added */}
+                        {/* Copyright Section */}
                         <div className="border-t sm:max-w-4xl mx-auto border-neutral-700/40 mt-12 sm:mt-16 pt-6 sm:pt-8">
                             <div className="text-center">
                                 <p className="text-xs sm:text-sm text-neutral-400">
