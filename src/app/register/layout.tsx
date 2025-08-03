@@ -9,11 +9,9 @@ export default function RegisterLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <body className="bg-neutral1">
-                <MinimalHeader />
-                <PageTransitionWrapper>{children}</PageTransitionWrapper>
-            </body>
-        </html>
+        <>
+            <MinimalHeader />
+            <PageTransitionWrapper>{children}</PageTransitionWrapper>
+        </>
     );
 }

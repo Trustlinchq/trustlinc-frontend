@@ -69,15 +69,15 @@ export default function AuthForm({
 
     return (
         <section className="min-h-screen flex flex-col bg-neutral-100">
-            <div className="flex-grow flex flex-col items-center w-full mx-auto space-y-4 max-h-full overflow-hidden pt-44 sm:pt-48">
+            <main className="flex-grow flex flex-col items-center w-full mx-auto space-y-4 max-h-full overflow-hidden pt-44 sm:pt-48">
                 <form
                     onSubmit={handleSubmit}
                     className="flex flex-col items-center space-y-6 w-full sm:max-w-md mx-auto overflow-hidden"
                 >
-                    <div className="text-center w-full">
-                        <h2 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold">
+                    <header className="text-center w-full">
+                        <h1 className="text-3xl sm:text-4xl text-backgroundSecondary font-bold">
                             {title}
-                        </h2>
+                        </h1>
                         <p className="text-xs sm:text-sm text-accent4 mx-auto mt-2 sm:mt-4 max-w-[75%]">
                             {description}
                         </p>
@@ -101,7 +101,7 @@ export default function AuthForm({
                         >
                             {loading ? "Sending OTP..." : "Continue"}
                         </Button>
-                    </div>
+                    </header>
 
                     <p className="text-sm text-accent4 text-center w-full">
                         {redirectLabel}{" "}
@@ -113,7 +113,7 @@ export default function AuthForm({
                         </Link>
                     </p>
                 </form>
-            </div>
+            </main>
 
             {terms && (
                 <div className="mt-auto text-xs text-accent4 text-center w-full pt-4 border-t max-w-72 mx-auto pb-6">
